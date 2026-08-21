@@ -1,129 +1,138 @@
 (function () {
   'use strict';
 
-  /* Keeps the calculator locked to the active Shopify variant. */
+  /*
+   * Sync the calculator with the SAME variant selected by the existing
+   * product-variant-options.liquid picker.
+   *
+   * We do not replace the theme picker and we do not make a network request
+   * for every click. All variant prices/metafields are already rendered in
+   * product-calculator.liquid, so the update is instant and production-safe.
+   */
 
   function getSection(root) {
     return root.closest('[data-section]') || root.parentElement;
   }
 
   function getVariants(root) {
-    var el = root.querySelector('.product-calculator-variants');
-    if (!el) return [];
+    var node = root.querySelector('.product-calculator-variants');
+    if (!node) return [];
 
     try {
-      return JSON.parse(el.textContent.trim()) || [];
+      return JSON.parse(node.textContent.trim()) || [];
     } catch (error) {
       console.error('Calculator variant data error:', error);
       return [];
     }
   }
 
-  function getSelectedOptions(section) {
-    var values = [];
+  function optionPosition(root, inputName) {
+    var name = String(inputName || '').trim().toLowerCase();
+    if (!name) return 0;
 
-    if (!section) return values;
+    var option1 = String(root.dataset.option1Name || '').trim().toLowerCase();
+    var option2 = String(root.dataset.option2Name || '').trim().toLowerCase();
+    var option3 = String(root.dataset.option3Name || '').trim().toLowerCase();
 
-    Array.prototype.forEach.call(
-      section.querySelectorAll('input[type="radio"]:checked'),
-      function (input) {
-        var name = String(input.name || '').toLowerCase();
-        var value = String(input.value || '').trim();
-
-        if (!value || name === 'id' || name === 'quantity' || name.indexOf('calculator') !== -1) return;
-        values.push(value);
-      }
-    );
-
-    Array.prototype.forEach.call(
-      section.querySelectorAll('select:not([name="id"])'),
-      function (select) {
-        var name = String(select.name || '').toLowerCase();
-        var value = String(select.value || '').trim();
-
-        if (!value || name === 'quantity' || name.indexOf('calculator') !== -1) return;
-        values.push(value);
-      }
-    );
-
-    return values;
+    if (name === option1) return 1;
+    if (name === option2) return 2;
+    if (name === option3) return 3;
+    return 0;
   }
 
-  function variantMatches(variant, selectedValues) {
-    if (!selectedValues.length) return false;
-
-    var optionValues = [variant.option1, variant.option2, variant.option3]
-      .filter(function (value) { return value !== null && value !== undefined && value !== ''; })
-      .map(function (value) { return String(value).trim(); });
-
-    return selectedValues.every(function (selected) {
-      return optionValues.indexOf(selected) !== -1;
-    });
-  }
-
-  function getActiveVariant(root) {
+  function getSelectedOptions(root) {
     var section = getSection(root);
+    var selected = {};
+
+    if (!section) return selected;
+
+    section.querySelectorAll('input[type="radio"]:checked').forEach(function (input) {
+      var name = String(input.name || '').trim().toLowerCase();
+      var value = String(input.value || '').trim();
+      var position = optionPosition(root, name);
+
+      if (!value || !position) return;
+      selected['option' + position] = value;
+    });
+
+    section.querySelectorAll('select').forEach(function (select) {
+      var name = String(select.name || '').trim().toLowerCase();
+      var value = String(select.value || '').trim();
+      var position = optionPosition(root, name);
+
+      if (!value || !position) return;
+      selected['option' + position] = value;
+    });
+
+    return selected;
+  }
+
+  function findVariantFromOptions(root) {
+    var selected = getSelectedOptions(root);
     var list = getVariants(root);
 
-    if (!section || !list.length) return null;
+    if (!list.length) return null;
 
-    /* First use Shopify's actual active variant ID. */
-    var idInput = section.querySelector(
-      'input.product-variant-id[name="id"], select[name="id"], input[name="id"]'
-    );
-
-    if (idInput && idInput.value) {
-      var byId = list.find(function (variant) {
-        return String(variant.id) === String(idInput.value);
-      });
-
-      if (byId) return byId;
-    }
-
-    /* Fallback for a picker that has changed visually but not its ID yet. */
-    var selectedValues = getSelectedOptions(section);
+    var hasOptions = selected.option1 || selected.option2 || selected.option3;
+    if (!hasOptions) return null;
 
     return list.find(function (variant) {
-      return variantMatches(variant, selectedValues);
+      return (!selected.option1 || String(variant.option1 || '').trim() === selected.option1) &&
+        (!selected.option2 || String(variant.option2 || '').trim() === selected.option2) &&
+        (!selected.option3 || String(variant.option3 || '').trim() === selected.option3);
     }) || null;
   }
 
-  function syncVariantId(section, variant) {
-    if (!section || !variant || !variant.id) return false;
+  function findVariantById(root) {
+    var section = getSection(root);
+    var list = getVariants(root);
+    if (!section || !list.length) return null;
 
-    var changed = false;
-
-    Array.prototype.forEach.call(
-      section.querySelectorAll('input[name="id"], select[name="id"]'),
-      function (input) {
-        if (String(input.value) === String(variant.id)) return;
-
-        input.value = variant.id;
-        input.setAttribute('value', variant.id);
-        changed = true;
-      }
+    var idInput = section.querySelector(
+      'input.product-variant-id[name="id"], input[name="id"], select[name="id"]'
     );
 
-    return changed;
+    if (!idInput || !idInput.value) return null;
+
+    return list.find(function (variant) {
+      return String(variant.id) === String(idInput.value);
+    }) || null;
   }
 
-  function updateCalculator(root, force) {
-    var section = getSection(root);
-    if (!section) return;
+  function getActiveVariant(root) {
+    /*
+     * IMPORTANT: selected picker options win over the hidden ID.
+     * The theme picker can update the checked radio first and update the
+     * hidden Shopify variant ID a moment later. This was the original bug.
+     */
+    return findVariantFromOptions(root) || findVariantById(root);
+  }
 
+  function syncVariantId(root, variant) {
+    var section = getSection(root);
+    if (!section || !variant || !variant.id) return;
+
+    section.querySelectorAll('input[name="id"], select[name="id"]').forEach(function (field) {
+      if (String(field.value) === String(variant.id)) return;
+      field.value = variant.id;
+      field.setAttribute('value', variant.id);
+      field.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+  }
+
+  function recalculate(root, force) {
     var variant = getActiveVariant(root);
     if (!variant) return;
 
-    var changed = syncVariantId(section, variant);
-    var previousId = root.dataset.activeVariantId;
-    var variantChanged = previousId !== String(variant.id);
+    var variantId = String(variant.id);
+    var changed = root.dataset.activeVariantId !== variantId;
 
-    root.dataset.activeVariantId = String(variant.id);
+    root.dataset.activeVariantId = variantId;
 
-    if (!force && !changed && !variantChanged) return;
+    syncVariantId(root, variant);
 
-    /* product-calculators.js now reads the newly active variant's native
-       Shopify price plus its variant calculator metafields. */
+    if (!force && !changed) return;
+
     var piecesInput = root.querySelector('[data-calculator-input="pieces"]');
     var sfInput = root.querySelector('[data-calculator-input="sf"]');
     var trigger = piecesInput && piecesInput.value !== '' ? piecesInput : sfInput;
@@ -140,13 +149,13 @@
     var section = getSection(root);
     if (!section) return;
 
-    var timer = null;
+    var timer;
 
     function schedule(force) {
-      window.clearTimeout(timer);
-      timer = window.setTimeout(function () {
-        updateCalculator(root, force === true);
-      }, 50);
+      clearTimeout(timer);
+      timer = setTimeout(function () {
+        recalculate(root, force === true);
+      }, 80);
     }
 
     section.addEventListener('change', function (event) {
@@ -160,20 +169,25 @@
       }
     });
 
-    section.addEventListener('click', function () {
-      schedule(true);
+    /* Handles the label/button click used by product-variant-options.liquid. */
+    section.addEventListener('click', function (event) {
+      if (event.target.closest('.product__color-swatches--js')) {
+        schedule(true);
+      }
     });
 
-    document.addEventListener('variant:change', function () { schedule(true); });
-    document.addEventListener('variantChange', function () { schedule(true); });
-    document.addEventListener('product:variant-change', function () { schedule(true); });
+    /* Support the theme's asynchronous variant events. */
+    ['variant:change', 'variantChange', 'product:variant-change'].forEach(function (eventName) {
+      document.addEventListener(eventName, function () {
+        schedule(true);
+      });
+    });
 
-    /* Catch asynchronous changes made by the theme picker. */
+    /* Fallback for theme code that changes checked state asynchronously. */
     var lastSignature = '';
-
-    window.setInterval(function () {
-      var selected = getSelectedOptions(section);
-      var signature = selected.join('|');
+    setInterval(function () {
+      var selected = getSelectedOptions(root);
+      var signature = [selected.option1 || '', selected.option2 || '', selected.option3 || ''].join('|');
 
       if (signature && signature !== lastSignature) {
         lastSignature = signature;
