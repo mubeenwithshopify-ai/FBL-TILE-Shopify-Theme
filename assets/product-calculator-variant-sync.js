@@ -2,71 +2,97 @@
   'use strict';
 
   /*
-   * Calculator <-> existing product variant picker bridge.
-   *
-   * IMPORTANT:
-   * product-variant-options.liquid uses labels with
-   * .product__color-swatches--js and radio inputs whose names are the real
-   * Shopify option names (for example Size and Finish).
-   *
-   * The theme can visually change the clicked label before the radio's
-   * checked state / hidden variant ID is updated. Therefore we capture the
-   * actual clicked label and resolve the variant directly from its value.
-   * This prevents the calculator from staying on the previous variant.
+   * Direct bridge between the theme's existing variant picker and calculator.
+   * We listen on document capture so custom picker elements cannot swallow
+   * the click before the calculator sees it.
    */
 
-  function getSection(root) {
+  function section(root) {
     return root.closest('[data-section]') || root.parentElement;
   }
 
-  function getVariants(root) {
-    var node = root.querySelector('.product-calculator-variants');
-    if (!node) return [];
-
+  function variants(root) {
+    var el = root.querySelector('.product-calculator-variants');
+    if (!el) return [];
     try {
-      return JSON.parse(node.textContent.trim()) || [];
-    } catch (error) {
-      console.error('Calculator variant data error:', error);
+      return JSON.parse(el.textContent.trim()) || [];
+    } catch (e) {
+      console.error('Calculator variant data error:', e);
       return [];
     }
   }
 
-  function optionPosition(root, inputName) {
-    var name = String(inputName || '').trim().toLowerCase();
-    var option1 = String(root.dataset.option1Name || '').trim().toLowerCase();
-    var option2 = String(root.dataset.option2Name || '').trim().toLowerCase();
-    var option3 = String(root.dataset.option3Name || '').trim().toLowerCase();
+  function optionPosition(root, name) {
+    var value = String(name || '').trim().toLowerCase();
+    var names = [
+      String(root.dataset.option1Name || '').trim().toLowerCase(),
+      String(root.dataset.option2Name || '').trim().toLowerCase(),
+      String(root.dataset.option3Name || '').trim().toLowerCase()
+    ];
 
-    if (name === option1) return 1;
-    if (name === option2) return 2;
-    if (name === option3) return 3;
+    for (var i = 0; i < names.length; i++) {
+      if (names[i] && value === names[i]) return i + 1;
+    }
+
     return 0;
   }
 
-  function getInitialSelection(root) {
-    var section = getSection(root);
-    var selected = {};
-    if (!section) return selected;
+  function findCalculatorForInput(input) {
+    if (!input) return null;
 
-    section.querySelectorAll('input[type="radio"]:checked').forEach(function (input) {
+    var formId = input.getAttribute('form');
+    var form = formId ? document.getElementById(formId) : input.form;
+    var calculators = document.querySelectorAll('[data-product-calculator]');
+
+    for (var i = 0; i < calculators.length; i++) {
+      var root = calculators[i];
+      var s = section(root);
+
+      if (form && s && s.contains(form)) return root;
+      if (s && s.contains(input)) return root;
+    }
+
+    return null;
+  }
+
+  function getInputFromLabel(label) {
+    if (!label) return null;
+
+    var id = label.getAttribute('for') || label.htmlFor;
+    if (id) {
+      var input = document.getElementById(id);
+      if (input) return input;
+    }
+
+    return label.querySelector('input[type="radio"]') ||
+      (label.parentElement && label.parentElement.querySelector('input[type="radio"]'));
+  }
+
+  function currentSelection(root, changedInput) {
+    var selected = {};
+    var s = section(root);
+    if (!s) return selected;
+
+    /* Read checked radios belonging to the actual product form. */
+    var formId = changedInput && changedInput.getAttribute('form');
+    var form = formId ? document.getElementById(formId) : (changedInput && changedInput.form);
+    var scope = form || s;
+
+    scope.querySelectorAll('input[type="radio"]:checked').forEach(function (input) {
       var position = optionPosition(root, input.name);
-      if (position && input.value) {
-        selected['option' + position] = String(input.value).trim();
-      }
+      if (position) selected['option' + position] = String(input.value || '').trim();
     });
 
-    section.querySelectorAll('select').forEach(function (select) {
+    scope.querySelectorAll('select').forEach(function (select) {
       var position = optionPosition(root, select.name);
-      if (position && select.value) {
-        selected['option' + position] = String(select.value).trim();
-      }
+      if (position && select.value) selected['option' + position] = String(select.value).trim();
     });
 
     return selected;
   }
 
-  function findVariant(root, selection) {
-    var list = getVariants(root);
+  function resolveVariant(root, selection) {
+    var list = variants(root);
     if (!list.length) return null;
 
     return list.find(function (variant) {
@@ -76,178 +102,116 @@
     }) || null;
   }
 
-  function getVariantById(root, id) {
-    if (!id) return null;
-    var list = getVariants(root);
+  function setActiveVariant(root, variant) {
+    if (!variant) return;
 
-    return list.find(function (variant) {
-      return String(variant.id) === String(id);
-    }) || null;
-  }
+    root.dataset.activeVariantId = String(variant.id);
 
-  function setHiddenVariantId(root, variant) {
-    var section = getSection(root);
-    if (!section || !variant || !variant.id) return;
+    var s = section(root);
+    if (s) {
+      s.querySelectorAll('input[name="id"], select[name="id"]').forEach(function (field) {
+        field.value = variant.id;
+        field.setAttribute('value', variant.id);
+      });
+    }
 
-    section.querySelectorAll('input[name="id"], select[name="id"]').forEach(function (field) {
-      /* Do NOT dispatch change here. The theme's variant picker owns its
-         normal change lifecycle. We only keep the product form ID correct
-         for Add to Cart. */
-      field.value = variant.id;
-      field.setAttribute('value', variant.id);
-    });
-  }
-
-  function triggerCalculator(root) {
-    var piecesInput = root.querySelector('[data-calculator-input="pieces"]');
-    var sfInput = root.querySelector('[data-calculator-input="sf"]');
-    var trigger = piecesInput && piecesInput.value !== '' ? piecesInput : sfInput;
+    /* product-calculators.js already listens to calculator inputs. Re-fire
+       the current calculator input so it recalculates from the new variant. */
+    var pieces = root.querySelector('[data-calculator-input="pieces"]');
+    var sf = root.querySelector('[data-calculator-input="sf"]');
+    var trigger = pieces && pieces.value !== '' ? pieces : sf;
 
     if (trigger) {
       trigger.dispatchEvent(new Event('input', { bubbles: true }));
     }
+
+    /* Also expose a reliable custom event for any future calculator logic. */
+    root.dispatchEvent(new CustomEvent('calculator:variant-change', {
+      bubbles: true,
+      detail: { variant: variant }
+    }));
   }
 
-  function applyVariant(root, variant, force) {
+  function processClickedLabel(label) {
+    if (!label || !label.matches('.product__color-swatches--js')) return;
+
+    var input = getInputFromLabel(label);
+    if (!input) return;
+
+    var root = findCalculatorForInput(input);
+    if (!root) return;
+
+    var position = optionPosition(root, input.name);
+    if (!position) return;
+
+    /* Do not wait for the theme/custom element to update :checked. The value
+       of the clicked label is the authoritative newly selected option. */
+    var selection = currentSelection(root, input);
+    selection['option' + position] = String(input.value || label.getAttribute('data-value') || '').trim();
+
+    var variant = resolveVariant(root, selection);
     if (!variant) return;
 
-    var id = String(variant.id);
-    var changed = String(root.dataset.activeVariantId || '') !== id;
+    /* Run after the theme's own click handler as well as immediately if the
+       picker stops propagation. The capture listener guarantees this starts. */
+    setActiveVariant(root, variant);
 
-    root.dataset.activeVariantId = id;
-    setHiddenVariantId(root, variant);
-
-    if (force || changed) {
-      triggerCalculator(root);
-    }
+    setTimeout(function () {
+      var latest = currentSelection(root, input);
+      latest['option' + position] = String(input.value || label.getAttribute('data-value') || '').trim();
+      var latestVariant = resolveVariant(root, latest);
+      if (latestVariant) setActiveVariant(root, latestVariant);
+    }, 50);
   }
 
-  function getInputFromLabel(label) {
-    if (!label) return null;
+  function processRadio(input) {
+    if (!input || !input.matches('input[type="radio"]')) return;
 
-    var id = label.htmlFor || label.getAttribute('for');
-    if (id) {
-      var input = document.getElementById(id);
-      if (input) return input;
-    }
+    var root = findCalculatorForInput(input);
+    if (!root) return;
 
-    return label.parentElement && label.parentElement.querySelector('input[type="radio"]');
+    var position = optionPosition(root, input.name);
+    if (!position) return;
+
+    var selection = currentSelection(root, input);
+    if (input.checked) selection['option' + position] = String(input.value || '').trim();
+
+    var variant = resolveVariant(root, selection);
+    if (variant) setActiveVariant(root, variant);
   }
 
   function init(root) {
     if (root.dataset.variantSyncInitialized === 'true') return;
     root.dataset.variantSyncInitialized = 'true';
 
-    var section = getSection(root);
-    if (!section) return;
+    var s = section(root);
+    if (!s) return;
 
-    /* Keep our own option state. This is intentionally independent from the
-       theme's checked attribute because the visual swatch can change first. */
-    var selection = getInitialSelection(root);
-    var timer = null;
-
-    function schedule(fn, delay) {
-      clearTimeout(timer);
-      timer = setTimeout(fn, delay === undefined ? 50 : delay);
-    }
-
-    function applySelection(force) {
-      var variant = findVariant(root, selection);
-
-      if (!variant) {
-        /* If only one option has been captured during the theme's update,
-           fall back to the current Shopify variant ID. */
-        var idField = section.querySelector('input[name="id"], select[name="id"]');
-        variant = getVariantById(root, idField && idField.value);
-      }
-
-      if (variant) applyVariant(root, variant, force);
-    }
-
-    /* This is the critical path for the existing snippet's pill buttons. */
-    section.addEventListener('click', function (event) {
-      var label = event.target.closest('.product__color-swatches--js');
-      if (!label || !section.contains(label)) return;
-
-      var input = getInputFromLabel(label);
-      if (!input) return;
-
-      var position = optionPosition(root, input.name);
-      if (!position) return;
-
-      selection['option' + position] = String(input.value || '').trim();
-
-      /* Let the theme finish its own picker work, then immediately use the
-         exact option that was clicked. */
-      schedule(function () {
-        applySelection(true);
-      }, 20);
-    }, false);
-
-    /* Covers keyboard selection and any normal radio/select interaction. */
-    section.addEventListener('change', function (event) {
-      var target = event.target;
-      if (!target) return;
-
-      if (target.matches('input[type="radio"]')) {
-        var position = optionPosition(root, target.name);
-        if (position && target.checked) {
-          selection['option' + position] = String(target.value || '').trim();
-          schedule(function () {
-            applySelection(true);
-          }, 20);
-        }
-        return;
-      }
-
-      if (target.matches('select')) {
-        var selectPosition = optionPosition(root, target.name);
-        if (selectPosition) {
-          selection['option' + selectPosition] = String(target.value || '').trim();
-          schedule(function () {
-            applySelection(true);
-          }, 20);
-        }
-      }
-    }, false);
-
-    /* Support themes that announce a variant change after their own AJAX /
-       product-form update. */
-    ['variant:change', 'variantChange', 'product:variant-change'].forEach(function (eventName) {
-      document.addEventListener(eventName, function () {
-        schedule(function () {
-          /* Refresh our selection from checked controls, but preserve any
-             option captured directly from the clicked label. */
-          var checked = getInitialSelection(root);
-          Object.keys(checked).forEach(function (key) {
-            selection[key] = checked[key];
-          });
-          applySelection(true);
-        }, 20);
-      });
+    /* Initial active variant from the product form. */
+    var idField = s.querySelector('input.product-variant-id[name="id"], select[name="id"], input[name="id"]');
+    var initial = variants(root).find(function (v) {
+      return idField && String(v.id) === String(idField.value);
     });
 
-    /* Fallback for asynchronous picker updates. */
-    var lastSignature = '';
-    setInterval(function () {
-      var signature = [
-        selection.option1 || '',
-        selection.option2 || '',
-        selection.option3 || ''
-      ].join('|');
-
-      if (signature && signature !== lastSignature) {
-        lastSignature = signature;
-        applySelection(true);
-      }
-    }, 300);
-
-    /* Initial variant. */
-    applySelection(true);
+    if (initial) setActiveVariant(root, initial);
   }
 
   function boot() {
     document.querySelectorAll('[data-product-calculator]').forEach(init);
+
+    if (document.documentElement.dataset.calculatorVariantBridge === 'true') return;
+    document.documentElement.dataset.calculatorVariantBridge = 'true';
+
+    /* CAPTURE is intentional: the existing variant picker/custom element may
+       stop propagation before a normal bubbling listener can see the click. */
+    document.addEventListener('click', function (event) {
+      var label = event.target && event.target.closest ? event.target.closest('.product__color-swatches--js') : null;
+      if (label) processClickedLabel(label);
+    }, true);
+
+    document.addEventListener('change', function (event) {
+      processRadio(event.target);
+    }, true);
   }
 
   if (document.readyState === 'loading') {
