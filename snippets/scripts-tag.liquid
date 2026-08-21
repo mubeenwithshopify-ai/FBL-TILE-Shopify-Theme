@@ -4,7 +4,7 @@
 -%}
 {% if settings.scroll_animation != 'none' %}
   <script src="{{ 'animation.js' | asset_url }}" defer="defer"></script>
-{%- endif %}
+{%- endif -%}
 <script src="{{ 'tingle.min.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
 {%- case t -%}
@@ -14,6 +14,7 @@
     <script src="{{ 'main-product.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'js-cloudimage-360-view.min.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'product-calculator-cart-fix.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'product-calculator-variant-sync.js' | asset_url }}" defer="defer"></script>
   {%- when 'search' -%}
     <script src="{{ 'collection.js' | asset_url }}" defer="defer"></script>
 {%- endcase -%}
