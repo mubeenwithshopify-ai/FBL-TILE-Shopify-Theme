@@ -13,8 +13,14 @@
   {%- when 'product' -%}
     <script src="{{ 'main-product.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'js-cloudimage-360-view.min.js' | asset_url }}" defer="defer"></script>
-    <script src="{{ 'product-calculator-cart-fix.js' | asset_url }}" defer="defer"></script>
+
+    {%- comment -%}
+      IMPORTANT: variant sync MUST load before calculator-cart-fix.
+      Both scripts register capture-phase submit handlers. The cart-fix calls
+      stopImmediatePropagation(), so anything registered after it cannot run.
+    {%- endcomment -%}
     <script src="{{ 'product-calculator-variant-sync.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'product-calculator-cart-fix.js' | asset_url }}" defer="defer"></script>
   {%- when 'search' -%}
     <script src="{{ 'collection.js' | asset_url }}" defer="defer"></script>
 {%- endcase -%}
