@@ -26,7 +26,6 @@
     assign special_class = 'price--special'
   endif
 
-  # Determine selling unit from Shopify Product Type
   assign sold_by = 'Box'
 
   case product.type
@@ -37,26 +36,33 @@
   endcase
 -%}
 
-<div class="card-product-price {{ class }} flex align-center flex-wrap gap-5 relative">
+<div
+  class="card-product-price {{ class }} flex align-center flex-wrap gap-5 relative"
+  {% if scope == 'detail' %}
+    data-product-detail-price
+    data-price-currency="{{ cart.currency.iso_code }}"
+    data-price-locale="{{ request.locale.iso_code }}"
+    data-price-show-currency="{{ theme_st.show_currency_code }}"
+  {% endif %}
+>
 
   {%- if compare_at_price > price -%}
-
-    <div class="price-regular primary-color">
+    <div class="price-regular primary-color" data-price-sale>
       <span class="visually-hidden">
         {{ 'products.product.price.sale_price' | t }}
       </span>
 
-      <span class="price heading_weight primary-color price-same-style {{ special_class }}">
+      <span class="price heading_weight primary-color price-same-style {{ special_class }}" data-price-current>
         {{ money_price }}
       </span>
     </div>
 
-    <div class="price-regular">
+    <div class="price-regular" data-price-compare-wrap>
       <span class="visually-hidden">
         {{ 'products.product.price.regular_price' | t }}
       </span>
 
-      <s class="price-item compare-price dark-grey">
+      <s class="price-item compare-price dark-grey" data-price-compare>
         {%- if theme_st.show_currency_code -%}
           {{ compare_at_price | money_with_currency }}
         {%- else -%}
@@ -64,19 +70,23 @@
         {%- endif -%}
       </s>
     </div>
-
   {%- else -%}
-
-    <div class="price-regular">
+    <div class="price-regular" data-price-regular-wrap>
       <span class="visually-hidden">
         {{ 'products.product.price.regular_price' | t }}
       </span>
 
-      <span class="price price-same-style heading-style">
+      <span class="price price-same-style heading-style" data-price-current>
         {{ money_price }}
       </span>
     </div>
 
+    <div class="price-regular" data-price-compare-wrap hidden>
+      <span class="visually-hidden">
+        {{ 'products.product.price.regular_price' | t }}
+      </span>
+      <s class="price-item compare-price dark-grey" data-price-compare></s>
+    </div>
   {%- endif -%}
 
   <span class="price-unit">
