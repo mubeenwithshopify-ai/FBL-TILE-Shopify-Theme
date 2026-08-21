@@ -21,13 +21,11 @@
   endif
 
   assign special_class = ''
-
   if compare_at_price > price
     assign special_class = 'price--special'
   endif
 
   assign sold_by = 'Box'
-
   case product.type
     when 'Mosaic'
       assign sold_by = 'Sheet'
@@ -45,84 +43,50 @@
     data-price-show-currency="{{ theme_st.show_currency_code }}"
   {% endif %}
 >
-
   {%- if compare_at_price > price -%}
     <div class="price-regular primary-color" data-price-sale>
-      <span class="visually-hidden">
-        {{ 'products.product.price.sale_price' | t }}
-      </span>
-
-      <span class="price heading_weight primary-color price-same-style {{ special_class }}" data-price-current>
-        {{ money_price }}
-      </span>
+      <span class="visually-hidden">{{ 'products.product.price.sale_price' | t }}</span>
+      <span class="price heading_weight primary-color price-same-style {{ special_class }}" data-price-current>{{ money_price }}</span>
     </div>
-
     <div class="price-regular" data-price-compare-wrap>
-      <span class="visually-hidden">
-        {{ 'products.product.price.regular_price' | t }}
-      </span>
-
+      <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
       <s class="price-item compare-price dark-grey" data-price-compare>
-        {%- if theme_st.show_currency_code -%}
-          {{ compare_at_price | money_with_currency }}
-        {%- else -%}
-          {{ compare_at_price | money }}
-        {%- endif -%}
+        {%- if theme_st.show_currency_code -%}{{ compare_at_price | money_with_currency }}{%- else -%}{{ compare_at_price | money }}{%- endif -%}
       </s>
     </div>
   {%- else -%}
     <div class="price-regular" data-price-regular-wrap>
-      <span class="visually-hidden">
-        {{ 'products.product.price.regular_price' | t }}
-      </span>
-
-      <span class="price price-same-style heading-style" data-price-current>
-        {{ money_price }}
-      </span>
+      <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
+      <span class="price price-same-style heading-style" data-price-current>{{ money_price }}</span>
     </div>
-
     <div class="price-regular" data-price-compare-wrap hidden>
-      <span class="visually-hidden">
-        {{ 'products.product.price.regular_price' | t }}
-      </span>
+      <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
       <s class="price-item compare-price dark-grey" data-price-compare></s>
     </div>
   {%- endif -%}
 
-  <span class="price-unit">
-    / {{ sold_by }}
-  </span>
+  <span class="price-unit">/ {{ sold_by }}</span>
 
   {% if target.unit_price_measurement != null %}
     <small class="unit-price">
-      <span class="visually-hidden-price">
-        {{ 'products.product.price.unit_price' | t }}
-      </span>
-
+      <span class="visually-hidden-price">{{ 'products.product.price.unit_price' | t }}</span>
       <span class="price-item price-item--last">
-        <span class="number">
-          {%- if theme_st.show_currency_code -%}
-            {{- target.unit_price | money_with_currency -}}
-          {%- else -%}
-            {{- target.unit_price | money -}}
-          {%- endif -%}
-        </span>
-
+        <span class="number">{%- if theme_st.show_currency_code -%}{{- target.unit_price | money_with_currency -}}{%- else -%}{{- target.unit_price | money -}}{%- endif -%}</span>
         <span aria-hidden="true">/</span>
-
-        <span class="visually-hidden">
-          &nbsp;{{ 'products.product.price.unit_price_separator' | t }}&nbsp;
-        </span>
-
-        <span class="unit">
-          {%- if target.unit_price_measurement.reference_value != 1 -%}
-            {{- target.unit_price_measurement.reference_value -}}
-          {%- endif -%}
-
-          {{ target.unit_price_measurement.reference_unit }}
-        </span>
+        <span class="visually-hidden">&nbsp;{{ 'products.product.price.unit_price_separator' | t }}&nbsp;</span>
+        <span class="unit">{%- if target.unit_price_measurement.reference_value != 1 -%}{{- target.unit_price_measurement.reference_value -}}{%- endif -%}{{ target.unit_price_measurement.reference_unit }}</span>
       </span>
     </small>
   {% endif %}
 
+  {% if scope == 'detail' %}
+    <script type="application/json" data-product-price-variants>
+      [
+        {%- for variant in product.variants -%}
+          {"id":{{ variant.id | json }},"price":{{ variant.price | json }},"compare_at_price":{{ variant.compare_at_price | json }}}
+          {%- unless forloop.last -%},{%- endunless -%}
+        {%- endfor -%}
+      ]
+    </script>
+  {% endif %}
 </div>
