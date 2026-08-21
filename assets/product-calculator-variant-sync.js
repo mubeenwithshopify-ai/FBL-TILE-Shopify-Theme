@@ -2,362 +2,292 @@
   'use strict';
 
   /*
-   * Calculator <-> Shopify variant bridge.
+   * SINGLE PRODUCT VARIANT + CALCULATOR BRIDGE
    *
-   * The theme renders the variant picker in product-variant-options.liquid
-   * and the calculator in product-calculator.liquid. They are separate
-   * components, so this file is deliberately the only bridge between them.
+   * The theme has two separate systems:
+   *   1. variant-radios-single -> renders the option radios and contains the
+   *      complete Shopify variant JSON.
+   *   2. product-calculator -> contains the calculator JSON/metafields.
    *
-   * Source of truth:
-   *   - Shopify native variant price: variant.price
-   *   - Variant metafields: custom.sf_per_piece, custom.minimum_pieces,
-   *     custom.pieces_per_box, custom.coverage_per_sheet, etc.
+   * The important source of truth is always the Shopify variant ID.
+   * We resolve the selected option combination, write the exact variant ID
+   * into the real product form, and then give that same ID to the calculator.
    *
-   * product-calculator.liquid already serializes those values for every
-   * variant in .product-calculator-variants. We only have to resolve the
-   * currently selected variant correctly and tell product-calculators.js to
-   * recalculate.
+   * This also performs a final sync on form submit. Therefore Add to Cart
+   * cannot submit the initial/default variant if a customer changed Size or
+   * Finish immediately before submitting.
    */
 
-  function getCalculators(area) {
+  function productArea(element) {
+    if (!element) return null;
+    return element.closest('.product__item-js') || element.closest('[data-section]');
+  }
+
+  function pickerFor(element) {
+    var area = productArea(element);
+    if (!area) return null;
+
+    return area.querySelector('variant-radios-single') ||
+      area.querySelector('variant-radios-detail') ||
+      area.querySelector('variant-group-detail');
+  }
+
+  function readJsonScript(container) {
+    if (!container) return [];
+
+    var scripts = container.querySelectorAll('script[type="application/json"]');
+    for (var i = scripts.length - 1; i >= 0; i--) {
+      try {
+        var parsed = JSON.parse(scripts[i].textContent.trim());
+        if (Array.isArray(parsed) && parsed.length && parsed[0].id) return parsed;
+      } catch (e) {
+        /* Ignore unrelated JSON blocks. */
+      }
+    }
+
+    return [];
+  }
+
+  function pickerVariants(picker) {
+    return readJsonScript(picker);
+  }
+
+  function calculatorRoots(area) {
     if (!area) return [];
     return Array.prototype.slice.call(area.querySelectorAll('[data-product-calculator]'));
   }
 
-  function getVariants(root) {
-    var data = root.querySelector('.product-calculator-variants');
+  function calculatorVariants(root) {
+    var data = root && root.querySelector('.product-calculator-variants');
     if (!data) return [];
 
     try {
       return JSON.parse(data.textContent.trim()) || [];
-    } catch (error) {
-      console.error('[Calculator] Invalid variant JSON:', error);
+    } catch (e) {
+      console.error('[Calculator] Invalid variant JSON:', e);
       return [];
     }
   }
 
-  function getOptionPosition(root, name) {
-    var optionName = String(name || '').trim().toLowerCase();
-    var names = [
-      String(root.dataset.option1Name || '').trim().toLowerCase(),
-      String(root.dataset.option2Name || '').trim().toLowerCase(),
-      String(root.dataset.option3Name || '').trim().toLowerCase()
-    ];
-
-    for (var i = 0; i < names.length; i++) {
-      if (names[i] && names[i] === optionName) return i + 1;
-    }
-
-    return 0;
-  }
-
-  function getFormFromInput(input) {
-    if (!input) return null;
-
-    var formId = input.getAttribute('form');
-    if (formId) return document.getElementById(formId);
-
-    return input.form || null;
-  }
-
-  function getProductArea(input) {
-    if (!input) return null;
-
-    return input.closest(
-      '.product__item-js, .main-product, .product-detail__information, [data-section]'
-    );
-  }
-
-  function getAssociatedControls(form) {
-    if (!form) return [];
-
-    var controls = Array.prototype.slice.call(form.querySelectorAll('input, select'));
-    var formId = form.id;
-
-    if (formId) {
-      var external = document.querySelectorAll('[form="' + formId.replace(/"/g, '\\"') + '"]');
-      Array.prototype.forEach.call(external, function (control) {
-        if (controls.indexOf(control) === -1) controls.push(control);
-      });
-    }
-
-    return controls;
-  }
-
-  function getSelection(root, changedInput, changedValue) {
-    var selection = {};
-    var form = getFormFromInput(changedInput);
-
-    if (form) {
-      getAssociatedControls(form).forEach(function (control) {
-        if (control.matches('input[type="radio"]') && control.checked) {
-          var position = getOptionPosition(root, control.name);
-          if (position) selection['option' + position] = String(control.value).trim();
-        }
-
-        if (control.matches('select')) {
-          var selectPosition = getOptionPosition(root, control.name);
-          if (selectPosition && control.value) {
-            selection['option' + selectPosition] = String(control.value).trim();
-          }
-        }
-      });
-    }
-
-    /* The clicked label is authoritative for that option. This is important
-       because the theme's custom picker can update its visual state before
-       the native radio's checked state is updated. */
-    if (changedInput) {
-      var changedPosition = getOptionPosition(root, changedInput.name);
-      if (changedPosition) {
-        selection['option' + changedPosition] = String(
-          changedValue !== undefined ? changedValue : changedInput.value
-        ).trim();
-      }
-    }
-
-    return selection;
-  }
-
-  function resolveVariant(root, selection) {
-    var list = getVariants(root);
-    if (!list.length) return null;
-
-    return list.find(function (variant) {
-      return (!selection.option1 || String(variant.option1 || '').trim() === selection.option1) &&
-        (!selection.option2 || String(variant.option2 || '').trim() === selection.option2) &&
-        (!selection.option3 || String(variant.option3 || '').trim() === selection.option3);
-    }) || null;
-  }
-
-  function variantById(root, id) {
+  function variantById(list, id) {
     if (!id) return null;
 
-    return getVariants(root).find(function (variant) {
+    return list.find(function (variant) {
       return String(variant.id) === String(id);
     }) || null;
   }
 
-  function getProductFormId(area) {
-    if (!area) return null;
+  function selectedOptionValues(picker) {
+    var values = [];
 
-    var form = area.querySelector('form[id^="product-form-"]');
-    return form ? form.id : null;
+    if (!picker) return values;
+
+    /* These radios are physically inside variant-radios-single even though
+       their form="product-form-*" association points to the Add to Cart form. */
+    var checked = picker.querySelectorAll('input[type="radio"]:checked');
+
+    Array.prototype.forEach.call(checked, function (input) {
+      var position = Number(input.closest('fieldset')?.querySelector('[data-position]')?.getAttribute('data-position')) || 0;
+
+      /* Prefer the option position from the input's surrounding fieldset.
+         The theme's fieldsets are rendered in Shopify option order. */
+      if (!position) {
+        var fieldsets = picker.querySelectorAll('fieldset.product-form__input');
+        for (var i = 0; i < fieldsets.length; i++) {
+          if (fieldsets[i].contains(input)) {
+            position = i + 1;
+            break;
+          }
+        }
+      }
+
+      if (position) values[position - 1] = String(input.value || '').trim();
+    });
+
+    /* Safety fallback: fieldset order is authoritative for this theme. */
+    if (!values.length || values.some(function (value) { return !value; })) {
+      var fieldsets = picker.querySelectorAll('fieldset.product-form__input');
+      Array.prototype.forEach.call(fieldsets, function (fieldset, index) {
+        var checkedInput = fieldset.querySelector('input[type="radio"]:checked');
+        if (checkedInput) values[index] = String(checkedInput.value || '').trim();
+      });
+    }
+
+    return values;
   }
 
-  function getCurrentFormVariant(area) {
-    if (!area) return null;
+  function resolveSelectedVariant(picker) {
+    var variants = pickerVariants(picker);
+    if (!variants.length) return null;
 
-    var form = area.querySelector('form[id^="product-form-"]');
-    if (!form) return null;
+    var options = selectedOptionValues(picker);
+    if (!options.length) return null;
 
-    var idField = form.querySelector('input[name="id"], select[name="id"]');
-    return idField && idField.value ? String(idField.value) : null;
+    return variants.find(function (variant) {
+      return options.every(function (value, index) {
+        if (!value) return true;
+        return String(variant.options[index] || '').trim() === value;
+      });
+    }) || null;
   }
 
-  function setActiveVariant(root, variant) {
-    if (!root || !variant) return false;
+  function formForArea(area) {
+    if (!area) return null;
+
+    return area.querySelector('form[data-type="add-to-cart-form"]') ||
+      area.querySelector('form[id^="product-form-"]');
+  }
+
+  function writeVariantToForm(area, variant) {
+    if (!area || !variant) return false;
+
+    var form = formForArea(area);
+    if (!form) return false;
+
+    var fields = form.querySelectorAll('input[name="id"], select[name="id"]');
+    if (!fields.length) return false;
 
     var id = String(variant.id);
-    var changed = String(root.dataset.activeVariantId || '') !== id;
+    var changed = false;
 
-    root.dataset.activeVariantId = id;
-    root.setAttribute('data-active-variant-id', id);
+    Array.prototype.forEach.call(fields, function (field) {
+      if (String(field.value) !== id) changed = true;
+      field.value = id;
+      field.setAttribute('value', id);
+      field.disabled = false;
+    });
 
     return changed;
   }
 
-  function triggerCalculator(root) {
-    if (!root) return;
+  function setCalculatorVariant(area, variantId) {
+    if (!area || !variantId) return;
 
-    /* product-calculators.js already owns all calculations. Trigger its
-       normal input path instead of duplicating calculation logic here. */
-    var pieces = root.querySelector('[data-calculator-input="pieces"]');
-    var sf = root.querySelector('[data-calculator-input="sf"]');
-    var trigger = pieces && pieces.value !== '' ? pieces : sf;
-
-    if (trigger) {
-      trigger.dispatchEvent(new Event('input', { bubbles: true }));
-    }
-
-    root.dispatchEvent(new CustomEvent('calculator:variant-change', {
-      bubbles: true,
-      detail: { variantId: root.dataset.activeVariantId }
-    }));
-  }
-
-  function syncArea(area, variant) {
-    if (!area || !variant) return;
-
-    getCalculators(area).forEach(function (root) {
-      var calculatorVariant = variantById(root, variant.id);
-      if (!calculatorVariant) return;
-
-      setActiveVariant(root, calculatorVariant);
-      triggerCalculator(root);
-    });
-  }
-
-  function syncFromForm(area) {
-    var id = getCurrentFormVariant(area);
-    if (!id) return false;
-
-    var matched = false;
-
-    getCalculators(area).forEach(function (root) {
-      var variant = variantById(root, id);
+    calculatorRoots(area).forEach(function (root) {
+      var variant = variantById(calculatorVariants(root), variantId);
       if (!variant) return;
 
-      setActiveVariant(root, variant);
-      triggerCalculator(root);
-      matched = true;
-    });
+      root.dataset.activeVariantId = String(variant.id);
+      root.setAttribute('data-active-variant-id', String(variant.id));
 
-    return matched;
+      /* product-calculators.js owns the calculations. Trigger its normal input
+         path after changing the active variant. */
+      var pieces = root.querySelector('[data-calculator-input="pieces"]');
+      var sf = root.querySelector('[data-calculator-input="sf"]');
+      var trigger = pieces && pieces.value !== '' ? pieces : sf;
+
+      if (trigger) {
+        trigger.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+
+      root.dispatchEvent(new CustomEvent('calculator:variant-change', {
+        bubbles: true,
+        detail: { variantId: String(variant.id) }
+      }));
+    });
   }
 
-  function handleLabel(label) {
-    if (!label || !label.matches('.product__color-swatches--js')) return;
+  function syncFromPicker(picker) {
+    if (!picker) return null;
 
-    var id = label.getAttribute('for');
-    var input = id ? document.getElementById(id) : label.querySelector('input[type="radio"]');
-    if (!input) return;
+    var area = productArea(picker);
+    if (!area) return null;
 
-    var area = getProductArea(input);
+    var variant = resolveSelectedVariant(picker);
+    if (!variant) return null;
+
+    /* FIRST: update the real Shopify form. This is what Add to Cart submits. */
+    writeVariantToForm(area, variant);
+
+    /* SECOND: use the exact same variant ID for every calculator on this page. */
+    setCalculatorVariant(area, variant.id);
+
+    return variant;
+  }
+
+  function syncFromElement(element) {
+    var picker = pickerFor(element);
+    if (!picker) return null;
+    return syncFromPicker(picker);
+  }
+
+  function scheduleSync(picker) {
+    if (!picker) return;
+
+    /* Let the native label -> radio action and the theme's own handler run. */
+    window.setTimeout(function () { syncFromPicker(picker); }, 0);
+    window.setTimeout(function () { syncFromPicker(picker); }, 50);
+    window.setTimeout(function () { syncFromPicker(picker); }, 150);
+  }
+
+  function initArea(area) {
     if (!area) return;
 
-    var clickedValue = label.getAttribute('data-value') || input.value;
+    var picker = pickerFor(area);
+    if (!picker) return;
 
-    /* First resolve directly from the option that was clicked. */
-    getCalculators(area).forEach(function (root) {
-      var selection = getSelection(root, input, clickedValue);
-      var variant = resolveVariant(root, selection);
-
-      if (variant) {
-        setActiveVariant(root, variant);
-        triggerCalculator(root);
-      }
-    });
-
-    /* Then let the theme finish its own native variant update. The hidden
-       product-form ID is the strongest source of truth, so sync it again. */
-    window.setTimeout(function () {
-      syncFromForm(area);
-    }, 0);
-
-    window.setTimeout(function () {
-      syncFromForm(area);
-    }, 100);
+    syncFromPicker(picker);
   }
 
-  function handleRadio(input) {
-    if (!input || !input.matches('input[type="radio"]') || !input.checked) return;
+  function boot() {
+    document.querySelectorAll('.product__item-js').forEach(initArea);
 
-    var area = getProductArea(input);
-    if (!area) return;
+    if (document.documentElement.dataset.productVariantCalculatorBridge === 'true') return;
+    document.documentElement.dataset.productVariantCalculatorBridge = 'true';
 
-    getCalculators(area).forEach(function (root) {
-      var selection = getSelection(root, input, input.value);
-      var variant = resolveVariant(root, selection);
-
-      if (variant) {
-        setActiveVariant(root, variant);
-        triggerCalculator(root);
-      }
-    });
-
-    window.setTimeout(function () {
-      syncFromForm(area);
-    }, 0);
-  }
-
-  function observeProductForm(area) {
-    if (!area || area.dataset.calculatorVariantObserver === 'true') return;
-    area.dataset.calculatorVariantObserver = 'true';
-
-    var formId = getProductFormId(area);
-    if (!formId) return;
-
-    var form = document.getElementById(formId);
-    if (!form) return;
-
-    var idField = form.querySelector('input[name="id"], select[name="id"]');
-    if (!idField) return;
-
-    var lastId = idField.value;
-
-    var observer = new MutationObserver(function () {
-      var currentId = idField.value;
-      if (!currentId || currentId === lastId) return;
-      lastId = currentId;
-      syncFromForm(area);
-    });
-
-    observer.observe(idField, {
-      attributes: true,
-      attributeFilter: ['value']
-    });
-
-    idField.addEventListener('change', function () {
-      lastId = idField.value;
-      syncFromForm(area);
-    });
-
-    /* Also poll the property because JS often changes .value without changing
-       the DOM value attribute, which MutationObserver cannot see. */
-    var timer = window.setInterval(function () {
-      if (!document.documentElement.contains(area)) {
-        window.clearInterval(timer);
-        return;
-      }
-
-      var currentId = idField.value;
-      if (currentId && currentId !== lastId) {
-        lastId = currentId;
-        syncFromForm(area);
-      }
-    }, 150);
-  }
-
-  function init() {
-    document.querySelectorAll('[data-product-calculator]').forEach(function (root) {
-      var area = getProductArea(root);
-      if (area) {
-        observeProductForm(area);
-        syncFromForm(area);
-      }
-    });
-
-    if (document.documentElement.dataset.productCalculatorVariantBridge === 'true') return;
-    document.documentElement.dataset.productCalculatorVariantBridge = 'true';
-
-    /* Capture the custom variant-picker label click before the theme handler. */
+    /* Option click: resolve the selected radio after the browser performs the
+       label action and after the theme's own variant handler has had a chance
+       to update its active state. */
     document.addEventListener('click', function (event) {
       var label = event.target && event.target.closest
         ? event.target.closest('.product__color-swatches--js')
         : null;
-      if (label) handleLabel(label);
-    }, true);
 
+      if (!label) return;
+
+      var picker = pickerFor(label);
+      if (picker) scheduleSync(picker);
+    }, false);
+
+    /* Direct radio changes are also supported for keyboard accessibility. */
     document.addEventListener('change', function (event) {
-      handleRadio(event.target);
+      var input = event.target;
+      if (!input || !input.matches('input[type="radio"]')) return;
+      if (!input.closest('variant-radios-single, variant-radios-detail, variant-group-detail')) return;
+
+      var picker = pickerFor(input);
+      if (picker) scheduleSync(picker);
+    }, false);
+
+    /* FINAL SAFETY NET:
+       Add to Cart must always use the variant represented by the currently
+       selected Size/Finish options, even if the theme's async handler has not
+       finished yet. */
+    document.addEventListener('submit', function (event) {
+      var form = event.target;
+      if (!form || !form.matches('form[data-type="add-to-cart-form"]')) return;
+
+      var area = productArea(form);
+      var picker = pickerFor(form);
+      if (!area || !picker) return;
+
+      var variant = syncFromPicker(picker);
+      if (!variant) return;
+
+      /* Make absolutely sure the submitted field is correct immediately before
+         the browser's FormData is created. */
+      writeVariantToForm(area, variant);
     }, true);
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', boot);
   } else {
-    init();
+    boot();
   }
 
   document.addEventListener('shopify:section:load', function (event) {
     if (!event.target) return;
-    event.target.querySelectorAll('[data-product-calculator]').forEach(function (root) {
-      var area = getProductArea(root);
-      if (area) {
-        observeProductForm(area);
-        syncFromForm(area);
-      }
-    });
+    event.target.querySelectorAll('.product__item-js').forEach(initArea);
   });
 })();
