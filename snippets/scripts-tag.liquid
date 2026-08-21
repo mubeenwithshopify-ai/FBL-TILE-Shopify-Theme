@@ -15,11 +15,11 @@
     <script src="{{ 'js-cloudimage-360-view.min.js' | asset_url }}" defer="defer"></script>
 
     {%- comment -%}
-      IMPORTANT: variant sync MUST load before calculator-cart-fix.
-      Both scripts register capture-phase submit handlers. The cart-fix calls
-      stopImmediatePropagation(), so anything registered after it cannot run.
+      Variant sync must load before calculator cart handling.
+      The label sync only updates the visible selected option text.
     {%- endcomment -%}
     <script src="{{ 'product-calculator-variant-sync.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'product-variant-label-sync.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'product-calculator-cart-fix.js' | asset_url }}" defer="defer"></script>
   {%- when 'search' -%}
     <script src="{{ 'collection.js' | asset_url }}" defer="defer"></script>
