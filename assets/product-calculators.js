@@ -59,13 +59,28 @@
   }
 
   function selectedVariant(root, list) {
+    if (!list.length) return null;
+
+    /* The variant-sync script sets this only after resolving the actual
+       checked Size/Finish controls. Prefer it over a stale hidden ID. */
+    var activeId = root.dataset.activeVariantId;
+    if (activeId) {
+      var active = list.find(function (variant) {
+        return String(variant.id) === String(activeId);
+      });
+      if (active) return active;
+    }
+
     var s = section(root);
     if (!s) return list[0] || null;
+
     var input = s.querySelector('input.product-variant-id[name="id"], select[name="id"], input[name="id"]');
     var id = input ? input.value : '';
+
     for (var i = 0; i < list.length; i++) {
       if (String(list[i].id) === String(id)) return list[i];
     }
+
     return list[0] || null;
   }
 
@@ -161,11 +176,17 @@
     var piecesInput = root.querySelector('[data-calculator-input="pieces"]');
     var sfPerPiece = number(variant && variant.sfPerPiece);
     var weightPerSF = number(variant && variant.shippingWeightPerSF, 6);
-    var minPieces = number(variant && variant.quantityRule && variant.quantityRule.min, 5);
+
+    /* Use the variant's custom Minimum Pieces metafield first. */
+    var minPieces = number(variant && variant.minimumPieces);
+    if (!minPieces || minPieces < 1) {
+      minPieces = number(variant && variant.quantityRule && variant.quantityRule.min, 5);
+    }
+
     var maxPieces = number(variant && variant.quantityRule && variant.quantityRule.max);
 
     if (!sfPerPiece || sfPerPiece <= 0) {
-      message(root, 'error', 'This tile size is missing Coverage per Piece configuration.', true);
+      message(root, 'error', 'This tile size is missing SF per Piece configuration.', true);
       buttons(root, false);
       return;
     }
