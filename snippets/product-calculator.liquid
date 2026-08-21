@@ -1,1 +1,97 @@
-PLACEHOLDER
+{%- liquid
+  assign calculator_type = calculator_type | default: 'default'
+
+  assign calculator_minimum = product.metafields.custom.calculator_minimum.value
+  assign ltl_freight_only = product.metafields.custom.ltl_freight_only.value
+  assign sold_by = product.metafields.custom.sold_by.value
+  assign sf_per_piece = product.metafields.custom.sf_per_piece.value
+  assign pieces_per_box = product.metafields.custom.pieces_per_box.value
+  assign shipping_weight_per_sf = product.metafields.custom.shipping_weight_per_sf.value
+  assign coverage_per_sheet = product.metafields.custom.coverage_per_sheet.value
+  assign shipping_weight_per_sheet = product.metafields.custom.shipping_weight_per_sheet.value
+  assign shipping_weight_per_piece = product.metafields.custom.shipping_weight_per_piece.value
+
+  if calculator_type == 'square_footage'
+    assign calculator_minimum = calculator_minimum | default: 5
+    assign sold_by = 'Piece'
+    assign shipping_weight_per_sf = shipping_weight_per_sf | default: 6
+  elsif calculator_type == 'sheet'
+    assign calculator_minimum = calculator_minimum | default: 1
+    assign sold_by = sold_by | default: 'Sheet'
+    assign coverage_per_sheet = coverage_per_sheet | default: 0
+    assign shipping_weight_per_sheet = shipping_weight_per_sheet | default: 6
+  elsif calculator_type == 'piece'
+    assign calculator_minimum = calculator_minimum | default: 1
+    assign sold_by = 'Piece'
+  endif
+-%}
+
+<div class="product-calculator product-calculator--{{ calculator_type }}" data-product-calculator data-calculator-section="{{ section_id }}" data-calculator-type="{{ calculator_type }}" data-minimum="{{ calculator_minimum }}" data-sold-by="{{ sold_by | escape }}" data-ltl="{{ ltl_freight_only }}" data-currency="{{ cart.currency.iso_code }}" data-locale="{{ request.locale.iso_code }}" data-money-format="{{ shop.money_format | escape }}" data-sf-per-piece="{{ sf_per_piece }}" data-pieces-per-box="{{ pieces_per_box }}" data-weight-per-sf="{{ shipping_weight_per_sf }}" data-coverage-per-sheet="{{ coverage_per_sheet }}" data-weight-per-sheet="{{ shipping_weight_per_sheet }}" data-weight-per-piece="{{ shipping_weight_per_piece }}" data-option1-name="{{ product.options[0] | escape }}" data-option2-name="{{ product.options[1] | escape }}" data-option3-name="{{ product.options[2] | escape }}">
+  <div class="product-calculator__header">
+    <h3 class="product-calculator__title">How much do you need?</h3>
+    {%- if ltl_freight_only -%}<span class="product-calculator__badge">LTL Freight Only</span>{%- endif -%}
+  </div>
+
+  {%- if calculator_type == 'square_footage' -%}
+    <div class="product-calculator__pricing">
+      <div class="product-calculator__primary-price"><span>Price per Sq. Ft.</span> <strong data-calculator-output="price-per-sf">—</strong></div>
+      <div class="product-calculator__secondary-price"><strong data-calculator-output="price-per-piece">—</strong><span>/ Piece - 1 Piece = <strong data-calculator-output="sf-per-piece">—</strong> sq. ft.</span></div>
+    </div>
+
+    <div class="product-calculator__minimum-banner" aria-live="polite"><strong>Minimum Order: 1 Box - <span data-calculator-output="min-pieces">—</span> Pieces - <span data-calculator-output="min-coverage">—</span> sq. ft. - <span data-calculator-output="min-price">—</span></strong></div>
+
+    <div class="product-calculator__inputs product-calculator__inputs--tile">
+      <div class="product-calculator__field">
+        <label for="CalculatorSF-{{ section_id }}">I NEED (SQ. FT.)</label>
+        <input id="CalculatorSF-{{ section_id }}" class="product-calculator__input" type="number" inputmode="decimal" min="0" step="0.01" placeholder="Enter Square Footage Needed" autocomplete="off" data-calculator-input="sf">
+      </div>
+      <div class="product-calculator__or" aria-hidden="true">OR</div>
+      <div class="product-calculator__field">
+        <label for="CalculatorPieces-{{ section_id }}">BUY (PIECES)</label>
+        <input id="CalculatorPieces-{{ section_id }}" class="product-calculator__input" type="number" inputmode="numeric" min="1" step="1" placeholder="Pieces" autocomplete="off" data-calculator-input="pieces">
+      </div>
+    </div>
+
+    <div class="product-calculator__reference">1 Piece = <strong data-calculator-output="sf-per-piece">—</strong> sq. ft.</div>
+
+    <div class="product-calculator__results">
+      <div class="product-calculator__result"><span>Pieces Selected</span><strong data-calculator-output="pieces">—</strong></div>
+      <div class="product-calculator__result"><span>Actual Coverage</span><strong data-calculator-output="coverage">—</strong></div>
+      <div class="product-calculator__result"><span>Price per Sq. Ft.</span><strong data-calculator-output="price-per-sf">—</strong></div>
+      <div class="product-calculator__result"><span>Price per Piece</span><strong data-calculator-output="price-per-piece">—</strong></div>
+      <div class="product-calculator__result"><span>Product Subtotal</span><strong data-calculator-output="subtotal">—</strong></div>
+      <div class="product-calculator__result"><span>Estimated Shipping Weight</span><strong data-calculator-output="weight">—</strong></div>
+    </div>
+    <div class="product-calculator__shipping-note">Shipping calculated separately at checkout.</div>
+
+  {%- elsif calculator_type == 'sheet' -%}
+    <div class="product-calculator__inputs"><div class="product-calculator__field product-calculator__field--full"><label for="CalculatorMosaicSF-{{ section_id }}">I NEED (SQ. FT.)</label><input id="CalculatorMosaicSF-{{ section_id }}" class="product-calculator__input" type="number" inputmode="decimal" min="0" step="0.01" placeholder="Enter Square Footage Needed" autocomplete="off" data-calculator-input="sf"></div></div>
+    <div class="product-calculator__reference">Coverage per Sheet: <strong data-calculator-output="coverage-per-sheet">{{ coverage_per_sheet | default: 0 }}</strong> sq. ft.</div>
+    <div class="product-calculator__results">
+      <div class="product-calculator__result"><span>Sheets Required</span><strong data-calculator-output="quantity">—</strong></div>
+      <div class="product-calculator__result"><span>Actual Coverage</span><strong data-calculator-output="coverage">—</strong></div>
+      <div class="product-calculator__result"><span>Total Price</span><strong data-calculator-output="subtotal">—</strong></div>
+      <div class="product-calculator__result"><span>Estimated Shipping Weight</span><strong data-calculator-output="weight">—</strong></div>
+    </div>
+
+  {%- elsif calculator_type == 'piece' -%}
+    <div class="product-calculator__inputs"><div class="product-calculator__field product-calculator__field--full"><label for="CalculatorPieces-{{ section_id }}">NUMBER OF PIECES</label><input id="CalculatorPieces-{{ section_id }}" class="product-calculator__input" type="number" inputmode="numeric" min="1" step="1" placeholder="Enter Number of Pieces" autocomplete="off" data-calculator-input="pieces"></div></div>
+    <div class="product-calculator__results">
+      <div class="product-calculator__result"><span>Pieces Required</span><strong data-calculator-output="quantity">—</strong></div>
+      <div class="product-calculator__result"><span>Total Price</span><strong data-calculator-output="subtotal">—</strong></div>
+      <div class="product-calculator__result"><span>Estimated Shipping Weight</span><strong data-calculator-output="weight">—</strong></div>
+    </div>
+  {%- endif -%}
+
+  <div class="product-calculator__error" data-calculator-message="error" hidden role="alert" aria-live="assertive"></div>
+  <input type="hidden" name="quantity" value="1" data-calculator-quantity form="{{ product_form_id }}">
+
+  <script type="application/json" class="product-calculator-variants">
+  [
+    {%- for variant in product.variants -%}
+      {"id":{{ variant.id | json }},"price":{{ variant.price | json }},"available":{{ variant.available | json }},"inventoryManagement":{{ variant.inventory_management | json }},"inventoryPolicy":{{ variant.inventory_policy | json }},"inventoryQuantity":{{ variant.inventory_quantity | json }},"option1":{{ variant.option1 | json }},"option2":{{ variant.option2 | json }},"option3":{{ variant.option3 | json }},"sfPerPiece":{{ variant.metafields.custom.sf_per_piece.value | default: 0 | json }},"piecesPerBox":{{ variant.metafields.custom.pieces_per_box.value | default: 0 | json }},"coveragePerSheet":{{ variant.metafields.custom.coverage_per_sheet.value | default: 0 | json }},"shippingWeightPerSF":{{ variant.metafields.custom.shipping_weight_per_sf.value | default: 0 | json }},"shippingWeightPerSheet":{{ variant.metafields.custom.shipping_weight_per_sheet.value | default: 0 | json }},"shippingWeightPerPiece":{{ variant.metafields.custom.shipping_weight_per_piece.value | default: 0 | json }},"quantityRule":{"min":{{ variant.quantity_rule.min | default: 1 }},"max":{{ variant.quantity_rule.max | json }},"increment":{{ variant.quantity_rule.increment | default: 1 }}}}
+      {%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+  ]
+  </script>
+</div>
