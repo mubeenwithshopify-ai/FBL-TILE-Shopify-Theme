@@ -13,13 +13,9 @@
   {%- when 'product' -%}
     <script src="{{ 'main-product.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'js-cloudimage-360-view.min.js' | asset_url }}" defer="defer"></script>
-
-    {%- comment -%}
-      Variant sync must load before calculator cart handling.
-      The label sync only updates the visible selected option text.
-    {%- endcomment -%}
     <script src="{{ 'product-calculator-variant-sync.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'product-variant-label-sync.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'product-detail-price-sync.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'product-calculator-cart-fix.js' | asset_url }}" defer="defer"></script>
   {%- when 'search' -%}
     <script src="{{ 'collection.js' | asset_url }}" defer="defer"></script>
