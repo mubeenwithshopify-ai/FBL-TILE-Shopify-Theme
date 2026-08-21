@@ -3,65 +3,129 @@
 
   function getCalculatorRoot(productForm) {
     var sectionId = productForm && productForm.dataset.calculatorForm;
-
-    if (!sectionId) {
-      return null;
-    }
-
-    return document.querySelector(
-      '[data-calculator-section="' + sectionId + '"]'
-    );
+    if (!sectionId) return null;
+    return document.querySelector('[data-calculator-section="' + sectionId + '"]');
   }
 
   function setLoading(productForm, loading) {
     var button = productForm.querySelector('button[name="add"][type="submit"]');
-
-    if (!button) {
-      return;
-    }
-
+    if (!button) return;
     button.disabled = loading;
     button.setAttribute('aria-disabled', loading ? 'true' : 'false');
     button.classList.toggle('loading', loading);
   }
 
   function showError(root, message) {
-    if (!root) {
-      return;
-    }
-
+    if (!root) return;
     var error = root.querySelector('[data-calculator-message="error"]');
-
     if (error) {
       error.textContent = message || 'Unable to add this product to the cart.';
       error.hidden = false;
     }
   }
 
+  /*
+   * FINAL SOURCE-OF-TRUTH CHECK
+   *
+   * Do not trust the hidden id field here. The calculator form starts with the
+   * first available variant and the theme has several variant handlers. At
+   * submit time we resolve the exact Shopify variant again from the checked
+   * option radios + the variant JSON already rendered by product-calculator.
+   * This guarantees that Add to Cart receives the variant the customer chose.
+   */
+  function resolveVariantAtSubmit(productForm, root) {
+    var picker = productForm.closest('.product__item-js')
+      ? productForm.closest('.product__item-js').querySelector('variant-radios-single, variant-radios-detail, variant-group-detail')
+      : document.querySelector('variant-radios-single, variant-radios-detail, variant-group-detail');
+
+    var json = root && root.querySelector('.product-calculator-variants');
+    if (!picker || !json) return null;
+
+    var variants;
+    try {
+      variants = JSON.parse(json.textContent.trim()) || [];
+    } catch (e) {
+      console.error('[Calculator Cart Fix] Invalid variant JSON:', e);
+      return null;
+    }
+
+    var names = [
+      String(root.dataset.option1Name || '').trim().toLowerCase(),
+      String(root.dataset.option2Name || '').trim().toLowerCase(),
+      String(root.dataset.option3Name || '').trim().toLowerCase()
+    ];
+
+    var selected = {};
+    Array.prototype.forEach.call(
+      picker.querySelectorAll('input[type="radio"][name]:checked'),
+      function (input) {
+        var inputName = String(input.name || '').trim().toLowerCase();
+        var index = names.indexOf(inputName);
+        if (index !== -1) selected[index] = String(input.value || '').trim();
+      }
+    );
+
+    /* Fall back to fieldset order if option names have been renamed by the
+       merchant/theme settings. */
+    if (Object.keys(selected).length === 0) {
+      Array.prototype.forEach.call(
+        picker.querySelectorAll('fieldset.product-form__input'),
+        function (fieldset, index) {
+          var checked = fieldset.querySelector('input[type="radio"]:checked');
+          if (checked) selected[index] = String(checked.value || '').trim();
+        }
+      );
+    }
+
+    if (!Object.keys(selected).length) return null;
+
+    var variant = variants.find(function (item) {
+      return Object.keys(selected).every(function (index) {
+        return String(item['option' + (Number(index) + 1)] || '').trim() === selected[index];
+      });
+    });
+
+    if (!variant) return null;
+
+    var variantInput = productForm.querySelector('input[name="id"]');
+    if (!variantInput) return null;
+
+    variantInput.value = String(variant.id);
+    variantInput.setAttribute('value', String(variant.id));
+    variantInput.disabled = false;
+
+    /* Keep the calculator on exactly the same variant. */
+    root.dataset.activeVariantId = String(variant.id);
+    root.setAttribute('data-active-variant-id', String(variant.id));
+
+    return variant;
+  }
+
   document.addEventListener(
     'submit',
     function (event) {
       var form = event.target;
-
-      if (!form || !form.matches) {
-        return;
-      }
+      if (!form || !form.matches) return;
 
       var productForm = form.closest('product-form[data-calculator-form]');
-
-      if (!productForm) {
-        return;
-      }
+      if (!productForm) return;
 
       var root = getCalculatorRoot(productForm);
       var state = root && root._calculatorState;
+      if (!root || !state || !state.valid) return;
 
-      if (!root || !state || !state.valid) {
+      /* Resolve the variant FIRST, before FormData is constructed. */
+      var resolvedVariant = resolveVariantAtSubmit(productForm, root);
+
+      if (!resolvedVariant) {
+        showError(root, 'Unable to determine the selected product variant. Please select a valid size and finish.');
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
         return;
       }
 
       var variantInput = form.querySelector('input[name="id"]');
-
       if (!variantInput || !variantInput.value) {
         showError(root, 'Unable to determine the selected product variant.');
         event.preventDefault();
@@ -70,13 +134,8 @@
         return;
       }
 
-      // Disabled controls are omitted from FormData. Calculator products must
-      // always submit the selected variant ID to Shopify.
       variantInput.disabled = false;
 
-      // Handle calculator products independently from the theme's generic
-      // product-form JSON handler. This avoids the invalid/missing "items"
-      // request that currently sends the browser to /cart/add with an error.
       event.preventDefault();
       event.stopPropagation();
       event.stopImmediatePropagation();
@@ -100,7 +159,6 @@
         .then(function (response) {
           return response.text().then(function (text) {
             var data = {};
-
             try {
               data = text ? JSON.parse(text) : {};
             } catch (parseError) {
@@ -108,29 +166,23 @@
             }
 
             if (!response.ok || data.status || data.errors || data.description) {
-              var message =
+              throw new Error(
                 data.description ||
                 data.message ||
-                'We could not add this product to your cart. Please try again.';
-
-              throw new Error(message);
+                'We could not add this product to your cart. Please try again.'
+              );
             }
 
             return data;
           });
         })
         .then(function (data) {
-          // Shopify returns the added line item object for a standard
-          // multipart/form-data cart/add.js request. Some theme/app handlers
-          // may instead return an items array, so support both formats.
-          var addedItem =
-            data &&
-            (data.id || data.key || data.variant_id ||
-              (data.items && data.items.length));
+          var addedItem = data && (
+            data.id || data.key || data.variant_id ||
+            (data.items && data.items.length)
+          );
 
-          if (!addedItem) {
-            throw new Error('The product was not added to the cart.');
-          }
+          if (!addedItem) throw new Error('The product was not added to the cart.');
 
           var cartUrl =
             window.routes && window.routes.cart_url
