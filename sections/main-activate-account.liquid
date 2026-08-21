@@ -1,0 +1,67 @@
+{{ 'my-account.css' | asset_url | stylesheet_tag }}
+<div class="customer-active">
+  <div class="container">
+    <div class="customer-form active-form col-md-6 col-sm-8 m-auto">
+      {%- form 'activate_customer_password' -%}
+        {%- if form.errors -%}
+          <ul>
+            {%- for field in form.errors -%}
+              <li class="flex gap-5">
+                {%- render 'icon-error' -%}
+                {%- if field == 'form' -%}
+                  {{ form.errors.messages[field] }}
+                {%- else -%}
+                  <a href="#{{ field }}">
+                    {{ form.errors.translated_fields[field] | capitalize }}
+                    {{ form.errors.messages[field] }}
+                  </a>
+                {% endif %}
+              </li>
+            {%- endfor -%}
+          </ul>
+        {% endif %}
+        <div class="form-field form-group  mb-15 d-flex flex-column">
+          <label class="pb-5 visually-hidden" for="password">
+            {{- 'customer.activate_account.password' | t }}
+            <span class="required">*</span></label
+          >
+          <input
+            type="password"
+            name="customer[password]"
+            aria-required="true"
+            placeholder=""
+            required
+            id="password"
+          >
+        </div>
+        <div class="form-field form-group  mb-15 d-flex flex-column">
+          <label class="pb-5 visually-hidden" for="password_confirmation">
+            {{- 'customer.activate_account.password_confirm' | t }}
+            <span class="required">*</span></label
+          >
+          <input
+            type="password"
+            name="customer[password_confirmation]"
+            aria-required="true"
+            placeholder=""
+            required
+            id="password_confirmation"
+          >
+        </div>
+        <div class="form-actions mt-30 d-flex justify-content-center flex-column text-center ">
+          <button type="submit" class="btn-primary mb-5">
+            {{ 'customer.activate_account.submit' | t }}
+          </button>
+          <span>{{ 'customer.activate_account.or' | t }}</span>
+          <button
+            type="submit"
+            name="decline"
+            class="btn-secondary mt-5"
+          >
+            {{ 'customer.activate_account.cancel' | t }}
+          </button>
+        </div>
+      {%- endform -%}
+    </div>
+  </div>
+</div>

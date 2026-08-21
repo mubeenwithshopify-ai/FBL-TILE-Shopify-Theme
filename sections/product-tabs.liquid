@@ -1,0 +1,337 @@
+{{ 'product-tabs.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-tabs.js' | asset_url }}" defer></script>
+{%- liquid
+  assign section_st = section.settings
+  assign section_width = section_st.section_width
+  assign color_scheme = section_st.color_scheme
+  if section_st.reset_spacing
+    assign reset_spacing = ' remove_spacing'
+  endif
+-%}
+{%- capture style -%}
+  --section-pt: {{ section_st.padding_top }}; --section-pb: {{ section_st.padding_bottom }}
+{%- endcapture -%}
+
+{%- if section.blocks.size > 0 -%}
+  <div
+    class="section{% if section_st.padding_top < 30 %} pt-min{% endif %}{% if section_st.padding_bottom < 30 %} pb-min{% endif %} sec__product-tabs color-{{ color_scheme }} gradient{{ reset_spacing }}"
+    style="{{ style | strip | strip_newlines }}"
+  >
+    <div class="{{ section_width }}">
+      <tab-items data-type="{{ section_st.tab_header_style }}" class="product-tabs">
+
+        <div class="product-tabs__nav-wrap mb-30 mb-sm-20{% if section_st.section_width == 'full_width' %} px-20{% endif %}">
+          <div class="inline-flex align-center max-w-100 {% if section_st.tab_header_style == 'horizontal' %} product-tabs__ta overflow-auto{% else %} product-tabs__select align-center gap-10{% endif %}{% if section_st.tab_header_style != 'horizontal' %} h4 my-0{% endif %}{% if section_st.tab_header_style == 'horizontal' and section_st.horizontal_tab_style == 'underline' %} border-bottom{% endif %}{% if section_st.tab_header_style == 'horizontal' and section_st.horizontal_tab_style != 'underline' %} gap-15{% endif %}">
+
+            {%- if section_st.tab_header_style != 'horizontal' -%}
+              <span>Choose a tab</span>
+              <div class="select-product-tab relative select-custom">
+                {%- for block in section.blocks -%}
+                  {%- liquid
+                    assign block_st = block.settings
+                    assign tab_label = block_st.tab_label | default: block.type | capitalize
+                  -%}
+                  {%- if forloop.first -%}
+                    <div class="select__selected select__selected_title inline-flex align-center gap-10 pointer">
+                      {{ tab_label }}
+                      <svg class="icon-down transition active-rotated" width="10" height="6">
+                        <use href="#icon-arrow-down"></use>
+                      </svg>
+                    </div>
+                  {%- endif -%}
+                {%- endfor -%}
+                <div class="select-custom__content invisible transition-short top-100 absolute shadow list-none z-2 py-20 px-25 color-default{% if settings.rtl %} right-0{% else %} left-0{% endif %}">
+                  <ul class="list-none p-0 my-0">
+                    {%- for block in section.blocks -%}
+                      {%- liquid
+                        assign block_st = block.settings
+                        assign tab_label = block_st.tab_label | default: block.type | capitalize
+                        if block.type == 'reviews'
+                          assign review_count = block_st.review_count | default: product.metafields.judgeme.review_count
+                        endif
+                      -%}
+                      <li class="py-5 hover-heading-color pointer product_tab_title_input" data-id="{{ block.id }}">
+                        {{ tab_label }}
+                        {%- if block.type == 'reviews' and review_count != blank %} ({{ review_count }}){% endif -%}
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                </div>
+              </div>
+            {%- else -%}
+              {%- for block in section.blocks -%}
+                {%- liquid
+                  assign block_st = block.settings
+                  assign tab_label = block_st.tab_label | default: block.type | capitalize
+                  if block.type == 'reviews'
+                    assign review_count = block_st.review_count | default: product.metafields.judgeme.review_count
+                  endif
+                -%}
+                <div
+                  data-block-id="{{ block.id }}"
+                  class="product-tabs__tab-item whitespace-nowrap pointer{% if section_st.horizontal_tab_style != 'underline' %} px-20{% endif %} pb-8 transition text-center heading-style{% if section_st.horizontal_tab_style == 'underline' %} fs-15 mx-20 border-animation uppercase{% else %} border btn-hover btn-rounded px-25 py-8 btn-active{% endif %}{% if forloop.first %} active{% endif %}"
+                  {{ block.shopify_attributes }}
+                  style="--height: 2px;"
+                  role="tab"
+                  aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+                >
+                  {{ tab_label }}
+                  {%- if block.type == 'reviews' and review_count != blank %} <span class="product-tabs__count">({{ review_count }})</span>{% endif -%}
+                </div>
+              {%- endfor -%}
+            {%- endif -%}
+
+          </div>
+        </div>
+
+        <div class="relative product-tabs__content">
+          {%- for block in section.blocks -%}
+            {%- liquid
+              assign block_st = block.settings
+              assign has_image = false
+              if block_st.image != blank
+                assign has_image = true
+              endif
+            -%}
+            <div
+              class="product-tabs__tab-content{% if forloop.first %} active{% endif %}"
+              data-block-id="{{ block.id }}"
+              role="tabpanel"
+              {{ block.shopify_attributes }}
+            >
+              {%- if block.type == 'reviews' -%}
+
+                <div class="product-tabs__reviews-widget">
+                  {%- if block_st.heading != blank -%}
+                    <p class="product-tabs__panel-lede rich__text-m0">{{ block_st.heading }}</p>
+                  {%- endif -%}
+
+                  {%- liquid
+                    assign has_legacy = false
+                    if product.metafields.judgeme.widget.size > 20
+                      assign has_legacy = true
+                    endif
+                  -%}
+                  <div style="clear:both"></div>
+                  <div
+                    id="judgeme_product_reviews"
+                    class="jdgm-widget jdgm-review-widget"
+                    data-product-title="{{ product.title | escape }}"
+                    data-id="{{ product.id }}"
+                    data-product-id="{{ product.id }}"
+                    data-widget="review"
+                    data-auto-install="false"
+                    data-shop-reviews-count="{{ shop.metafields.judgeme.shop_reviews_count | default: 0 | escape }}"
+                    data-entry-point="review_widget.js"
+                    data-entry-key="review-widget/main.js"
+                  >
+                    {%- if has_legacy -%}
+                      <div class="jdgm-legacy-widget-content" style="display: none;">{{ product.metafields.judgeme.widget }}</div>
+                    {%- endif -%}
+                  </div>
+                  {%- if product.metafields.judgeme.review_widget_data -%}
+                    <script>
+                      jdgm.data ||= {};
+                      jdgm.data.reviewWidget ||= {};
+                      jdgm.data.reviewWidget[{{ product.id }}] = {{ product.metafields.judgeme.review_widget_data }}
+                    </script>
+                  {%- endif -%}
+                </div>
+
+              {%- else -%}
+
+              <div class="product-tabs__panel-inner{% if has_image %} has-media{% endif %}">
+
+                <div class="product-tabs__panel-copy">
+                  {%- if block_st.heading != blank -%}
+                    <p class="product-tabs__panel-lede rich__text-m0">{{ block_st.heading }}</p>
+                  {%- endif -%}
+
+                  {%- if block_st.body != blank -%}
+                    <div class="product-tabs__panel-body rich__text-m0">{{ block_st.body }}</div>
+                  {%- endif -%}
+
+                  {%- if block_st.checklist != blank -%}
+                    <ul class="product-tabs__checklist">
+                      {%- assign checklist_lines = block_st.checklist | newline_to_br | split: '<br />' -%}
+                      {%- for line in checklist_lines -%}
+                        {%- assign trimmed_line = line | strip -%}
+                        {%- if trimmed_line != blank -%}
+                          <li><span class="product-tabs__checklist-icon">{% render 'pit-icon-check' %}</span>{{ trimmed_line }}</li>
+                        {%- endif -%}
+                      {%- endfor -%}
+                    </ul>
+                  {%- endif -%}
+                </div>
+
+                {%- if has_image -%}
+                  <div class="product-tabs__panel-media">
+                    {%- assign image_alt = block_st.image.alt | default: block_st.heading | escape -%}
+                    {% render 'responsive-image',
+                      type: 'product',
+                      container: section_width,
+                      image: block_st.image,
+                      image_alt: image_alt,
+                      class: 'product-tabs__panel-img w-full h-full object-position-center object-fit-cover'
+                    %}
+                  </div>
+                {%- endif -%}
+
+              </div>
+
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+
+      </tab-items>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Product tabs",
+  "tag": "section",
+  "class": "product-tabs-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Section width",
+      "default": "container",
+      "options": [
+        { "value": "container", "label": "Container" },
+        { "value": "fluid_container", "label": "Fluid container" },
+        { "value": "stretch_width", "label": "Stretch width" },
+        { "value": "full_width", "label": "Full width" }
+      ]
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "default-color-scheme"
+    },
+    {
+      "type": "header",
+      "content": "Tab style"
+    },
+    {
+      "type": "select",
+      "id": "tab_header_style",
+      "label": "Tab header style",
+      "options": [
+        { "value": "horizontal", "label": "Horizontal tabs" },
+        { "value": "select", "label": "Dropdown select" }
+      ],
+      "default": "horizontal"
+    },
+    {
+      "type": "select",
+      "id": "horizontal_tab_style",
+      "label": "Horizontal tab appearance",
+      "options": [
+        { "value": "underline", "label": "Underline" },
+        { "value": "fill", "label": "Filled pill" }
+      ],
+      "default": "underline"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "default": 60,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "default": 60,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "checkbox",
+      "id": "reset_spacing",
+      "label": "Remove section spacing",
+      "default": false
+    }
+  ],
+  "max_blocks": 6,
+  "blocks": [
+    {
+      "type": "description",
+      "name": "Description",
+      "settings": [
+        { "type": "text", "id": "tab_label", "label": "Tab label", "default": "Description" },
+        { "type": "textarea", "id": "heading", "label": "Intro text", "default": "Carrara White marble has been a symbol of refined taste for centuries. Its delicate veining and bright white tones make it perfect for both traditional and modern designs." },
+        { "type": "richtext", "id": "body", "label": "Additional text", "default": "<p>Ideal for walls, floors, bathrooms, kitchens, backsplashes, showers, and more.</p>" },
+        { "type": "textarea", "id": "checklist", "label": "Checklist (one item per line)", "default": "100% Natural Marble\nElegant White Background with Gray Veining\nHigh-End Look for Any Space\nDurable & Long Lasting\nPerfect for Residential & Commercial Projects" },
+        { "type": "image_picker", "id": "image", "label": "Image" }
+      ]
+    },
+    {
+      "type": "details",
+      "name": "Details",
+      "settings": [
+        { "type": "text", "id": "tab_label", "label": "Tab label", "default": "Details" },
+        { "type": "richtext", "id": "body", "label": "Content", "default": "<p>Add material specs, dimensions, finish, and usage details here.</p>" },
+        { "type": "image_picker", "id": "image", "label": "Image" }
+      ]
+    },
+    {
+      "type": "installation",
+      "name": "Installation",
+      "settings": [
+        { "type": "text", "id": "tab_label", "label": "Tab label", "default": "Installation" },
+        { "type": "richtext", "id": "body", "label": "Content", "default": "<p>Add installation instructions and recommended tools here.</p>" },
+        { "type": "image_picker", "id": "image", "label": "Image" }
+      ]
+    },
+    {
+      "type": "shipping",
+      "name": "Shipping",
+      "settings": [
+        { "type": "text", "id": "tab_label", "label": "Tab label", "default": "Shipping" },
+        { "type": "richtext", "id": "body", "label": "Content", "default": "<p>Add shipping times, packaging, and delivery details here.</p>" },
+        { "type": "image_picker", "id": "image", "label": "Image" }
+      ]
+    },
+    {
+      "type": "reviews",
+      "name": "Reviews",
+      "settings": [
+        { "type": "text", "id": "tab_label", "label": "Tab label", "default": "Reviews" },
+        {
+          "type": "paragraph",
+          "content": "Pulls your Judge.me review widget automatically. Leave the count field blank to just show the tab label without a number."
+        },
+        { "type": "text", "id": "review_count", "label": "Review count (shown in parentheses)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product tabs",
+      "blocks": [
+        { "type": "description" },
+        { "type": "details" },
+        { "type": "installation" },
+        { "type": "shipping" },
+        { "type": "reviews" }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,297 @@
+{%- liquid
+  assign section_st = section.settings
+  assign sec_blocks = section.blocks
+  assign section_width = section_st.section_width
+  assign heading = section_st.heading
+  assign image_width = section_st.image_width
+  assign scroll_animation = settings.scroll_animation
+  if section_st.reset_spacing
+    assign reset_spacing = ' remove_spacing'
+  endif
+  assign aspect_ratio = '1/1'
+  case section_st.aspect_ratio
+    when 'square'
+      assign aspect_ratio = '1/1'
+    when 'portrait'
+      assign aspect_ratio = '3/4'
+    else
+      assign aspect_ratio = '4/3'
+  endcase
+-%}
+
+{%- capture style -%}
+  --section-pt: {{ section_st.padding_top }}; --section-pb: {{ section_st.padding_bottom }};
+{%- endcapture -%}
+
+<div
+  class="color-{{ section_st.color_scheme }} gradient {{ reset_spacing }} bls__section text-image-pairing section{% if section_st.padding_top < 30 %} pt-min{% endif %}{% if section_st.padding_bottom < 30 %} pb-min{% endif %}"
+  style="{{ style | strip | strip_newlines }}"
+>
+  <div class="{{ section_width }}">
+    <div
+      class="bls__section-content text-{{ section_st.text_alignment }} {% if scroll_animation != 'none' %} scroll-trigger {{ scroll_animation }}{% endif %}"
+    >
+      <text-image-pairing class="block heading-style {{ section_st.size }} m-0">
+        {%- for block in sec_blocks -%}
+          {% liquid
+            assign blo_settings = block.settings
+            assign image = blo_settings.image
+            assign link = blo_settings.link
+            assign index_block = '[image' | append: forloop.index | append: ']'
+          %}
+          {%- capture image_block -%}
+          <a
+            tabindex="-1"
+            class="inline-block mx-15 my-5 vertical-align-middle hover_zoom"
+            {% if link == blank %}
+              role="link" aria-disabled="true" {{ block.shopify_attributes }}
+            {% else %}
+              href="{{ link }}"
+              target="_blank"
+            {% endif %}
+          >
+            <div class="bls__scrolling-img flex align-center w-custom hover-effect rounded-custom" 
+              style="--custom-width: {{ image_width }}px; --rounded-custom: {{ section_st.rounded_image }}px;--animation-order: {{ forloop.index }};
+              {% if section_st.aspect_ratio != 'adapt' %}
+             --aspect-ratio:{{ aspect_ratio }}
+            {% else %}--aspect-ratio:{% if image == blank %}1{% else %}{{ image.aspect_ratio }}
+            {% endif %} {% endif %}
+              ">
+              {% if image != blank %}
+                {% assign image_alt = image.alt %}
+                {% render 'responsive-image',
+                  type: 'banner',
+                  container: section_width,
+                  image: image,
+                  class: 'rounded-custom',
+                  image_alt: image_alt
+                %}
+                
+              {% else %}
+                {% render 'placeholder-render', type: "collection", class: "w-custom rounded-custom" %}
+              {% endif %}
+            </div>
+          </a>
+          {%- endcapture -%}
+          {% assign heading = heading | replace: index_block, image_block %}
+        {%- endfor -%}
+        {{ heading }}
+      </text-image-pairing>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.text-image-pairing.name",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "select",
+      "id": "section_width",
+      "options": [
+        {
+          "value": "container",
+          "label": "t:sections.all.section_width.container.label"
+        },
+        {
+          "value": "fluid_container",
+          "label": "t:sections.all.section_width.fluid_container.label"
+        },
+        {
+          "value": "stretch_width",
+          "label": "t:sections.all.section_width.stretch_width.label"
+        },
+        {
+          "value": "full_width",
+          "label": "t:sections.all.section_width.full_width.label"
+        }
+      ],
+      "default": "stretch_width",
+      "label": "t:sections.all.section_width.label"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.color_scheme.label",
+      "default": "default-color-scheme"
+    },
+    {
+      "type": "select",
+      "id": "aspect_ratio",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:sections.image-tabs.settings.aspect_ratio.adapt"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.image-tabs.settings.aspect_ratio.option__1"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.image-tabs.settings.aspect_ratio.option__2"
+        },
+        {
+          "value": "landscape",
+          "label": "t:sections.image-tabs.settings.aspect_ratio.option__3"
+        }
+      ],
+      "default": "adapt",
+      "label": "t:sections.image-tabs.settings.aspect_ratio.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.content_setting.label"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "t:sections.text-image-pairing.settings.heading",
+      "default": "Elevate your style [image1] and<br> embrace comfort [image2] and radiate confidence [image3]",
+      "info": "t:sections.text-image-pairing.settings.info"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.all.content_settings.content_alignment.left.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.all.content_settings.content_alignment.center.label"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.all.content_settings.content_alignment.right.label"
+        }
+      ],
+      "default": "center",
+      "label": "t:sections.all.section_header.alignment.label"
+    },
+    {
+      "type": "select",
+      "id": "size",
+      "options": [
+        {
+          "value": "h4",
+          "label": "t:sections.all.section_header.header_size.small.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.all.section_header.header_size.medium.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.all.section_header.header_size.large.label"
+        }
+      ],
+      "default": "h2",
+      "label": "t:sections.all.section_header.header_size.label"
+    },
+    {
+      "type": "range",
+      "id": "rounded_image",
+      "label": "t:sections.text-image-pairing.settings.rounded_image",
+      "min": 5,
+      "max": 80,
+      "step": 5,
+      "default": 5,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "image_width",
+      "label": "t:sections.text-image-pairing.settings.image_custom_width.label",
+      "min": 50,
+      "max": 150,
+      "step": 5,
+      "default": 100,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.section_padding.label"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.all.section_padding.top.label",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.all.section_padding.bottom.label",
+      "default": 0
+    },
+    {
+      "type": "checkbox",
+      "id": "reset_spacing",
+      "label": "t:sections.all.section_padding.reset_spacing.label",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text-image-pairing",
+      "name": "t:sections.all.image.label",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.all.image.label"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "t:sections.all.image.link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.text-image-pairing.name",
+      "blocks": [
+        {
+          "type": "text-image-pairing"
+        },
+        {
+          "type": "text-image-pairing"
+        },
+        {
+          "type": "text-image-pairing"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: '{% render ''placeholder-render'' | type: "collection" | class:  "w-custom
+    rounded-custom" %}'
+  to: '{% render ''placeholder-render'', type: "collection", class: "w-custom rounded-custom"
+    %}'
+  position: 2944..3031
+{% endcomment %}
