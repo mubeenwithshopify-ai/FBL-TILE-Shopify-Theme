@@ -1,0 +1,85 @@
+.popup-search-form {
+  transform: translateY(30px);
+  top: calc(var(--height-header) - var(--height-bottom));
+}
+header-inner.show-search-form {
+  grid-template-columns: 1fr auto 1fr;
+}
+.content-search-form {
+  max-height: calc(80vh - var(--height-bottom)); 
+  overflow: auto;
+  position: relative;
+  z-index: 10; 
+  background-color: var(--color-white);
+}
+.popup-search-show:not(.search-hidden) {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.popup-search-form:after {
+  position: fixed;
+  visibility: hidden;
+  background-color: var(--overlay-bg);
+  transition: var(--transition-popup);
+  opacity: 0;
+  left: 0;
+  right: 0;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9;
+  top: 100%;
+  height: auto;
+  content: "";
+}
+.popup-search-show:not(.search-hidden):after {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  cursor: pointer;
+  height: calc(
+    100vh - var(--height-header, 70px) - var(--height-topbar, 0px) -
+      var(--height-bar, 0px)
+  );
+}
+html:has(.popup-search-show:not(.search-hidden)) {
+  overflow: hidden;
+}
+@media screen and (max-width: 575.98px) {
+  .popup-search-form {
+    left: calc(var(--bs-gutter-x) * -1);
+    right: calc(var(--bs-gutter-x) * -1);
+  }
+}
+@media screen and (max-width: 767.98px) {
+  .header_search .product-item__wrapper {
+    display: flex;
+    gap: 15px;
+    --product-item__price-top: 3px;
+    --col-width: 8rem;
+    border: none;
+  }
+  .header_search .product-item__information {
+    margin-top: 0;
+    text-align: start;
+    align-self: center;
+  }
+  .header_search .product-item__inner {
+    width: 7rem;
+  }
+  .header_search .product-item:not(:last-child) {
+    border-bottom: 1px dashed var(--color-border);
+    padding-bottom: 1.5rem;
+  }
+  .header_search .product-item .product-item__price {
+    justify-content: flex-start;
+  }
+  .search-type-default .search__button.light-dark-grey {
+    color: var(--color-heading);
+  }
+}
+@media screen and (min-width: 768px) {
+  .bls__drawer.search__type-popup {
+    max-width: 100%;
+  }
+}

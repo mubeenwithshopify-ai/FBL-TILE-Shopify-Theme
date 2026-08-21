@@ -1,0 +1,115 @@
+/* Marquee */
+.animation-marquee {
+  animation: ticker var(--speed, 6s) infinite linear;
+  -webkit-animation: ticker var(--speed, 6s) infinite linear;
+}
+
+.animation-marquee.right {
+  animation: ticker-right var(--speed, 6s) infinite linear;
+  -webkit-animation: ticker-right var(--speed, 6s) infinite linear;
+}
+.animation-marquee.marquee-down {
+  animation: ticker-down var(--speed, 6s) infinite linear;
+  -webkit-animation: ticker-down var(--speed, 6s) infinite linear;
+}
+
+.animation-marquee.marquee-up {
+  animation: ticker-up var(--speed, 6s) infinite linear;
+  -webkit-animation: ticker-up var(--speed, 6s) infinite linear;
+}
+.marquee:hover > * {
+  animation-play-state: paused;
+}
+.animation-marquee :is(.spacing, svg, .image_icon_scroll,.image_scroll) {
+  margin-inline-end:var(--col-gap);
+}
+@media (min-width: 768px) {
+  .animation-marquee :is(.spacing, svg, .image_icon_scroll,.image_scroll) {
+    margin-inline-end: var(--col-gap-desktop, var(--col-gap));
+  }
+}
+@keyframes ticker {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+@-webkit-keyframes ticker {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+@keyframes ticker-right {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+@-webkit-keyframes ticker-right {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+@keyframes ticker-down {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+@-webkit-keyframes ticker-down {
+   0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0); 
+  }
+}
+@keyframes ticker-up {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+@-webkit-keyframes ticker-up {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+.image_icon_scroll{
+   width: var(--image_scroll-width);
+   line-height: 0;
+}
+.image_icon_scroll .placeholder-image,
+.image_icon_scroll img{
+  width: 100%;
+}
+.marquee  .rich__text-outline:nth-child(odd)> .outline-text {
+  position: relative;
+  text-decoration: none;
+  -webkit-text-stroke: 1px var(--color-text);
+  background: linear-gradient(var(--color-text) 0 100%) left / 0 no-repeat;
+  color: transparent !important;
+  background-clip: text;
+  transition: .8s ease; 
+}
+.marquee .rich__text-outline .outline-text:hover {
+  background-size: 100%;
+}

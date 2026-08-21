@@ -1,0 +1,29 @@
+.icon_plus-animation::before,
+.icon_plus-animation::after {
+  position: absolute;
+  content: "";
+  top: 50%;
+  left: calc(100% - 6px);
+  -webkit-transform: translate(-50%, -50%) rotate(-90deg);
+  transform: translate(-50%, -50%) rotate(-90deg);
+  background-color: currentColor;
+  transition: var(--transition);
+}
+.icon_plus-animation:before {
+  width: var(--icon-width, 12px);
+  height: var(--icon-height, 1px);
+}
+.icon_plus-animation:after {
+  width: var(--icon-height, 1px);
+  height: var(--icon-width, 12px);
+}
+.active .open-children-toggle .icon_plus-animation:before {
+  opacity: 0;
+  -webkit-transform: translate(-50%, -50%) rotate(90deg);
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+@media screen and (max-width: 767.98px) {
+  .collapsible-content:not(.filter-content) {
+    display: none;
+  }
+}

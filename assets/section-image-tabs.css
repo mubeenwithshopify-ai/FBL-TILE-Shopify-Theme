@@ -1,0 +1,30 @@
+
+.tabs__item-icon {
+  width: clamp(3.5rem, 4vw, 4.5rem);
+  height: clamp(3.5rem, 4vw, 4.5rem);
+  transition: var(--transition);
+}
+
+.tabs__item>a {
+  padding: clamp(1.5rem, 2.2vw, 3rem) 0;
+}
+
+.tabs__item:not(:last-child)>a {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.tabs__item.active .tabs__item-icon {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.tabs__item.active>a {
+  color: var(--color-primary);
+}
+.tabs__item >a svg {
+  transition: transform 0.3s ease-in-out;
+}
+.tabs__item.active>a svg {
+  transform: rotate(-45deg);
+}
+

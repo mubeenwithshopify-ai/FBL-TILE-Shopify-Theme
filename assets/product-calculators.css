@@ -1,0 +1,343 @@
+.product-calculator {
+  width: 100%;
+  margin: 0 0 20px;
+  padding: 20px;
+  border: 1px solid var(--color-border, #d9d9d9);
+  border-radius: 4px;
+  background: var(--color-background, #fff);
+  box-sizing: border-box;
+}
+
+/* --- Price block: Selected Size / Price per Sq Ft / Price per Piece --- */
+
+.product-calculator__price-block {
+  margin: 0 0 16px;
+}
+
+.product-calculator__selected-size {
+  margin: 0 0 4px;
+  font-size: 13px;
+  line-height: 1.4;
+  opacity: 0.75;
+}
+
+.product-calculator__price-main {
+  margin: 0 0 4px;
+  font-size: 32px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.product-calculator__price-sub {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+  opacity: 0.8;
+}
+
+/* --- Highlighted minimum-order banner --- */
+
+.product-calculator__banner {
+  margin: 0 0 20px;
+  padding: 12px 16px;
+  border-radius: 4px;
+  background: #fdf1e2;
+  color: #7a4a12;
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: center;
+  font-weight: 600;
+}
+
+.product-calculator__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.product-calculator__title {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.35;
+  font-weight: 600;
+}
+
+.product-calculator__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 10px;
+  border-radius: 3px;
+  background: #fff3df;
+  color: #8a4b00;
+  font-size: 12px;
+  line-height: 1.2;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.product-calculator__inputs {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 15px;
+  align-items: end;
+}
+
+.product-calculator__inputs--tile {
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+}
+
+.product-calculator__field {
+  min-width: 0;
+}
+
+.product-calculator__field--full {
+  width: 100%;
+}
+
+.product-calculator__field label {
+  display: block;
+  margin: 0 0 8px;
+  font-size: 13px;
+  line-height: 1.35;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.product-calculator__input {
+  width: 100%;
+  min-height: 52px;
+  margin: 0;
+  padding: 12px 15px;
+  border: 1px solid var(--color-border, #d9d9d9);
+  border-radius: 4px;
+  background: var(--color-background, #fff);
+  color: var(--color-foreground, currentColor);
+  font-size: 16px;
+  line-height: 1.4;
+  text-align: center;
+  outline: none;
+  box-sizing: border-box;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.product-calculator__input:focus {
+  border-color: currentColor;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.08);
+}
+
+.product-calculator__input::placeholder {
+  opacity: 0.65;
+}
+
+.product-calculator__or {
+  align-self: center;
+  padding: 0 2px;
+  font-size: 13px;
+  color: currentColor;
+  opacity: 0.65;
+  text-transform: uppercase;
+}
+
+.product-calculator__reference {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--color-border, #d9d9d9);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.product-calculator__reference strong {
+  font-weight: 700;
+}
+
+.product-calculator__reference-divider {
+  opacity: 0.4;
+}
+
+.product-calculator__results {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.product-calculator__result {
+  min-width: 0;
+  padding: 12px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.035);
+}
+
+.product-calculator__result span {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 12px;
+  line-height: 1.35;
+  opacity: 0.72;
+}
+
+.product-calculator__result strong {
+  display: block;
+  font-size: 15px;
+  line-height: 1.35;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.product-calculator__rounding,
+.product-calculator__minimum,
+.product-calculator__error {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 4px;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.product-calculator__rounding {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.product-calculator__minimum {
+  background: #fff1f0;
+  color: #b42318;
+  border: 1px solid #f5c2c0;
+}
+
+.product-calculator__error {
+  background: #fff1f0;
+  color: #b42318;
+  border: 1px solid #f5c2c0;
+}
+
+.product-calculator__shipping-note {
+  margin: 14px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--color-border, #d9d9d9);
+  font-size: 13px;
+  line-height: 1.4;
+  text-align: center;
+  opacity: 0.7;
+}
+
+.product-calculator__stock {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid var(--color-border, #d9d9d9);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.product-calculator__stock strong {
+  font-weight: 700;
+}
+
+.product-calculator__note {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 10px;
+  font-size: 12px;
+  line-height: 1.45;
+  opacity: 0.72;
+}
+
+.product-calculator-price-override {
+  display: block;
+}
+
+.product-calculator-price-override[hidden] {
+  display: none !important;
+}
+
+.product-calculator__buttons-disabled {
+  pointer-events: none !important;
+  opacity: 0.5 !important;
+}
+
+.product-calculator__input.is-invalid {
+  border-color: #b42318;
+}
+
+@media screen and (max-width: 767px) {
+  .product-calculator {
+    padding: 15px;
+  }
+
+  .product-calculator__header {
+    align-items: flex-start;
+    flex-direction: column;
+    margin-bottom: 15px;
+  }
+
+  .product-calculator__inputs--tile {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .product-calculator__or {
+    justify-self: center;
+    padding: 0;
+  }
+
+  .product-calculator__results {
+    grid-template-columns: 1fr;
+  }
+
+  .product-calculator__reference {
+    justify-content: flex-start;
+  }
+
+  .product-calculator__stock {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .product-calculator__price-main {
+    font-size: 26px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .product-calculator {
+    padding: 12px;
+  }
+
+  .product-calculator__title {
+    font-size: 17px;
+  }
+
+  .product-calculator__input {
+    min-height: 50px;
+  }
+
+  .product-calculator__badge {
+    white-space: normal;
+  }
+}
+
+.tile-sf-error {
+    display: none;
+    margin-top: 6px;
+    color: #d32f2f;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+#tile-sf-input.has-error {
+    border-color: #d32f2f !important;
+}

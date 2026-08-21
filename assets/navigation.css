@@ -1,0 +1,854 @@
+@media screen and (max-width: 1024.98px) {
+  .nav-open .navigation {
+    transform: translate(0);
+    opacity: 1;
+    visibility: visible;
+  }
+  .navigation {
+    background: var(--color-background);
+    --menu-mobile-width: 43rem;
+    --show-overlay-bg: rgba(255, 255, 255, 0.9);
+    width: 100%;
+    max-width: var(--menu-mobile-width);
+    overflow: hidden;
+    transform: translateX(-100%);
+    transition: var(--transition-popup);
+  }
+  .navigation open-children-toggle {
+    color: var(--color-heading);
+  }
+  .menu-mobile-title a {
+    color: var(--color-heading);
+    opacity: 0.6;
+  }
+  .menu-mobile-title a.active {
+    opacity: 1;
+  }
+  .navigation__menu-content {
+    height: 100%;
+    flex: 1; 
+  }
+  .submenu,
+  .sub-children-menu {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-width: var(--menu-mobile-width);
+    transform: translateX(100%);
+    z-index: 12;
+  }
+  .is-open + .submenu,
+  .is-open + .sub-children-menu {
+    transform: translate(0);
+  }
+  .submenu .grid-cols {
+    --col-desktop: 1 !important;
+  }
+  .subchildmenu {
+    --col-gap: 0 !important;
+  }
+  :is(.subchildmenu, .sub-children-menu ul, .horizontal-list) {
+    max-height: 100%;
+    overflow: auto;
+  }
+  .touch-target-mb {
+    width: 30px;
+    height: 30px;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  :where(.lang__currency-on-nav, .lang__currency-desktop) .disclosure__list {
+    bottom: -3rem;
+    padding: 2.5rem 3rem;
+    border-radius: var(--rounded-radius) var(--rounded-radius) 0 0;
+    position: fixed;
+    z-index: 15;
+    box-shadow: var(--shadow);
+  }
+  :where(.lang__currency-on-nav, .lang__currency-desktop) .disclosure__list ul {
+    max-height: 50vh;
+  }
+  .lang__currency-on-nav {
+    padding-block: 1rem;
+  }
+  .lang__currency-on-nav .button-localization {
+    padding: 0.5rem 3rem;
+  }
+  :where(.lang__currency-on-nav, .lang__currency-desktop)
+    .button-localization.open
+    + .disclosure__list {
+    bottom: 0;
+    opacity: 1;
+    visibility: visible;
+  }
+  :where(.lang__currency-on-nav, .lang__currency-desktop)
+    .disclosure__list
+    [aria-current="true"] {
+    font-weight: var(--heading-weight);
+  }
+  :is(.horizontal-list, .categories-list) {
+    animation: 0.5s fadeIn;
+    overflow-y: auto;
+    max-height: 100%;
+  }
+  .menu_label {
+    right: -10px;
+  }
+  .menu_label:after {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-95%);
+    -webkit-transform: translateX(-95%);
+    border-right-color: var(--menu-label-bg);
+    margin: auto;
+    border-top-color: transparent;
+  }
+  .submenu :is(.stretch_width, .fluid_container, .full_width, .container) {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+}
+@media screen and (min-width: 1025px) {
+  .navigation {
+    --shadow: 0px 5px 30px 0px rgba(0, 0, 0, 0.05);
+  }
+  .mega-menu .submenu {
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  .animation-down-to-up :is(.submenu, .dropdown-menu .sub-children-menu) {
+    transform: translateY(20px);
+    -webkit-transform: translateY(20px);
+  }
+  .animation-fade-in-down :is(.submenu, .dropdown-menu .sub-children-menu) {
+    transform: translateY(-20px);
+    -webkit-transform: translateY(-20px);
+  }
+  .animation-fade-in :is(.submenu, .dropdown-menu .sub-children-menu) {
+    transform: translateY(calc(var(--section-pb) * 1px));
+    -webkit-transform: translateY(calc(var(--section-pb) * 1px));
+  }
+  :is(.submenu, .dropdown-menu .sub-children-menu) {
+    z-index: 12;
+    pointer-events: none;
+    transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+    box-shadow: var(--shadow);
+    border-radius: 0 0 var(--rounded-radius, 0) var(--rounded-radius, 0);
+  }
+  .menu-parent.visible .submenu,
+  .dropdown-menu .level-1:hover > .sub-children-menu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: none;
+  }
+  .menu-parent.visible .submenu {
+    transform: translateY(calc(var(--section-pb) * 1px));
+    -webkit-transform: translateY(calc(var(--section-pb) * 1px));
+  }
+  .horizontal-list .level0 > menu-item > a:after {
+    content: "";
+    position: absolute;
+    right: 0;
+    left: 0;
+    height: 30px;
+    bottom: calc(-1 * var(--section-pb) - 3px);
+    z-index: 1;
+  }
+  .level0 > menu-item open-children-toggle {
+    transition: var(--transition);
+  }
+  .level0:hover > menu-item > a,
+  .level0:hover > menu-item open-children-toggle {
+    color: var(--color-link-hover);
+  }
+  .dropdown-menu .sub-children-menu {
+    left: 100%;
+    top: -1rem;
+  }
+  .dropdown-menu .level-1 open-children-toggle {
+    position: relative;
+  }
+  :is(.dropdown-menu .submenu, .dropdown-menu .sub-children-menu) {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    width: 26rem;
+  }
+  :is(.dropdown-menu .menu-link) {
+    position: relative;
+  }
+  .dropdown-menu .menu-link:hover open-children-toggle {
+    color: var(--color-primary);
+  }
+  :is(.dropdown-menu .menu_item-link) {
+    padding-left: 3rem;
+    padding-right: 3rem;
+    position: relative;
+  }
+
+  .menu-list {
+    flex: 0 0 auto;
+    width: calc(100% - var(--col-mega-width) - var(--col-gap) * 0.5);
+  }
+  .col-mega {
+    flex: 0 0 auto;
+    width: calc(var(--col-mega-width) - var(--col-gap) * 0.5);
+  }
+  .mega-menu-custom-width {
+    width: var(--mega_custom_width);
+    max-width: 90vw;
+  }
+  .submenu .collection-info .bg-white {
+    width: 90%;
+    max-width: 17rem;
+  }
+  .submenu .menu_label {
+    position: static;
+    margin-inline-start: 1rem;
+    padding: 3px 8px 2px 8px;
+  }
+  .rounded-style .submenu .menu_label.rounded-2 {
+    border-radius: 20px;
+  }
+  .submenu .menu_label::after {
+    display: none;
+  }
+  .mega-menu .level-1 menu-item > .menu_item-link {
+    padding-top: 0;
+  }
+}
+.menu-parent.mega-menu .level-1 > menu-item {
+  font-size: calc(var(--body-font-size) + 1px);
+}
+
+/* =========================================================
+   CUSTOM SHOP MEGA MENU
+   ========================================================= */
+
+.shop-mega-menu {
+  width: 100%;
+}
+
+.shop-mega-menu__inner {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 35px;
+
+  display: grid;
+  grid-template-columns:
+    minmax(170px, 0.75fr)
+    minmax(170px, 0.75fr)
+    minmax(440px, 2fr);
+
+  gap: 45px;
+}
+
+
+/* ---------------------------------------------------------
+   COLUMN HEADINGS
+   --------------------------------------------------------- */
+
+.shop-mega-menu__heading {
+  margin: 0 0 22px;
+  padding: 0;
+
+  font-family: var(--font-heading-family);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.3;
+
+  color: rgb(var(--color-heading));
+}
+
+
+/* ---------------------------------------------------------
+   TEXT MENU COLUMNS
+   --------------------------------------------------------- */
+
+.shop-mega-menu__link-list {
+  margin: 0;
+  padding: 0;
+}
+
+.shop-mega-menu__link-item {
+  margin: 0 0 18px;
+  padding: 0;
+}
+
+.shop-mega-menu__link {
+  display: inline-block;
+
+  font-size: 16px;
+  line-height: 1.4;
+
+  color: rgb(var(--color-foreground));
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.shop-mega-menu__link:hover {
+  opacity: 0.65;
+}
+
+
+/* ---------------------------------------------------------
+   COLLECTION COLUMN
+   --------------------------------------------------------- */
+
+.shop-mega-menu__collection-column {
+  min-width: 0;
+}
+
+.shop-mega-menu__collection-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 200px);
+
+  gap: 20px;
+}
+
+
+/* ---------------------------------------------------------
+   COLLECTION CARD
+   --------------------------------------------------------- */
+
+.shop-mega-menu__collection-card {
+  position: relative;
+
+  display: block;
+
+  width: 200px;
+  height: 200px;
+
+  overflow: hidden;
+
+  border-radius: 5px;
+
+  background: #f5f5f5;
+
+  text-decoration: none;
+}
+
+
+/* ---------------------------------------------------------
+   IMAGE
+   --------------------------------------------------------- */
+
+.shop-mega-menu__collection-image {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+}
+
+.shop-mega-menu__collection-image img,
+.shop-mega-menu__collection-image svg {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition: transform 0.35s ease;
+}
+
+
+/* ---------------------------------------------------------
+   IMAGE OVERLAY
+   --------------------------------------------------------- */
+
+.shop-mega-menu__collection-card::after {
+  content: '';
+
+  position: absolute;
+  inset: 0;
+
+  z-index: 1;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.18),
+      rgba(0, 0, 0, 0) 60%
+    );
+
+  pointer-events: none;
+}
+
+
+/* ---------------------------------------------------------
+   COLLECTION TITLE
+   --------------------------------------------------------- */
+
+.shop-mega-menu__collection-title {
+  position: absolute;
+
+  z-index: 2;
+
+  left: 50%;
+  bottom: 15px;
+
+  transform: translateX(-50%);
+
+  width: calc(100% - 30px);
+
+  padding: 10px 12px;
+
+  background: #ffffff;
+
+  color: #111111;
+
+  border-radius: 4px;
+
+  text-align: center;
+
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+
+/* ---------------------------------------------------------
+   HOVER
+   --------------------------------------------------------- */
+
+.shop-mega-menu__collection-card:hover
+.shop-mega-menu__collection-image img {
+  transform: scale(1.04);
+}
+
+
+/* ---------------------------------------------------------
+   LARGE DESKTOP
+   --------------------------------------------------------- */
+
+@media screen and (min-width: 1400px) {
+
+  .shop-mega-menu__inner {
+    padding-left: 50px;
+    padding-right: 50px;
+    gap: 20px;
+  }
+
+}
+
+
+/* ---------------------------------------------------------
+   MEDIUM DESKTOP
+   --------------------------------------------------------- */
+
+@media screen and (min-width: 1025px) and (max-width: 1199px) {
+
+  .shop-mega-menu__inner {
+    padding-left: 25px;
+    padding-right: 25px;
+
+    grid-template-columns:
+      minmax(150px, 0.7fr)
+      minmax(150px, 0.7fr)
+      minmax(420px, 1.8fr);
+
+    gap: 25px;
+  }
+
+  .shop-mega-menu__collection-grid {
+    gap: 15px;
+  }
+
+}
+
+
+/* ---------------------------------------------------------
+   MOBILE
+   --------------------------------------------------------- */
+
+@media screen and (max-width: 1024px) {
+
+  .shop-mega-menu__inner {
+    display: block;
+
+    padding: 0 30px 30px;
+  }
+
+  .shop-mega-menu__text-column {
+    margin-bottom: 30px;
+  }
+
+  .shop-mega-menu__collection-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 15px;
+  }
+
+  .shop-mega-menu__collection-card {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+
+}
+
+/* =========================================================
+   FULL-WIDTH DESKTOP MEGA MENU
+   ========================================================= */
+
+@media screen and (min-width: 1025px) {
+
+  /* Make the mega menu span the complete viewport */
+  .navigation .mega-menu > .submenu {
+    left: 50% !important;
+    right: auto !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    transform: translateX(-50%);
+  }
+
+  /* Keep the mega menu above the page content */
+  .navigation .mega-menu > .submenu {
+    z-index: 9999;
+  }
+
+  /* Prevent the menu itself from creating horizontal overflow */
+  .navigation {
+    overflow: visible !important;
+  }
+
+  .navigation__menu-content {
+    overflow: visible !important;
+  }
+
+}
+
+@media screen and (min-width: 1025px) {
+
+  .navigation .mega-menu > .submenu {
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .navigation .mega-menu > .submenu > div {
+    width: 100%;
+    max-width: 100%;
+  }
+
+}
+
+/* =========================================================
+   FBL TILE - Desktop Mega Menu
+   ========================================================= */
+
+@media (min-width: 1025px) {
+
+  /*
+   * Main mega menu container
+   * Keeps the menu centered and prevents it from
+   * stretching across the entire viewport.
+   */
+  .navigation .mega-menu > .submenu {
+    left: 50% !important;
+    right: auto !important;
+
+    width: min(
+      calc(100vw - 60px),
+      1440px
+    ) !important;
+
+    max-width: 1440px !important;
+
+    transform: translateX(-50%);
+
+    box-sizing: border-box;
+
+    padding-top: 32px !important;
+    padding-bottom: 36px !important;
+
+    max-height: calc(100vh - 100px);
+
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+
+  /*
+   * Main content wrapper
+   */
+  .navigation .mega-menu > .submenu > .container,
+  .navigation .mega-menu > .submenu > .fluid_container {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+
+  /*
+   * Main mega menu row
+   *
+   * 40% = Material + Color
+   * 60% = Collections
+   */
+  .navigation .mega-menu .fbl-mega-menu-content {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    gap: 0;
+    width: 100%;
+  }
+
+
+  /*
+   * Left side:
+   * Material + Color
+   */
+  .navigation .mega-menu .fbl-mega-menu-links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+
+    padding-right: 35px;
+  }
+
+
+  /*
+   * Individual link columns
+   */
+  .navigation .mega-menu .fbl-mega-menu-links .menu-list {
+    width: 100%;
+  }
+
+
+  /*
+   * Collection area
+   */
+  .navigation .mega-menu .fbl-mega-collections {
+    width: 100%;
+    padding-left: 35px;
+  }
+
+
+  /*
+   * Three collection cards per row
+   */
+  .navigation .mega-menu .fbl-mega-collection-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+
+    width: 100%;
+  }
+
+
+  /*
+   * Collection card
+   */
+  .navigation .mega-menu .fbl-mega-collection-grid .collection-items {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 0.82;
+
+    min-width: 0;
+
+    overflow: hidden;
+    border-radius: 6px;
+  }
+
+
+  /*
+   * Collection image wrapper
+   */
+  .navigation .mega-menu .fbl-mega-collection-media {
+    position: absolute;
+    inset: 0;
+
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+  }
+
+
+  /*
+   * Actual image
+   */
+  .navigation .mega-menu .fbl-mega-collection-image {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+
+    transition:
+      transform 0.35s ease,
+      opacity 0.35s ease;
+  }
+
+
+  /*
+   * Subtle hover effect
+   */
+  .navigation .mega-menu .collection-items:hover
+  .fbl-mega-collection-image {
+    transform: scale(1.04);
+  }
+
+
+  /*
+   * Collection title
+   */
+  .navigation .mega-menu .collection-info {
+    z-index: 2;
+
+    bottom: 14px;
+
+    padding: 0 14px;
+  }
+
+
+  .navigation .mega-menu .collection-info .btn {
+    display: block;
+
+    width: 100%;
+
+    padding: 10px 14px;
+
+    border-radius: 4px;
+
+    font-size: 14px;
+    line-height: 1.2;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+
+  /*
+   * Remove the generic flex behavior from the
+   * menu block because we're controlling the layout
+   * ourselves.
+   */
+  .navigation .mega-menu .fbl-mega-menu-content > .menu-list {
+    width: 100%;
+  }
+}
+
+
+/* =========================================================
+   Smaller Desktop / Laptop
+   ========================================================= */
+
+@media (min-width: 1025px) and (max-width: 1250px) {
+
+  .navigation .mega-menu > .submenu {
+    width: calc(100vw - 40px) !important;
+  }
+
+  .navigation .mega-menu .fbl-mega-menu-links {
+    padding-right: 25px;
+    gap: 20px;
+  }
+
+  .navigation .mega-menu .fbl-mega-collections {
+    padding-left: 25px;
+  }
+
+  .navigation .mega-menu .fbl-mega-collection-grid {
+    gap: 14px;
+  }
+
+  .navigation .mega-menu .collection-info .btn {
+    font-size: 13px;
+    padding: 9px 10px;
+  }
+}
+
+/* =========================================================
+   DESKTOP MEGA MENU OVERLAY
+   ========================================================= */
+
+@media screen and (min-width: 1025px) {
+
+  /* The overlay itself */
+  .mega-menu-page-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.45);
+
+    opacity: 0;
+    visibility: hidden;
+
+    pointer-events: none;
+
+    z-index: 9990;
+
+    transition:
+      opacity 0.25s ease,
+      visibility 0.25s ease;
+  }
+
+  /* Overlay becomes visible */
+  body.mega-menu-is-open .mega-menu-page-overlay {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  /*
+   * Keep the header/navigation above the overlay.
+   */
+  body.mega-menu-is-open .shopify-section-header,
+  body.mega-menu-is-open header,
+  body.mega-menu-is-open .navigation.horizontal {
+    position: relative;
+    z-index: 10000;
+  }
+
+  /*
+   * Mega menu must be above the overlay as well.
+   */
+  body.mega-menu-is-open
+  .navigation.horizontal
+  .mega-menu
+  > .submenu {
+    position: absolute;
+    z-index: 10001;
+  }
+
+  /*
+   * Prevent the page itself from scrolling.
+   */
+  body.mega-menu-is-open {
+    overflow: hidden !important;
+  }
+
+  /*
+   * Optional: prevent horizontal movement caused by
+   * scrollbar disappearing.
+   */
+  html.mega-menu-scroll-lock {
+    overflow: hidden;
+  }
+
+}

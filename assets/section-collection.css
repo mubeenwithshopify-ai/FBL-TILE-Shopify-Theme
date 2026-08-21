@@ -1,0 +1,82 @@
+.collection-item__information.absolute .collection-item__name.btn-white {
+  --btn-padding-x: 2.5rem;
+  --btn-padding-y: .5rem;
+  width: 100%;
+  max-width: 100%; 
+}
+.collection-item__media.morden:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 10px;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 25%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+  opacity: 0.75;
+  pointer-events: none;
+  z-index: 2;
+  border-radius: var(--rounded-radius, 0);
+}
+.collection-item__information.absolute:not(.futuristic-absolute) .collection-item__name-inner {
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  line-height: inherit;
+}
+.collection-information-description p {
+  margin: 0; 
+}
+.collection-item__count.absolute {
+  right: -16px;
+}
+.futuristic-box .collection-item__count {
+  font-weight: var(--body-weight);
+  font-size: var(--body-font-size, 1.4rem);
+  line-height: 1.3;
+}
+.futuristic-absolute {
+  z-index: 1;
+  transition: var(--transition);
+  background-color: rgba(255, 255, 255, 0.75);
+  padding:10px 20px;
+  --rounded-radius:2px;
+}
+.futuristic-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height:3rem;
+  transition: var(--transition);
+}
+.collection-item__wrapper:hover .futuristic-absolute {
+  background-color: var(--color-white);
+  box-shadow: 0 0.5em 0.5em -0.4em var(--color-white);
+  transform: translateY(-0.45em);
+}
+.collection-item__wrapper:hover .futuristic-icon {
+  transform: rotate(-45deg);
+}
+@media (max-width: 575.98px) {
+  [data-mobile="3"]
+    .collection-item__information.absolute
+    .collection-item__name {
+    --btn-padding-x: 1.5rem;
+  }
+  [data-mobile="3"]
+    .collection-item__information.absolute
+    .collection-item__name-inner {
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+  }
+}

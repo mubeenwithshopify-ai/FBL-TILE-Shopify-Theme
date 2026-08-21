@@ -1,0 +1,217 @@
+/* NOTE: Uses your theme's color-scheme CSS variables (--color-text, --color-accent,
+   --color-heading, --color-border) with safe fallbacks baked in. If your theme
+   names these differently, check an existing section's compiled CSS or theme.css
+   and swap the var() names below. Structure/behavior mirrors your collection-tab
+   section: tab-items custom element, data-block-id matching, .active toggling. */
+
+.sec__product-tabs {
+  padding-top: var(--section-pt, 60px);
+  padding-bottom: var(--section-pb, 60px);
+}
+
+@media screen and (max-width: 749px) {
+  .sec__product-tabs {
+    padding-top: calc(var(--section-pt, 60px) * 0.6);
+    padding-bottom: calc(var(--section-pb, 60px) * 0.6);
+  }
+}
+
+/* ---- Horizontal tab nav ---- */
+.product-tabs__ta {
+  gap: 8px 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.product-tabs__ta::-webkit-scrollbar {
+  display: none;
+}
+
+.product-tabs__tab-item {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: rgba(var(--color-text-rgb, 0, 0, 0), 0.6);
+  position: relative;
+  border-bottom: 2px solid transparent;
+}
+
+.product-tabs__tab-item.fs-15.uppercase {
+  border-bottom: none;
+}
+
+/* underline style */
+.product-tabs__ta.border-bottom .product-tabs__tab-item::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: var(--height, 2px);
+  background: var(--color-heading, currentColor);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.2s ease;
+}
+
+.product-tabs__ta.border-bottom .product-tabs__tab-item.active::after {
+  transform: scaleX(1);
+}
+
+.product-tabs__ta.border-bottom .product-tabs__tab-item.active {
+  color: var(--color-heading, rgb(var(--color-text-rgb, 0, 0, 0)));
+}
+
+/* filled/pill style */
+.product-tabs__tab-item.border.btn-hover {
+  border: 1px solid rgba(var(--color-text-rgb, 0, 0, 0), 0.15);
+  border-radius: 999px;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.product-tabs__tab-item.border.btn-hover.active,
+.product-tabs__tab-item.border.btn-hover:hover {
+  background: var(--color-heading, #1a1a1a);
+  color: var(--color-background, #fff);
+  border-color: var(--color-heading, #1a1a1a);
+}
+
+.product-tabs__count {
+  font-weight: 500;
+  opacity: 0.75;
+}
+
+/* ---- Dropdown-select variant ---- */
+.select-product-tab .select__selected {
+  border: 1px solid rgba(var(--color-text-rgb, 0, 0, 0), 0.15);
+  border-radius: 6px;
+  padding: 10px 16px;
+}
+
+.select-custom__content {
+  min-width: 220px;
+}
+
+.product_tab_title_input {
+  font-size: 14px;
+}
+
+.product_tab_title_input:hover {
+  opacity: 0.75;
+}
+
+/* ---- Panels ---- */
+.product-tabs__tab-content {
+  display: none;
+}
+
+.product-tabs__tab-content.active {
+  display: block;
+}
+
+.product-tabs__panel-inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.product-tabs__panel-inner.has-media {
+  grid-template-columns: 1fr 1fr;
+}
+
+.product-tabs__panel-copy {
+  max-width: 480px;
+}
+
+.product-tabs__panel-lede,
+.product-tabs__panel-body {
+  font-size: 15px;
+  line-height: 1.7;
+  margin: 0 0 20px;
+}
+
+.product-tabs__panel-body p {
+  margin: 0 0 20px;
+}
+.product-tabs__panel-body p:last-child {
+  margin-bottom: 0;
+}
+
+.product-tabs__checklist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.product-tabs__checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14.5px;
+  line-height: 1.5;
+}
+
+.product-tabs__checklist-icon {
+  flex-shrink: 0;
+  color: var(--color-heading, currentColor);
+  margin-top: 1px;
+}
+
+.product-tabs__panel-media {
+  border-radius: var(--radius, 10px);
+  overflow: hidden;
+  line-height: 0;
+}
+
+.product-tabs__panel-img {
+  border-radius: var(--radius, 10px);
+}
+
+/* ---- Judge.me reviews widget ---- */
+.product-tabs__reviews-widget {
+  max-width: 100%;
+}
+
+.product-tabs__reviews-widget .product-tabs__panel-lede {
+  max-width: 480px;
+}
+
+/* Let Judge.me's own widget CSS control internal layout; just make sure
+   it doesn't overflow the section container on small screens. */
+.product-tabs__reviews-widget .jdgm-widget {
+  width: 100%;
+}
+
+/* ---- Mobile ---- */
+@media screen and (max-width: 749px) {
+  .product-tabs__nav-wrap {
+    margin-bottom: 24px;
+  }
+
+  .product-tabs__tab-item {
+    font-size: 12.5px;
+  }
+
+  .product-tabs__panel-inner,
+  .product-tabs__panel-inner.has-media {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .product-tabs__panel-copy {
+    max-width: none;
+  }
+
+  .product-tabs__panel-media {
+    order: -1;
+  }
+
+  .product-tabs__panel-lede,
+  .product-tabs__panel-body {
+    font-size: 14px;
+  }
+}
