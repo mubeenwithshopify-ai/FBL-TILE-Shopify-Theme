@@ -66,16 +66,17 @@
         showError(root, 'Unable to determine the selected product variant.');
         event.preventDefault();
         event.stopPropagation();
+        event.stopImmediatePropagation();
         return;
       }
 
-      // The theme may keep the variant input disabled for variant-picker logic.
-      // Disabled controls are omitted from FormData, so explicitly enable it.
+      // Disabled controls are omitted from FormData. Calculator products must
+      // always submit the selected variant ID to Shopify.
       variantInput.disabled = false;
 
-      // This calculator form has its own cart request because the theme\'s
-      // generic product-form handler can submit a single item as a JSON object.
-      // Shopify\'s current Ajax Cart API expects an items array for JSON requests.
+      // Handle calculator products independently from the theme's generic
+      // product-form JSON handler. This avoids the invalid/missing "items"
+      // request that currently sends the browser to /cart/add with an error.
       event.preventDefault();
       event.stopPropagation();
       event.stopImmediatePropagation();
@@ -119,7 +120,15 @@
           });
         })
         .then(function (data) {
-          if (!data.items || !data.items.length) {
+          // Shopify returns the added line item object for a standard
+          // multipart/form-data cart/add.js request. Some theme/app handlers
+          // may instead return an items array, so support both formats.
+          var addedItem =
+            data &&
+            (data.id || data.key || data.variant_id ||
+              (data.items && data.items.length));
+
+          if (!addedItem) {
             throw new Error('The product was not added to the cart.');
           }
 
