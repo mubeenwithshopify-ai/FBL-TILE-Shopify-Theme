@@ -20,17 +20,8 @@
   function getSelectedOptions(section) {
     var selected = {};
 
-    if (!section) return selected;
-
-    /*
-     * The theme's size/finish controls are radio inputs. The visual active
-     * label can change before the hidden Shopify variant ID is updated, so
-     * use the actual checked option values as the source of truth.
-     */
     Array.prototype.forEach.call(
-      section.querySelectorAll(
-        '.product-form__input input[type="radio"]:checked'
-      ),
+      section.querySelectorAll('.product-form__input input[type="radio"]:checked'),
       function (input) {
         var name = (input.name || '').toLowerCase();
         var value = input.value;
@@ -52,79 +43,54 @@
 
     if (!variants.length) return null;
 
-    var hasOptionSelection =
-      selected.option1 || selected.option2 || selected.option3;
+    var hasSelection = selected.option1 || selected.option2 || selected.option3;
 
-    if (!hasOptionSelection) return null;
+    if (!hasSelection) return null;
 
     return variants.find(function (variant) {
-      if (
-        selected.option1 &&
-        String(variant.option1 || '') !== String(selected.option1)
-      ) {
-        return false;
-      }
-
-      if (
-        selected.option2 &&
-        String(variant.option2 || '') !== String(selected.option2)
-      ) {
-        return false;
-      }
-
-      if (
-        selected.option3 &&
-        String(variant.option3 || '') !== String(selected.option3)
-      ) {
-        return false;
-      }
-
+      if (selected.option1 && String(variant.option1 || '') !== String(selected.option1)) return false;
+      if (selected.option2 && String(variant.option2 || '') !== String(selected.option2)) return false;
+      if (selected.option3 && String(variant.option3 || '') !== String(selected.option3)) return false;
       return true;
     }) || null;
   }
 
-  function setVariantId(section, variant) {
-    if (!section || !variant || !variant.id) return false;
-
-    var inputs = section.querySelectorAll(
-      'input[name="id"], select[name="id"]'
-    );
+  function syncVariantId(section, variant) {
+    if (!variant || !variant.id) return false;
 
     var changed = false;
 
-    Array.prototype.forEach.call(inputs, function (input) {
-      if (String(input.value) === String(variant.id)) return;
-
-      input.value = variant.id;
-      input.setAttribute('value', variant.id);
-      changed = true;
-    });
+    Array.prototype.forEach.call(
+      section.querySelectorAll('input[name="id"], select[name="id"]'),
+      function (input) {
+        if (String(input.value) === String(variant.id)) return;
+        input.value = variant.id;
+        input.setAttribute('value', variant.id);
+        changed = true;
+      }
+    );
 
     return changed;
   }
 
-  function refreshCalculator(root) {
+  function updateCalculator(root) {
     var section = getSection(root);
     if (!section) return;
 
     var variant = findVariant(root, section);
     if (!variant) return;
 
-    var changed = setVariantId(section, variant);
+    var changed = syncVariantId(section, variant);
 
-    /*
-     * product-calculators.js reads the Shopify variant ID. Once we have
-     * synchronized that ID, trigger its existing calculation logic instead
-     * of duplicating the calculator calculations here.
-     */
-    if (changed) {
-      var input = root.querySelector('[data-calculator-input="sf"]');
-      var pieces = root.querySelector('[data-calculator-input="pieces"]');
-      var trigger = pieces && pieces.value !== '' ? pieces : input;
+    if (!changed) return;
 
-      if (trigger) {
-        trigger.dispatchEvent(new Event('input', { bubbles: true }));
-      }
+    /* Re-run the existing calculator using the newly selected variant. */
+    var piecesInput = root.querySelector('[data-calculator-input="pieces"]');
+    var sfInput = root.querySelector('[data-calculator-input="sf"]');
+    var trigger = piecesInput && piecesInput.value !== '' ? piecesInput : sfInput;
+
+    if (trigger) {
+      trigger.dispatchEvent(new Event('input', { bubbles: true }));
     }
   }
 
@@ -135,52 +101,62 @@
     var section = getSection(root);
     if (!section) return;
 
-    var refreshTimer = null;
+    var timer;
 
-    function scheduleRefresh() {
-      window.clearTimeout(refreshTimer);
-      refreshTimer = window.setTimeout(function () {
-        refreshCalculator(root);
-      }, 0);
+    function scheduleUpdate() {
+      window.clearTimeout(timer);
+      timer = window.setTimeout(function () {
+        updateCalculator(root);
+      }, 25);
     }
 
-    /* Normal variant-picker changes. */
+    /* Theme variant picker: radios and dropdowns. */
     section.addEventListener('change', function (event) {
+      if (!event.target) return;
+
       if (
-        event.target &&
-        event.target.matches('.product-form__input input[type="radio"]')
+        event.target.matches('.product-form__input input[type="radio"]') ||
+        event.target.matches('select[name="id"]')
       ) {
-        scheduleRefresh();
+        scheduleUpdate();
       }
     });
 
-    /* Support dropdown variant controls as well. */
     section.addEventListener('click', function (event) {
-      var target = event.target.closest(
+      var option = event.target.closest(
         '.product__color-swatches--js, swatch-dropdown-item label'
       );
 
-      if (target) scheduleRefresh();
+      if (option) scheduleUpdate();
     });
 
-    /* Some theme variant components update the hidden ID asynchronously. */
-    document.addEventListener('variant:change', scheduleRefresh);
-    document.addEventListener('variantChange', scheduleRefresh);
-    document.addEventListener('product:variant-change', scheduleRefresh);
+    /* Support the theme's custom variant events. */
+    document.addEventListener('variant:change', scheduleUpdate);
+    document.addEventListener('variantChange', scheduleUpdate);
+    document.addEventListener('product:variant-change', scheduleUpdate);
 
-    /* Catch asynchronous checked-state changes made by the theme. */
-    var observer = new MutationObserver(function () {
-      scheduleRefresh();
-    });
+    /*
+     * The theme can update the hidden variant ID asynchronously. This small
+     * check is deliberately limited to the calculator and only compares the
+     * selected variant, so it does not interfere with the rest of the page.
+     */
+    var lastSignature = '';
 
-    observer.observe(section, {
-      subtree: true,
-      attributes: true,
-      attributeFilter: ['checked', 'class']
-    });
+    window.setInterval(function () {
+      var selected = getSelectedOptions(section);
+      var signature = [
+        selected.option1 || '',
+        selected.option2 || '',
+        selected.option3 || ''
+      ].join('|');
 
-    /* Initial synchronization. */
-    scheduleRefresh();
+      if (signature && signature !== lastSignature) {
+        lastSignature = signature;
+        updateCalculator(root);
+      }
+    }, 250);
+
+    scheduleUpdate();
   }
 
   function boot() {
