@@ -1,0 +1,4476 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "settings_schema": {
+    "purchase_code": {
+      "name": "رمز الشراء",
+      "info": "لا تنس النقر على زر الحفظ!",
+      "how_to_get": {
+        "content": "[أين يوجد رمز الشراء الخاص بي؟](https://help.market.envato.com/hc/en-us/articles/202822600-Where-Is-My-Purchase-Code-)"
+      },
+      "buy_now": {
+        "content": "[شراء ترخيص Milano!](xx)"
+      },
+      "purchase_code_action": {
+        "label": "إجراء الشراء",
+        "active": {
+          "label": "تفعيل رمز الشراء"
+        },
+        "remove": {
+          "label": "إزالة رمز الشراء"
+        }
+      }
+    },
+    "logo_favicon": {
+      "name": "الشعار والأيقونة المفضلة",
+      "settings": {
+        "favicon": {
+          "label": "الرمز المفضل"
+        },
+        "favicon_image": {
+          "label": "صورة الأيقونة المفضلة",
+          "info": "يوصى بحجم 32 × 32 بكسل.png"
+        },
+        "logo": {
+          "label": "الشعار",
+          "logo_on_transparent": {
+            "label": "الشعار على رأس شفاف"
+          }
+        },
+        "logo_width": {
+          "label": "عرض الشعار",
+          "desktop": {
+            "label": "سطح المكتب"
+          },
+          "mobile": {
+            "label": "متحرك"
+          }
+        }
+      }
+    },
+    "layout": {
+      "name": "تَخطِيط",
+      "settings": {
+        "page_width": {
+          "label": "عرض الصفحة"
+        },
+        "fluid_container_width": {
+          "label": "عرض حاوية السوائل",
+          "info": "توفر حاوية السوائل عرضًا أكبر من العرض الافتراضي للموقع."
+        },
+        "site_style": {
+          "label": "نمط الموقع",
+          "enable_rounded": {
+            "label": "تمكين نمط الزاوية المستديرة"
+          },
+          "rounded_corner": {
+            "label": "زوايا مدورة"
+          }
+        },
+        "rtl": {
+          "label": "تمكين RTL",
+          "language_rtl": {
+            "label": "يدعم رمز لغة ISO RTL",
+            "info": "اتركه فارغًا إذا كنت تريد التقديم على جميع اللغات. "
+          }
+        }
+      }
+    },
+    "section": {
+      "name": "قسم",
+      "settings": {
+        "spacing_desktop": {
+          "label": "المسافة بين الأقسام على سطح المكتب"
+        },
+        "space_mobile": {
+          "label": "المسافة بين الأقسام على الجوال"
+        }
+      }
+    },
+    "typography": {
+      "name": "الطباعة",
+      "settings": {
+        "font_type": {
+          "label": "نوع الخط"
+        },
+        "font_source": {
+          "label": "جسم الخط",
+          "shopify": {
+            "label": "شوبيفي"
+          },
+          "google": {
+            "label": "جوجل"
+          },
+          "default_font": {
+            "label": "الخط الافتراضي"
+          }
+        },
+        "font_shopify": {
+          "label": "خط شوبيفاي"
+        },
+        "font_google": {
+          "heading": "خط جوجل",
+          "label": "اسم خط جوجل",
+          "info": "[الحصول على خطوط جوجل](https://fonts.google.com/)",
+          "embed_font": "تضمين رمز الخط"
+        },
+        "font_size": {
+          "label": "حجم الخط"
+        },
+        "font_size_scale": {
+          "label": "مقياس حجم الخط"
+        },
+        "font_weight": {
+          "label": "وزن الخط"
+        },
+        "subheading_font_weight": {
+          "label": "وزن العنوان الفرعي"
+        },
+        "text_transform": {
+          "label": "تحويل النص",
+          "unset": {
+            "label": "غير محدد"
+          },
+          "capitalize": {
+            "label": "الاستفادة"
+          },
+          "uppercase": {
+            "label": "أحرف كبيرة"
+          }
+        },
+        "letter_spacing": {
+          "label": "تباعد الحروف",
+          "negative": {
+            "label": "سلبي"
+          },
+          "unset": {
+            "label": "غير محدد"
+          },
+          "small": {
+            "label": "صغير"
+          },
+          "medium": {
+            "label": "واسطة"
+          },
+          "large": {
+            "label": "كبير"
+          }
+        },
+        "font": {
+          "label": "الخط"
+        },
+        "body_font": {
+          "label": "خط الجسم"
+        },
+        "heading_font": {
+          "label": "خط العنوان"
+        },
+        "body": {
+          "label": "جسم"
+        },
+        "heading": {
+          "label": "عنوان"
+        },
+        "menu": {
+          "label": "قائمة طعام",
+          "menu_font": {
+            "label": "الخط المستوى الأول"
+          }
+        },
+        "button": {
+          "label": "زر"
+        }
+      }
+    },
+    "colors": {
+      "name": "لون",
+      "settings": {
+        "header": {
+          "button_primary": "الزر الأساسي",
+          "button_outline": "زر المخطط التفصيلي",
+          "button_link": "رابط الزر",
+          "mobile_browser": "اللون لمتصفح الجوال",
+          "background": "خلفية",
+          "general": "عام"
+        },
+        "background_gradient": {
+          "label": "التدرج الخلفية",
+          "info": "لم يتم اختيار لون. يستبدل تدرج الخلفية الخلفية حيثما أمكن ذلك."
+        },
+        "primary_color": {
+          "label": "أساسي"
+        },
+        "text_color": {
+          "label": "لون النص"
+        },
+        "heading_color": {
+          "label": "عنوان"
+        },
+        "border_color": {
+          "label": "حدود"
+        },
+        "hover_color": {
+          "label": "تحوم اللون"
+        },
+        "hover_background": {
+          "label": "تحوم الخلفية"
+        }
+      }
+    },
+    "browser_tab_notifications": {
+      "name": "إشعارات علامة تبويب المتصفح",
+      "settings": {
+        "notification_info": "اتركه فارغًا لاستخدام عنوان صفحتك الأصلي",
+        "enable_browser_tab_notifications": {
+          "label": "يُمكَِن"
+        },
+        "first_notification": {
+          "label": "الإخطار الأول"
+        },
+        "secondary_notification": {
+          "label": "إعلام ثانوي"
+        }
+      }
+    },
+    "badges": {
+      "name": "شارات",
+      "settings": {
+        "rounded_corner": {
+          "label": "زاوية مدورة"
+        },
+        "color": {
+          "label": "لون"
+        },
+        "background_color": {
+          "label": "لون الخلفية"
+        },
+        "sale": {
+          "label": "أُوكَازيُون",
+          "show_sale": "إظهار شارة البيع",
+          "sale_badge_addons": {
+            "label": "ملحقات شارة البيع",
+            "option_1": "بيع النص",
+            "option_2": "بنسبة مئوية (٪)",
+            "option_3": "حسب السعر ($)"
+          },
+          "sale_badge_type": {
+            "label": "نوع شارة البيع",
+            "badges": {
+              "label": "شارات"
+            },
+            "none": {
+              "label": "لا أحد"
+            },
+            "scrolling": {
+              "label": "التمرير",
+              "info": "تسليط الضوء على العناصر المعروضة للبيع عن طريق شارة بيع التمرير التلقائي. "
+            },
+            "countdown": {
+              "label": "العد التنازلي"
+            }
+          },
+          "badge_show_as": {
+            "label": "تظهر الشارة باسم",
+            "text": {
+              "label": "نص البيع"
+            },
+            "percent": {
+              "label": "نسبة مئوية"
+            },
+            "savings_amount": {
+              "label": "توفير المبلغ"
+            }
+          },
+          "scrolling_text": {
+            "label": "التمرير النص",
+            "info": "* [percent_sale] هو اسم المتغير الذي سيتم استبداله تلقائيًا، ويمكنك تحريك موضعه حسب الحاجة"
+          },
+          "countdown_style": {
+            "label": "أسلوب",
+            "normal": {
+              "label": "طبيعي"
+            },
+            "hight_light": {
+              "label": "ضوء هايت"
+            }
+          }
+        },
+        "new": {
+          "label": "جديد",
+          "show_new": {
+            "label": "عرض جديد"
+          },
+          "new_badge_display_period": {
+            "label": "فترة عرض الشارة الجديدة",
+            "info": "اختر مدة تصنيف المنتجات على أنها \"جديدة\" اعتبارًا من يوم إنشائها"
+          }
+        },
+        "pre_order": {
+          "label": "النظام السابق",
+          "show_pre_order": {
+            "label": "عرض الطلب المسبق"
+          }
+        },
+        "sold_out": {
+          "label": "نفذ",
+          "show_sold_out": {
+            "label": "عرض بيعت بالكامل"
+          }
+        },
+        "custom_badge": {
+          "label": "شارة مخصصة",
+          "info": "يرجى اتباع المستند لمعرفة [كيفية إعداد شارة مخصصة](https://blueskytechco.gitbook.io/glimo-shopify/get-started/import-data/create-required-metafield#id-8.-custom-product "
+        }
+      }
+    },
+    "product_card": {
+      "name": "بطاقات المنتج",
+      "settings": {
+        "style": {
+          "label": "أسلوب",
+          "standard": {
+            "label": "معيار"
+          },
+          "card": {
+            "label": "بطاقة"
+          }
+        },
+        "product_actions": {
+          "label": "إجراءات المنتج",
+          "show_quick_view": {
+            "label": "عرض عرض سريع"
+          },
+          "show_add_cart": {
+            "label": "إظهار سلة الإضافة"
+          },
+          "show_wishlist": {
+            "label": "إظهار إضافة قائمة الرغبات"
+          },
+          "show_compare": {
+            "label": "إظهار إضافة مقارنة"
+          }
+        },
+        "product_info": {
+          "label": "معلومات المنتج",
+          "alignment": {
+            "label": "تنسيق",
+            "left": {
+              "label": "غادر"
+            },
+            "center": {
+              "label": "مركز"
+            },
+            "right": {
+              "label": "يمين"
+            }
+          },
+          "product_name_text_transform": {
+            "label": "تحويل نص اسم المنتج",
+            "unset": {
+              "label": "غير محدد"
+            },
+            "capitalize": {
+              "label": "الاستفادة"
+            },
+            "uppercase": {
+              "label": "أحرف كبيرة"
+            }
+          },
+          "product_size": {
+            "label": "حجم اسم المنتج"
+          },
+          "price_size": {
+            "label": "حجم السعر"
+          },
+          "show_vendor": {
+            "label": "عرض البائع"
+          },
+          "show_short_description": {
+            "label": "عرض وصف قصير"
+          },
+          "show_rate": {
+            "label": "عرض المعدل",
+            "info": "لعرض التقييم، قم بإضافة تطبيق تقييم المنتج. "
+          },
+          "rate_color": {
+            "label": "معدل اللون"
+          }
+        },
+        "product_image": {
+          "label": "صورة المنتج",
+          "show_secondary_image": {
+            "label": "إظهار الصورة الثانوية"
+          },
+          "product_image_ratio": {
+            "label": "نسبة الصورة",
+            "adapt": {
+              "label": "التكيف مع الصورة"
+            },
+            "square": {
+              "label": "مربع (1:1)"
+            },
+            "portrait": {
+              "label": "صورة شخصية (3:4)"
+            },
+            "landscape": {
+              "label": "منظر طبيعي (4:3)"
+            },
+            "custom": {
+              "label": "مخصص"
+            },
+            "custom_ratio": {
+              "label": "نسبة مخصصة",
+              "info": "مثال: 2:3"
+            }
+          }
+        },
+        "catalog_mode": {
+          "label": "وضع الكتالوج",
+          "enable_catalog_mode": {
+            "label": "تمكين وضع الكتالوج"
+          },
+          "hidden_price": {
+            "label": "السعر المخفي"
+          }
+        },
+        "show_action_on_mobile": {
+          "label": "عرض إجراءات المنتج على الهاتف المحمول"
+        },
+        "size_trigger": {
+          "label": "حجم الزناد",
+          "info": "تحديد اسم خيار الحجم. "
+        }
+      }
+    },
+    "color_swatches": {
+      "name": "عينات اللون",
+      "settings": {
+        "enable_color_swatches": {
+          "label": "تمكين عينات الألوان"
+        },
+        "limit_color": {
+          "3": "3 ألوان",
+          "4": "4 ألوان",
+          "5": "5 ألوان",
+          "6": "6 ألوان",
+          "label": "حد اللون",
+          "default": "لا يوجد حد"
+        },
+        "swatch_item_type": {
+          "label": "نوع العنصر سواتش",
+          "color_swatches": "عينات اللون",
+          "variant_images": "صور متغيرة"
+        },
+        "color_swatch_trigger": {
+          "label": "يتم تشغيل عينات الألوان",
+          "info": "تحديد اسم خيار اللون. "
+        },
+        "color_swatch_custom": {
+          "label": "ألوان مخصصة",
+          "info": "تنسيق صالح: Muesli: #ddd5bc، مفصول بفاصلة"
+        }
+      }
+    },
+    "search_behavior": {
+      "name": "سلوك البحث",
+      "settings": {
+        "type": {
+          "label": "يكتب",
+          "default": {
+            "label": "تقصير"
+          },
+          "popup": {
+            "label": "يظهر فجأة"
+          },
+          "drawer": {
+            "label": "درج"
+          }
+        },
+        "search_result": {
+          "label": "نتائج البحث",
+          "all": {
+            "label": "الجميع"
+          },
+          "products": {
+            "label": "منتجات"
+          }
+        },
+        "search_suggestion": {
+          "label": "اقتراحات البحث",
+          "enable_search_suggestion": {
+            "label": "تمكين اقتراحات البحث",
+            "popular_key_word": {
+              "label": "كلمات البحث الشعبية",
+              "info": "التوصية بالكلمات الرئيسية التي تم البحث عنها في متجرك للعملاء. "
+            }
+          },
+          "collection_suggestion": {
+            "label": "اقتراحات التجميع",
+            "info": "حدد مجموعة للتوصية بها للعملاء"
+          },
+          "show_search_price": "عرض السعر"
+        }
+      }
+    },
+    "wishlist": {
+      "name": "قائمة الرغبات",
+      "settings": {
+        "show_message_when_remove": {
+          "label": "إظهار رسالة الإضافة إلى قائمة الرغبات عند إزالة عنصر سلة التسوق"
+        },
+        "action_when_click_added_wishlist": {
+          "label": "الإجراء عند النقر فوق قائمة الرغبات المضافة",
+          "remove": {
+            "label": "إزالة قائمة الرغبات"
+          },
+          "go_to_page": {
+            "label": "انتقل إلى صفحة قائمة الرغبات"
+          }
+        }
+      }
+    },
+    "cart": {
+      "name": "عربة",
+      "settings": {
+        "action_after_add_cart": {
+          "label": "الإجراء بعد إضافة سلة التسوق",
+          "open_drawer": {
+            "label": "درج مفتوح"
+          },
+          "show_popup": {
+            "label": "إظهار النافذة المنبثقة"
+          },
+          "go_to_cart_page": {
+            "label": "انتقل إلى صفحة سلة التسوق"
+          }
+        },
+        "show_on_minicart_cart_page": {
+          "label": "عرض على صفحة عربة التسوق الصغيرة وعربة التسوق"
+        },
+        "free_shipping": {
+          "label": "رسالة الشحن المجاني",
+          "info": "تأكد من أنك قمت بتكوين أسعار الشحن الخاصة بك بشكل صحيح",
+          "message": {
+            "label": "رسالة",
+            "info": "يستخدم {{amount}} لعرض الحد الأدنى للمبلغ للحصول على الشحن المجاني."
+          },
+          "free_shipping_minimum": {
+            "label": "الشحن المجاني الحد الأدنى للمبلغ",
+            "info": "استخدم الأرقام المستديرة. "
+          }
+        },
+        "cart_count_down": {
+          "label": "العد التنازلي للعربة",
+          "duration": {
+            "label": "مدة"
+          }
+        },
+        "cart_addons": {
+          "label": "إضافات سلة التسوق",
+          "enable_cart_note": {
+            "label": "تمكين ملاحظة سلة التسوق"
+          },
+          "enable_gift_wrap": {
+            "label": "تمكين تغليف الهدايا"
+          },
+          "choose_gift_wrap_product": {
+            "label": "اختر منتج تغليف الهدايا"
+          }
+        },
+        "product_recommendations": {
+          "label": "توصية المنتجات",
+          "minicart_type": {
+            "label": "نوع عربة صغيرة",
+            "disable": "إبطال",
+            "show_inside": "اعرض بالداخل",
+            "show_beside": "عرض بجانب"
+          },
+          "show_on_cart_page": {
+            "label": "عرض على صفحة سلة التسوق"
+          },
+          "heading": {
+            "label": "عنوان"
+          },
+          "product_recommendations_type": {
+            "label": "نوع توصيات المنتج",
+            "auto": "آلي",
+            "select": "يختار"
+          },
+          "select_product_recommendations": {
+            "label": "حدد المنتجات"
+          }
+        },
+        "shipping_rate_calculator": {
+          "label": "حاسبة أسعار الشحن",
+          "info": "يرجى اتباع [الوثائق](https://help.shopify.com/en/manual/shipping/shopify-shipping/rates) لفهم أفضل.",
+          "show_estimate_shipping_rates": {
+            "label": "عرض أسعار الشحن التقديرية"
+          },
+          "show_delivery_day": {
+            "label": "عرض أيام التسليم لتقدير الشحن"
+          }
+        }
+      }
+    },
+    "social_media": {
+      "name": "وسائل التواصل الاجتماعي",
+      "settings": {
+        "facebook": {
+          "label": "فيسبوك",
+          "info": "https://facebook.com/shopify"
+        },
+        "instagram": {
+          "label": "انستغرام",
+          "info": "https://nstagram.com/shopify"
+        },
+        "twitter": {
+          "label": "تغريد",
+          "info": "https://twitter.com/shopify"
+        },
+        "tiktok": {
+          "label": "تيكتوك",
+          "info": "https://tiktok.com/shopify"
+        },
+        "youtube": {
+          "label": "يوتيوب",
+          "info": "https://youtube.com/shopify"
+        },
+        "pinterest": {
+          "label": "بينتريست",
+          "info": "https://pinterest.com/shopify"
+        },
+        "vimeo": {
+          "label": "فيميو",
+          "info": "https://vimeo.com/shopify"
+        },
+        "linkedin": {
+          "label": "ينكدين",
+          "info": "https://linkedin.com/shopify"
+        },
+        "whatsapp": {
+          "label": "واتس اب",
+          "info": "https://whatsapp.com/shopify"
+        },
+        "tumblr": {
+          "label": "نعرفكم",
+          "info": "https://tumblr.com/shopify"
+        },
+        "snapchat": {
+          "label": "سناب شات",
+          "info": "https://snapchat.com/shopify"
+        }
+      }
+    },
+    "preload_page": {
+      "name": "صفحة التحميل المسبق",
+      "settings": {
+        "enable": "تمكين صفحة التحميل المسبق",
+        "icon_preload": {
+          "label": "أيقونة صفحة التحميل المسبق",
+          "dot": "نقطة",
+          "spin": "يلف"
+        }
+      }
+    },
+    "animation": {
+      "name": "الرسوم المتحركة",
+      "info": "الرسوم المتحركة عند التحميل والتمرير لأسفل الصفحة",
+      "settings": {
+        "scroll_animation": {
+          "label": "انتقل الرسوم المتحركة",
+          "none": "لا أحد",
+          "fade_in": "تتلاشى في",
+          "slide_in": "أدخل",
+          "zoom": "تكبير",
+          "mix": "مزج"
+        },
+        "hover_effect": {
+          "label": "تأثير التحويم",
+          "info": "يؤثر على البطاقات مثل: البانر، المجموعة، المدونة...",
+          "none": "لا أحد",
+          "fade_in": "تتلاشى في",
+          "zoom": "تكبير"
+        }
+      }
+    },
+    "store_information": {
+      "name": "تخزين المعلومات",
+      "settings": {
+        "store_phone": {
+          "label": "هاتف"
+        },
+        "store_email": {
+          "label": "بريد إلكتروني"
+        },
+        "store_address": {
+          "label": "عنوان"
+        },
+        "store_page": {
+          "label": "حدد صفحة المتجر"
+        }
+      }
+    },
+    "currency_format": {
+      "name": "تنسيق العملة",
+      "settings": {
+        "currency_code": {
+          "label": "رمز العملة"
+        },
+        "show_currency_code": {
+          "label": "إظهار رمز العملة",
+          "info": "تعرض أسعار سلة التسوق والخروج دائمًا رموز العملات. "
+        }
+      }
+    },
+    "cookies": {
+      "name": "ملفات تعريف الارتباط",
+      "info": "سيتم عرض ملف تعريف الارتباط تلقائيًا للزوار عندما يكون ذلك إلزاميًا. ",
+      "settings": {
+        "enable_cookies": {
+          "label": "تمكين ملفات تعريف الارتباط"
+        },
+        "show_in_editor": {
+          "label": "عرض في محرر التخصيص"
+        },
+        "content_settings": {
+          "label": "إعدادات المحتوى"
+        },
+        "heading_cookies": {
+          "label": "ملفات تعريف الارتباط"
+        },
+        "content_cookies": {
+          "label": "محتوى"
+        },
+        "label_allow": {
+          "label": "السماح بتسمية الزر"
+        },
+        "label_refuse": {
+          "label": "رفض تسمية الزر"
+        }
+      }
+    },
+    "terms_conditions": {
+      "name": "الشروط والأحكام",
+      "settings": {
+        "show_check_box_in_cart": {
+          "label": "إظهار مربع الاختيار في صفحة عربة التسوق الصغيرة وعربة التسوق"
+        },
+        "show_checkbox_in_product_page": {
+          "label": "إظهار خانة الاختيار في صفحة المنتج"
+        },
+        "show_check_box_in_quick_view": {
+          "label": "إظهار خانة الاختيار في العرض السريع"
+        },
+        "text_terms_conditions": {
+          "label": "نص"
+        },
+        "page_terms_conditions": {
+          "label": "شروط شروط الصفحة"
+        }
+      }
+    }
+  },
+  "sections": {
+    "product-information-tabs": {
+      "name": "علامات تبويب معلومات المنتج",
+      "settings": {
+        "description": "وصف",
+        "color_scheme": {
+          "label": "مخطط اللون"
+        },
+        "design": {
+          "label": "تصميم",
+          "options__1": {
+            "label": "علامات التبويب"
+          },
+          "options__2": {
+            "label": "الأكورديون"
+          },
+          "options__3": {
+            "label": "إظهار فتح الكل"
+          }
+        },
+        "position": {
+          "label": "الموقف (فقط للأكورديون)",
+          "options__1": {
+            "label": "تقصير"
+          },
+          "options__2": {
+            "label": "داخل المعلومات الرئيسية للمنتج"
+          }
+        },
+        "open_first_tab": {
+          "label": "تمكين الفتح التلقائي لعلامة التبويب الأولى",
+          "info": "العمل فقط مع التصميم \"الأكورديون\""
+        },
+        "show_two_column": {
+          "label": "تمكين إظهار عمودين",
+          "info": "العمل فقط مع التخطيط \"إظهار فتح الكل\""
+        },
+        "custom_class": {
+          "label": "فئة مخصصة"
+        },
+        "reset_spacing": {
+          "label": "إزالة المسافة الافتراضية بين الأقسام"
+        }
+      },
+      "blocks": {
+        "description": {
+          "name": "وصف",
+          "settings": {
+            "title": {
+              "label": "عنوان"
+            }
+          }
+        },
+        "review": {
+          "name": "مراجعة",
+          "settings": {
+            "title": {
+              "label": "عنوان"
+            }
+          }
+        },
+        "custom_tab": {
+          "name": "علامة تبويب مخصصة",
+          "settings": {
+            "title": {
+              "label": "عنوان"
+            },
+            "tab_content": {
+              "label": "محتوى علامة التبويب",
+              "options__1": {
+                "label": "محتوى"
+              },
+              "options__2": {
+                "label": "صفحة المحتوى"
+              },
+              "options__3": {
+                "label": "المحتوى في حقول التعريف"
+              }
+            },
+            "content": {
+              "label": "محتوى علامة التبويب"
+            },
+            "page": {
+              "label": "محتوى التبويب من الصفحة"
+            }
+          }
+        }
+      }
+    },
+    "main-password-footer": {
+      "name": "تذييل كلمة المرور"
+    },
+    "main-password-header": {
+      "name": "رأس كلمة المرور",
+      "settings": {
+        "logo_header": {
+          "content": "الشعار"
+        },
+        "logo": {
+          "label": "صورة الشعار"
+        },
+        "logo_help": {
+          "content": "يساعد"
+        },
+        "logo_width": {
+          "unit": "بكسل",
+          "label": "عرض شعار سطح المكتب"
+        },
+        "logo_width_mobile": {
+          "unit": "بكسل",
+          "label": "عرض شعار الجوال"
+        }
+      }
+    },
+    "main-password-content": {
+      "name": "صفحة كلمة المرور الرئيسية",
+      "settings": {
+        "header__1": {
+          "content": "الشعار",
+          "info": "قم بتحرير شعارك في إعدادات السمة"
+        },
+        "enable_banner": {
+          "label": "عرض لافتة"
+        },
+        "banner_img": {
+          "label": "صورة"
+        },
+        "banner_position": {
+          "label": "موضع",
+          "options__1": {
+            "label": "غادر"
+          },
+          "options__2": {
+            "label": "يمين"
+          }
+        },
+        "banner_width": {
+          "label": "عرض الشعار"
+        },
+        "header__2": {
+          "content": "إعداد المحتوى"
+        },
+        "text_horizontal_position": {
+          "label": "المحتوى (الوضع الأفقي) ",
+          "options__1": {
+            "label": "غادر"
+          },
+          "options__2": {
+            "label": "مركز"
+          },
+          "options__3": {
+            "label": "يمين"
+          }
+        },
+        "text_position": {
+          "label": "المحتوى (الوضع الرأسي) ",
+          "options__1": {
+            "label": "قمة"
+          },
+          "options__2": {
+            "label": "مركز"
+          },
+          "options__3": {
+            "label": "قاع"
+          }
+        },
+        "content_width": {
+          "label": "أقصى عرض للمحتوى"
+        }
+      },
+      "blocks": {
+        "logo": {
+          "name": "الشعار",
+          "settings": {
+            "image": {
+              "label": "الشعار"
+            },
+            "header__1": {
+              "content": "تباعد"
+            },
+            "text_img_mt": {
+              "label": "قمة"
+            },
+            "text_img_mb": {
+              "label": "قاع"
+            }
+          }
+        },
+        "heading": {
+          "name": "عنوان",
+          "settings": {
+            "heading_color": {
+              "label": "لون"
+            },
+            "heading_fs": {
+              "label": "حجم الخط"
+            },
+            "heading_fw": {
+              "label": "وزن الخط"
+            },
+            "heading_tf": {
+              "label": "تحويل النص",
+              "options__1": {
+                "label": "غير محدد"
+              },
+              "options__2": {
+                "label": "الاستفادة"
+              },
+              "options__3": {
+                "label": "أحرف كبيرة"
+              }
+            },
+            "header__1": {
+              "content": "تباعد"
+            },
+            "heading_mt": {
+              "label": "قمة"
+            },
+            "heading_mb": {
+              "label": "قاع"
+            }
+          }
+        },
+        "subheading": {
+          "name": " عنوان فرعي",
+          "settings": {
+            "sub_title": {
+              "label": "عنوان فرعي"
+            },
+            "subheading_color": {
+              "label": "لون"
+            },
+            "subheading_fs": {
+              "label": "حجم الخط"
+            },
+            "subheading_fw": {
+              "label": "وزن الخط"
+            },
+            "header__1": {
+              "content": "تباعد"
+            },
+            "subheading_mt": {
+              "label": "قمة"
+            },
+            "subheading_mb": {
+              "label": "قاع"
+            },
+            "subheading_tf": {
+              "label": "تحويل النص",
+              "options__1": {
+                "label": "غير محدد"
+              },
+              "options__2": {
+                "label": "الاستفادة"
+              },
+              "options__3": {
+                "label": "أحرف كبيرة"
+              }
+            }
+          }
+        },
+        "countdown_bn": {
+          "name": "العد التنازلي",
+          "settings": {
+            "countdown_design": {
+              "label": "تصميم",
+              "options__1": {
+                "label": "التصميم 1"
+              },
+              "options__2": {
+                "label": "التصميم 2"
+              },
+              "options__3": {
+                "label": "التصميم 3"
+              }
+            },
+            "bn_end_time": {
+              "label": "وقت الانتهاء",
+              "info": "على سبيل المثال "
+            },
+            "bn_txt_color": {
+              "label": "لون"
+            },
+            "bn_txt_fs": {
+              "label": "نص حجم الخط"
+            },
+            "number_txt_fs": {
+              "label": "رقم حجم الخط"
+            },
+            "bn_txt_fw": {
+              "label": "وزن الخط"
+            },
+            "header__1": {
+              "content": "تباعد"
+            },
+            "bn_txt_mt": {
+              "label": "قمة"
+            },
+            "bn_txt_mb": {
+              "label": "قاع"
+            },
+            "bn_txt_tf": {
+              "label": "تحويل النص",
+              "options__1": {
+                "label": "غير محدد"
+              },
+              "options__2": {
+                "label": "الاستفادة"
+              },
+              "options__3": {
+                "label": "أحرف كبيرة"
+              },
+              "options__4": {
+                "label": "أحرف صغيرة"
+              }
+            }
+          }
+        },
+        "form_subscribe": {
+          "name": "نموذج الاشتراك",
+          "settings": {
+            "email_placeholder": {
+              "label": "أرسل نص العنصر النائب بالبريد الإلكتروني"
+            },
+            "btn_label": {
+              "label": "تسمية الزر"
+            },
+            "header__1": {
+              "content": "تباعد"
+            },
+            "form_txt_mt": {
+              "label": "قمة"
+            },
+            "form_txt_mb": {
+              "label": "قاع"
+            }
+          }
+        },
+        "text": {
+          "name": "نص",
+          "settings": {
+            "txt_content": {
+              "label": "نص"
+            },
+            "txt_color": {
+              "label": "لون"
+            },
+            "txt_fs": {
+              "label": "حجم الخط"
+            },
+            "txt_fw": {
+              "label": "وزن الخط"
+            },
+            "header__1": {
+              "content": "تباعد"
+            },
+            "txt_mt": {
+              "label": "قمة"
+            },
+            "txt_mb": {
+              "label": "قاع"
+            },
+            "txt_tf": {
+              "label": "تحويل النص",
+              "options__1": {
+                "label": "غير محدد"
+              },
+              "options__2": {
+                "label": "الاستفادة"
+              },
+              "options__3": {
+                "label": "أحرف كبيرة"
+              },
+              "options__4": {
+                "label": "أحرف صغيرة"
+              }
+            }
+          }
+        }
+      }
+    },
+    "all": {
+      "animation": {
+        "content": "الرسوم المتحركة",
+        "image_behavior": {
+          "options__1": {
+            "label": "لا أحد"
+          },
+          "options__2": {
+            "label": "الحركة المحيطة"
+          },
+          "options__3": {
+            "label": "موقف الخلفية الثابتة"
+          },
+          "options__4": {
+            "label": "تكبير التمرير"
+          },
+          "label": "سلوك الصورة"
+        }
+      },
+      "page_heading": {
+        "label": "عنوان الصفحة",
+        "use_collection_image": "استخدام صورة المجموعة",
+        "info": "تجاوز إعداد صورة الخلفية",
+        "height": {
+          "label": "ارتفاع",
+          "option__1": "التكيف مع الصورة",
+          "option__2": "بناء على المحتوى"
+        },
+        "description": {
+          "label": "وصف",
+          "info": "اترك الوصف فارغًا لاستخدام وصف الصفحة الافتراضي"
+        },
+        "heading": {
+          "label": "عنوان",
+          "info": "اترك العنوان فارغًا لاستخدام عنوان الصفحة الافتراضي"
+        },
+        "breadcrumb": {
+          "label": "مسار التنقل"
+        }
+      },
+      "section_width": {
+        "label": "عرض القسم",
+        "container": {
+          "label": "تقصير"
+        },
+        "fluid_container": {
+          "label": "حاوية السوائل"
+        },
+        "stretch_width": {
+          "label": "عرض تمتد"
+        },
+        "full_width": {
+          "label": "العرض الكامل"
+        }
+      },
+      "color_scheme": {
+        "label": "نظام الألوان",
+        "info": "لتغيير نظام ألوان البطاقة، قم بتحديث إعدادات السمة الخاصة بك."
+      },
+      "content_setting": {
+        "label": "إعدادات المحتوى",
+        "info": "تم تحسين جميع الإعدادات تلقائيًا للجوال",
+        "font_size": {
+          "label": "حجم الخط"
+        },
+        "uppercase": {
+          "label": "أحرف كبيرة"
+        },
+        "font_weight": {
+          "label": "وزن الخط",
+          "body_weight": {
+            "label": "وزن الجسم"
+          },
+          "heading_weight": {
+            "label": "وزن العنوان"
+          },
+          "subheading_weight": {
+            "label": "وزن العنوان الفرعي"
+          }
+        },
+        "spacing": {
+          "label": "أحرف كبيرة"
+        },
+        "width": {
+          "label": "عرض"
+        }
+      },
+      "email_placeholder": {
+        "label": "العنصر النائب للبريد الإلكتروني"
+      },
+      "desktop_content_position": {
+        "label": "موقف محتوى سطح المكتب",
+        "info": "يتم تحسين الموضع تلقائيًا للجوال.",
+        "options__1": {
+          "label": "أعلى اليسار"
+        },
+        "options__2": {
+          "label": "المركز العلوي"
+        },
+        "options__3": {
+          "label": "أعلى اليمين"
+        },
+        "options__4": {
+          "label": "منتصف اليسار"
+        },
+        "options__5": {
+          "label": "المركز الأوسط"
+        },
+        "options__6": {
+          "label": "اليمين الأوسط"
+        },
+        "options__7": {
+          "label": "أسفل اليسار"
+        },
+        "options__8": {
+          "label": "المركز السفلي"
+        },
+        "options__9": {
+          "label": "أسفل اليمين"
+        }
+      },
+      "section_header": {
+        "label": "رأس القسم",
+        "heading": {
+          "label": "عنوان"
+        },
+        "login_popup": {
+          "label": "تمكين النافذة المنبثقة لتسجيل الدخول"
+        },
+        "description": {
+          "label": "وصف"
+        },
+        "alignment": {
+          "label": "تنسيق",
+          "left": {
+            "label": "غادر"
+          },
+          "center": {
+            "label": "مركز"
+          },
+          "right": {
+            "label": "يمين"
+          }
+        },
+        "show_view_all_button": {
+          "label": "إظهار زر عرض الكل"
+        },
+        "header_size": {
+          "label": "حجم الرأس",
+          "small": {
+            "label": "صغير"
+          },
+          "medium": {
+            "label": "واسطة"
+          },
+          "large": {
+            "label": "كبير"
+          }
+        }
+      },
+      "contents": {
+        "label": "محتوى",
+        "info": "تم تحسين جميع الإعدادات تلقائيًا للجوال",
+        "heading": {
+          "label": "عنوان"
+        },
+        "custom_svg": {
+          "label": "SVG مخصص"
+        },
+        "subheading": {
+          "label": "عنوان فرعي"
+        },
+        "description": {
+          "label": "وصف"
+        },
+        "button": {
+          "label": "زر",
+          "first_button_label": {
+            "label": "تسمية الزر الأول",
+            "info": "اترك التسمية فارغة لإخفاء الزر."
+          },
+          "first_button_link": {
+            "label": "رابط الزر الأول"
+          },
+          "secondary_button_label": {
+            "label": "تسمية الزر الثاني",
+            "info": "اترك التسمية فارغة لإخفاء الزر."
+          },
+          "secondary_button_link": {
+            "label": "رابط الزر الثاني"
+          },
+          "use_outline_button_style": "استخدم نمط زر المخطط التفصيلي",
+          "button_type": {
+            "label": "يكتب",
+            "primary": {
+              "label": "أساسي"
+            },
+            "outline": {
+              "label": "الخطوط العريضة"
+            },
+            "link": {
+              "label": "وصلة"
+            }
+          }
+        }
+      },
+      "content_settings": {
+        "label": "إعدادات المحتوى",
+        "typography": {
+          "label": "الطباعة"
+        },
+        "number": {
+          "label": "=== الرقم ==="
+        },
+        "heading": {
+          "label": "=== العنوان ==="
+        },
+        "custom_svg": {
+          "label": "=== SVG مخصص ==="
+        },
+        "subheading": {
+          "label": "=== العنوان الفرعي ==="
+        },
+        "description": {
+          "label": "=== الوصف ==="
+        },
+        "content_width": {
+          "label": "عرض المحتوى"
+        },
+        "max_width": {
+          "label": "أقصى عرض",
+          "info": "يتم تحسين الحد الأقصى لعرض المحتوى تلقائيًا للجوال."
+        },
+        "content_padding_inline": {
+          "label": "حشوة المحتوى يسار/يمين"
+        },
+        "content_padding_block": {
+          "label": "حشوة المحتوى أعلى / أسفل"
+        },
+        "max_height": {
+          "label": "أقصى ارتفاع للمحتوى"
+        },
+        "font_size": {
+          "label": "حجم الخط",
+          "default": {
+            "label": "تقصير"
+          },
+          "small": {
+            "label": "صغير"
+          },
+          "large": {
+            "label": "كبير"
+          }
+        },
+        "font_weight": {
+          "label": "وزن الخط",
+          "body_weight": {
+            "label": "وزن الجسم"
+          },
+          "subheading_weight": {
+            "label": "وزن العنوان الفرعي"
+          },
+          "heading_weight": {
+            "label": "وزن العنوان"
+          }
+        },
+        "spacing": {
+          "label": "تباعد",
+          "spacing_top": {
+            "label": "تباعد أعلى"
+          },
+          "spacing_bottom": {
+            "label": "تباعد القاع"
+          },
+          "desktop_spacing": {
+            "label": "تباعد سطح المكتب"
+          },
+          "mobile_spacing": {
+            "label": "تباعد المحمول"
+          }
+        },
+        "content_alignment": {
+          "label": "محاذاة المحتوى",
+          "left": {
+            "label": "غادر"
+          },
+          "center": {
+            "label": "مركز"
+          },
+          "right": {
+            "label": "يمين"
+          }
+        },
+        "content_position": {
+          "label": "موقف المحتوى",
+          "top_left": {
+            "label": "أعلى اليسار"
+          },
+          "top_center": {
+            "label": "المركز العلوي"
+          },
+          "top_right": {
+            "label": "أعلى اليمين"
+          },
+          "middle_left": {
+            "label": "منتصف اليسار"
+          },
+          "middle_center": {
+            "label": "المركز الأوسط"
+          },
+          "middle_right": {
+            "label": "اليمين الأوسط"
+          },
+          "bottom_left": {
+            "label": "أسفل اليسار"
+          },
+          "bottom_center": {
+            "label": "المركز السفلي"
+          },
+          "bottom_right": {
+            "label": "أسفل اليمين"
+          }
+        }
+      },
+      "content_box": {
+        "label": "مربع المحتوى",
+        "show_content_background": {
+          "label": "إظهار خلفية المحتوى"
+        },
+        "content_background": {
+          "label": "خلفية المحتوى"
+        },
+        "content_box_opacity": {
+          "label": "العتامة"
+        }
+      },
+      "text_transform": {
+        "label": "تحويل النص",
+        "unset": {
+          "label": "غير محدد"
+        },
+        "default": {
+          "label": "تقصير"
+        },
+        "capitalize": {
+          "label": "الاستفادة"
+        },
+        "uppercase": {
+          "label": "أحرف كبيرة"
+        }
+      },
+      "carousel_settings": {
+        "label": "إعدادات دائري",
+        "show-next-back": {
+          "label": "عرض التالي مرة أخرى"
+        },
+        "pagination": {
+          "label": "نقطة",
+          "disable": {
+            "label": "إبطال"
+          },
+          "show_dots": {
+            "label": "إظهار النقاط"
+          },
+          "show_dots_on_mobile": {
+            "label": "إظهار النقاط على الجوال"
+          },
+          "show_progress_bar": {
+            "label": "إظهار شريط التقدم"
+          }
+        },
+        "pagination_position": {
+          "label": "موضع نقاط سطح المكتب",
+          "left": {
+            "label": "غادر"
+          },
+          "center": {
+            "label": "مركز"
+          },
+          "right": {
+            "label": "يمين"
+          }
+        },
+        "infinite": {
+          "label": "شريحة لا نهاية لها"
+        },
+        "auto_change": {
+          "label": "تغيير الشرائح تلقائيًا"
+        },
+        "change_slides_every": {
+          "label": "تغيير الشرائح كل"
+        },
+        "reveal": {
+          "label": "كشف الشريحة التالية",
+          "info": "عرض جزء من الشريحة القادمة."
+        }
+      },
+      "mobile_options": {
+        "label": "خيارات الجوال",
+        "content_below_image": {
+          "label": "عرض المحتوى أسفل الصورة"
+        },
+        "carousel_on_mobile": {
+          "label": "تمكين الرف الدائري على الهاتف المحمول"
+        },
+        "enable_grid_scroll_on_mobile": {
+          "label": "تمكين تمرير الشبكة على الهاتف المحمول",
+          "info": "تعمل فقط عند تحديد تمكين الرف الدائري على إعداد الهاتف المحمول"
+        },
+        "display_mode": {
+          "label": "وضع العرض",
+          "default": {
+            "label": "تقصير"
+          },
+          "grid_scroll": {
+            "label": "التمرير الشبكة"
+          },
+          "carousel": {
+            "label": "دائري"
+          }
+        }
+      },
+      "image": {
+        "label": "صورة",
+        "link": "وصلة",
+        "mobile_image": {
+          "label": "صورة الجوال"
+        },
+        "background_image": {
+          "label": "صورة الخلفية"
+        },
+        "overlay_opacity": {
+          "label": "تراكب التعتيم"
+        },
+        "image_overlay_opacity": {
+          "label": "عتامة تراكب الصورة"
+        },
+        "image_ratio": {
+          "label": "نسبة الصورة",
+          "height": {
+            "label": "ارتفاع",
+            "full_screen": {
+              "label": "شاشة كاملة"
+            },
+            "custom_height": {
+              "label": "ارتفاع مخصص",
+              "info": "اعمل فقط عند اختيار مخصص في إعداد الارتفاع"
+            },
+            "desktop_height": {
+              "label": "ارتفاع سطح المكتب"
+            },
+            "mobile_height": {
+              "label": "ارتفاع المحمول"
+            }
+          },
+          "adapt": {
+            "label": "التكيف مع الصورة"
+          },
+          "square": {
+            "label": "مربع (1:1)"
+          },
+          "portrait": {
+            "label": "صورة شخصية (3:4)"
+          },
+          "landscape": {
+            "label": "منظر طبيعي (4:3)"
+          },
+          "custom": {
+            "label": "مخصص"
+          },
+          "custom_ratio": {
+            "label": "نسبة مخصصة"
+          }
+        }
+      },
+      "video": {
+        "label": "فيديو",
+        "video_url": {
+          "label": "رابط الفيديو",
+          "info": "يقبل روابط YouTube أو Vimeo"
+        },
+        "video_local": {
+          "label": "فيديو محلي",
+          "info": "إذا قمت بتحميل عنوان URL للفيديو والفيديو المحلي، فسيتم استخدام الفيديو المحلي."
+        },
+        "autoplay": {
+          "label": "التشغيل التلقائي",
+          "info": "يتم كتم صوت الفيديو تلقائيًا للسماح بالتشغيل التلقائي"
+        },
+        "video_poster": {
+          "label": "ملصق فيديو",
+          "info": "العمل فقط مع الفيديو المحلي"
+        },
+        "adapt_to_video": {
+          "label": "التكيف مع الفيديو"
+        }
+      },
+      "svg": {
+        "label": "أيقونة إس في جي",
+        "custom_svg": {
+          "label": "SVG مخصص",
+          "info": "إذا قمت بتحديد كل من أيقونة الصورة وsvg، فسيتم استخدام أيقونة svg."
+        }
+      },
+      "icon": {
+        "label": "رمز",
+        "none": {
+          "label": "لا أحد"
+        },
+        "free_shipping": {
+          "label": "ًالشحن مجانا"
+        },
+        "check_badge": {
+          "label": "شارة التحقق"
+        },
+        "message_communications": {
+          "label": "اتصالات الرسائل"
+        },
+        "boat": {
+          "label": "قارب"
+        },
+        "truck": {
+          "label": "شاحنة"
+        },
+        "question": {
+          "label": "سؤال"
+        },
+        "secure": {
+          "label": "يؤمن"
+        },
+        "protection": {
+          "label": "حماية"
+        },
+        "location": {
+          "label": "موقع"
+        },
+        "leaf": {
+          "label": "ورقة"
+        },
+        "blossom": {
+          "label": "زهر"
+        },
+        "payment": {
+          "label": "قسط"
+        },
+        "discount": {
+          "label": "تخفيض"
+        }
+      },
+      "design": {
+        "label": "تصميم",
+        "default": {
+          "label": "تقصير"
+        },
+        "morden": {
+          "label": "موردن"
+        }
+      },
+      "section_padding": {
+        "label": "حشوة القسم",
+        "top": {
+          "label": "قمة"
+        },
+        "bottom": {
+          "label": "قاع"
+        },
+        "reset_spacing": {
+          "label": "إزالة المسافة الافتراضية بين الأقسام"
+        },
+        "reset_spacing_on_homepage": {
+          "label": "إزالة التباعد الافتراضي العلوي على الصفحة الرئيسية"
+        }
+      },
+      "items": {
+        "items_to_show": {
+          "label": "العناصر المطلوب عرضها"
+        },
+        "items_per_row_on_desktop": {
+          "label": "العناصر لكل صف على سطح المكتب"
+        },
+        "items_per_row": {
+          "label": "العناصر لكل صف"
+        },
+        "column_gap": {
+          "label": "فجوة العمود"
+        },
+        "rows": {
+          "label": "الصفوف"
+        }
+      },
+      "settings": {
+        "show_separator_line": {
+          "label": "إظهار الخط الفاصل"
+        }
+      },
+      "banner": {
+        "header": "إعدادات الشعار",
+        "show_banner": "عرض لافتة",
+        "sticky_banner": "لافتة لاصقة",
+        "banner_width": "عرض",
+        "info": "سيتم إخفاء الشعار تلقائيًا على الأجهزة اللوحية والأجهزة المحمولة.",
+        "position": {
+          "label": "موضع",
+          "left": {
+            "label": "غادر"
+          },
+          "right": {
+            "label": "يمين"
+          }
+        },
+        "banner_link": "رابط البانر",
+        "banner_type": {
+          "label": "نوع البانر",
+          "image": {
+            "label": "صورة"
+          },
+          "video": {
+            "label": "فيديو"
+          }
+        },
+        "banner_color_scheme": {
+          "label": "راية نظام الألوان"
+        },
+        "image": "صورة",
+        "video_url": {
+          "label": "عنوان URL للفيديو",
+          "info": "يقبل روابط YouTube أو Vimeo"
+        },
+        "local_video": {
+          "label": "فيديو محلي",
+          "info": "إذا قمت بتحميل عنوان URL للفيديو والفيديو المحلي، فسيتم استخدام الفيديو المحلي."
+        }
+      },
+      "display_mode": {
+        "label": "وضع العرض",
+        "grid": "شبكة",
+        "carousel": "دائري"
+      },
+      "blocks": {
+        "store_info": {
+          "info": "ستعرض هذه الكتلة معلومات متجرك. "
+        },
+        "socials": {
+          "info": "قم بالتهيئة في [إعدادات الوسائط الاجتماعية](/editor?context=theme&category=social%20media)"
+        },
+        "store": {
+          "info": "تم تكوين صفحة متجرنا في معلومات المتجر. "
+        }
+      }
+    },
+    "store-location-page": {
+      "name": "صفحة موقع المتجر",
+      "blocks": {
+        "item": {
+          "name": "موقع المتجر",
+          "settings": {
+            "header": {
+              "content1": "إعدادات معلومات المتجر",
+              "content2": "إعدادات موقع المتجر"
+            },
+            "store_lng": {
+              "label": "خط الطول",
+              "info": "إحداثيات خط الطول في نظام الإحداثيات الجغرافية. "
+            },
+            "store_lat": {
+              "label": "خط العرض",
+              "info": "إحداثيات خطوط العرض في نظام الإحداثيات الجغرافية. "
+            },
+            "paragraph": {
+              "label": "كيفية الحصول على الإحداثيات أو البحث حسب خطوط الطول والعرض[https://support.google.com/maps/answer/18539](https://support.google.com/maps/answer/18539)"
+            },
+            "store_name": {
+              "label": "اسم المتجر"
+            },
+            "store_address": {
+              "label": "عنوان المتجر"
+            },
+            "store_phone": {
+              "label": "رقم هاتف المتجر"
+            }
+          }
+        }
+      }
+    },
+    "header": {
+      "name": "رأس",
+      "header_menu_bottom": "القائمة الرئيسية في الأسفل",
+      "settings": {
+        "logo_header": {
+          "content": "الشعار"
+        },
+        "logo": {
+          "label": "صورة الشعار"
+        },
+        "logo_width": {
+          "unit": "بكسل",
+          "label": "عرض شعار سطح المكتب"
+        },
+        "logo_width_mobile": {
+          "unit": "بكسل",
+          "label": "عرض شعار الجوال"
+        },
+        "logo_position": {
+          "label": "موقف شعار سطح المكتب",
+          "info": "يتم تحسين موضع الشعار تلقائيًا للجوال.",
+          "options__1": {
+            "label": "الشعار الأيسر، مركز القائمة"
+          },
+          "options__2": {
+            "label": "مركز الشعار، القائمة اليسرى"
+          },
+          "options__3": {
+            "label": "مركز الشعار، أسفل القائمة"
+          }
+        },
+        "transparent_header": {
+          "label": "شفافة على الصفحة الرئيسية",
+          "info": "تأكد من أن لديك قسم عرض الشرائح والفيديو مع تراكب النص والصورة مع تراكب النص كقسم أول في صفحتك الرئيسية.",
+          "enable_mobile": {
+            "label": "تمكين في الجوال"
+          },
+          "text_icon_color": {
+            "label": "لون النص والرمز"
+          }
+        },
+        "mega_menu": {
+          "label": "القائمة الضخمة",
+          "dropdowns_animation": {
+            "label": "الرسوم المتحركة المنسدلة",
+            "options__1": {
+              "label": "تتلاشى في"
+            },
+            "options__2": {
+              "label": "تتلاشى في الأسفل"
+            },
+            "options__3": {
+              "label": "من الأسفل إلى الأعلى"
+            }
+          },
+          "uppercase_first": {
+            "label": "المستوى الأول بالأحرف الكبيرة"
+          }
+        },
+        "vertical_menu": {
+          "label": "القائمة العمودية",
+          "title": "قائمة العنوان",
+          "show_thumb_icon": {
+            "label": "إظهار رمز الإبهام"
+          },
+          "enable_vertical_menu": {
+            "label": "تمكين القائمة العمودية"
+          }
+        },
+        "menu_label": {
+          "label": "تسمية القائمة",
+          "label1": {
+            "content": "=== ساخن ===",
+            "text": "التسمية الساخنة",
+            "color": "لون",
+            "background": "لون الخلفية"
+          },
+          "label2": {
+            "content": "=== جديد ===",
+            "text": "تسمية جديدة",
+            "color": "لون",
+            "background": "لون الخلفية"
+          },
+          "label3": {
+            "content": "=== بيع ===",
+            "text": "تسمية البيع",
+            "color": "لون",
+            "background": "لون الخلفية"
+          }
+        },
+        "menu_mobile": {
+          "label": "القائمة المحمول",
+          "title": "عنوان القائمة المحمول",
+          "color_title": "عنوان",
+          "background_title": "خلفية",
+          "redirect_to_link": {
+            "label": "إعادة التوجيه إلى الارتباط عند النقر فوق العنصر الأصلي في القائمة"
+          },
+          "collection_list": {
+            "label": "قائمة المجموعة"
+          },
+          "menu_tab": {
+            "label": "علامة تبويب القائمة",
+            "options__1": {
+              "label": "غير محدد"
+            },
+            "options__2": {
+              "label": "عنصر القائمة العمودية"
+            },
+            "options__3": {
+              "label": "قائمة المجموعات المخصصة"
+            }
+          }
+        },
+        "addons": {
+          "label": "إضافات",
+          "show_search_icon": {
+            "label": "إظهار أيقونة البحث"
+          },
+          "show_account_icon": {
+            "label": "إظهار أيقونة الحساب"
+          },
+          "show_shopping_cart": {
+            "label": "عرض عربة التسوق"
+          },
+          "show_wishlist_icon": {
+            "label": "إظهار أيقونة قائمة الرغبات"
+          },
+          "show_currency": {
+            "label": "إظهار العملة"
+          },
+          "show_language": {
+            "label": "إظهار اللغة"
+          },
+          "show_recently_viewed": {
+            "label": "عرض تمت مشاهدته مؤخرًا"
+          }
+        },
+        "menu": {
+          "header": "ملاحة",
+          "label": "قائمة طعام",
+          "uppercase": "المستوى الأول بالأحرف الكبيرة"
+        },
+        "sticky_header_type": {
+          "label": "رأس لزجة",
+          "options__1": {
+            "label": "غير محدد"
+          },
+          "options__2": {
+            "label": "على التمرير لأعلى"
+          },
+          "options__3": {
+            "label": "دائماً"
+          }
+        },
+        "sticky_header_mobile": {
+          "label": "Enabel لزجة على الهاتف المحمول"
+        },
+        "show_border_bottom": {
+          "label": "إظهار الحدود"
+        },
+        "mobile_settings": {
+          "header": "إعدادات الجوال",
+          "media_type": {
+            "label": "نوع الوسائط",
+            "option_1": "مجموعة",
+            "option_2": "صورة البانر",
+            "option_3": "لا أحد"
+          },
+          "banner_title": "عنوان",
+          "collection": "مجموعة",
+          "banner_img": "صورة البانر",
+          "link": "رابط البانر"
+        },
+        "blocks": {
+          "description": "يتم عرضه فقط على سطح المكتب، وستتم إزالته في قائمة الهاتف المحمول",
+          "menu_item": {
+            "label": "عنصر القائمة",
+            "info": "أدخل اسم قائمة المستوى 1 لعرض القائمة المنسدلة الضخمة. ",
+            "open_link_newtab": {
+              "label": "افتح الرابط في علامة تبويب جديدة"
+            },
+            "item_label": {
+              "label": "حدد التسمية",
+              "unset": "غير محدد",
+              "hot": "حار",
+              "new": "جديد",
+              "sale": "أُوكَازيُون"
+            },
+            "submenu": {
+              "label": "القائمة الفرعية"
+            },
+            "full_width": {
+              "label": "العرض الكامل",
+              "info": "تجاوز إعداد العرض المخصص لقائمة Mega"
+            },
+            "center_submenu": "القائمة الفرعية للمركز"
+          },
+          "menu_column": {
+            "label": "أعمدة قائمة سطح المكتب"
+          },
+          "mega_custom_width": {
+            "label": "العرض المخصص لقائمة ميجا"
+          },
+          "promotion": {
+            "name": "القائمة الضخمة مع صورة البانر",
+            "position": {
+              "label": "موقف لافتة",
+              "left": "غادر",
+              "right": "يمين"
+            },
+            "upload_image_width": "عرض",
+            "upload_image": "صورة",
+            "label": "صورة البانر",
+            "promotion_1": {
+              "label": "صورة البانر 1",
+              "link": "وصلة"
+            },
+            "promotion_2": {
+              "label": "صورة البانر 2",
+              "link": "وصلة"
+            }
+          },
+          "product": {
+            "all": {
+              "header": "منتج"
+            },
+            "name": "القائمة الضخمة مع المنتج",
+            "width": "عرض",
+            "product_1": "المنتج 1",
+            "product_2": "المنتج 2",
+            "product_3": "المنتج 3"
+          },
+          "collection": {
+            "all": {
+              "header": "مجموعة"
+            },
+            "width": "عرض",
+            "collection_1": "المجموعة 1",
+            "collection_2": "المجموعة 2",
+            "collection_3": "المجموعة 3",
+            "name": "القائمة الضخمة مع المجموعة"
+          }
+        }
+      }
+    },
+    "footer": {
+      "name": "تذييل",
+      "settings": {
+        "background_image": {
+          "label": "صورة الخلفية"
+        },
+        "enable_back_top": {
+          "label": "تمكين العودة إلى الأعلى"
+        },
+        "separator_line": {
+          "label": "خط فاصل",
+          "unset": {
+            "label": "غير محدد"
+          },
+          "show_on_homepage": {
+            "label": "عرض على الصفحة الرئيسية"
+          },
+          "show_inner_page": {
+            "label": "عرض على الصفحة الداخلية"
+          },
+          "show_all_page": {
+            "label": "إظهار كل الصفحة"
+          }
+        },
+        "social_icon": {
+          "content": "أيقونات وسائل التواصل الاجتماعي",
+          "info": "لعرض حسابات الوسائط الاجتماعية الخاصة بك، قم بربطها في إعدادات المظهر الخاص بك."
+        },
+        "show_social": {
+          "label": "إظهار أيقونات وسائل التواصل الاجتماعي"
+        },
+        "country_language": {
+          "content": "محدد البلد/اللغة",
+          "info": "لإضافة بلد/منطقة، انتقل إلى [إعدادات السوق.](/admin/settings/markets). "
+        },
+        "enable_country_selector": {
+          "label": "تمكين محدد البلد/المنطقة"
+        },
+        "enable_language_selector": {
+          "label": "تمكين محدد اللغة"
+        },
+        "payment": {
+          "content": "طرق الدفع"
+        },
+        "payment_enable": {
+          "label": "إظهار أيقونات الدفع"
+        },
+        "payment_image": "تحميل صورة المدفوعات",
+        "payment_width": "عرض الصورة",
+        "copyright": "حقوق الطبع والنشر",
+        "copyright_text": "نص حقوق الطبع والنشر",
+        "content_setting": "إعداد المحتوى",
+        "footer_heading_size": "حجم عنوان التذييل",
+        "header_follow": {
+          "content": "متابعة على المتجر",
+          "info": "للسماح للعملاء بمتابعة متجرك على تطبيق Shop من واجهة متجرك، يجب تمكين Shop Pay. "
+        },
+        "enable_follow_on_shop": {
+          "label": "تمكين المتابعة على المتجر"
+        }
+      },
+      "blocks": {
+        "content_width": {
+          "content_width": "عرض"
+        },
+        "link_list": {
+          "name": "قائمة طعام",
+          "settings": {
+            "heading": {
+              "label": "عنوان"
+            },
+            "menu": {
+              "label": "قائمة طعام",
+              "info": "هذه القائمة لا تدعم عنصر القائمة المنسدلة"
+            }
+          }
+        },
+        "newsletter": {
+          "name": "النشرة الإخبارية",
+          "info": "تتم إضافة المشتركين تلقائيًا إلى قائمة عملاء \"التسويق المقبولين\" لديك. ",
+          "settings": {
+            "heading": {
+              "label": "عنوان"
+            },
+            "description": {
+              "label": "وصف"
+            },
+            "button_label": {
+              "label": "تسمية الزر"
+            },
+            "email_placeholder": {
+              "label": "العنصر النائب للبريد الإلكتروني"
+            },
+            "note": {
+              "label": "ملحوظة"
+            }
+          }
+        },
+        "store_info": {
+          "name": "تخزين المعلومات",
+          "settings": {
+            "image": "صورة",
+            "description": "وصف",
+            "image_width": "عرض الصورة",
+            "store_address": "إظهار العنوان",
+            "store_phone": "عرض الهاتف",
+            "store_email": "إظهار البريد الإلكتروني"
+          }
+        },
+        "custom_liquid": {
+          "label": "سائل مخصص"
+        }
+      }
+    },
+    "promotion-popup": {
+      "name": "المنبثقة الترويجية",
+      "settings": {
+        "show": {
+          "label": "عرض على",
+          "hide": {
+            "label": "المنبثقة المخفية"
+          },
+          "show_homepage": {
+            "label": "الصفحة الرئيسية"
+          },
+          "show_all_page": {
+            "label": "كل الصفحة"
+          }
+        },
+        "show_on_mobile": {
+          "label": "عرض على الجوال"
+        },
+        "width": {
+          "label": "عرض الترويج"
+        },
+        "show_promotion": {
+          "label": "إظهار النافذة الترويجية المنبثقة"
+        },
+        "promotion_code": {
+          "label": "رمز الترويج"
+        },
+        "show_promotion_code": {
+          "label": "إظهار رمز الترويج"
+        },
+        "promotion_banner": {
+          "label": "صورة الخلفية",
+          "info": "يوصى بأبعاد 570 × 430 بكسل"
+        },
+        "promotion_content": {
+          "label": "محتوى الترويج",
+          "info": "[promotion_code] هو اسم المتغير الذي سيتم استبداله تلقائيًا، ويجب عدم تغييره. "
+        }
+      }
+    },
+    "newsletter_popup": {
+      "name": "النشرة الإخبارية المنبثقة",
+      "header": {
+        "heading": "الإعدادات العامة",
+        "banner_image": "الإعدادات العامة",
+        "content": "محتوى"
+      },
+      "settings": {
+        "heading": "عنوان",
+        "width": "عرض مخصص",
+        "disabled_mobile": "معطل على الجوال",
+        "short_description": "وصف",
+        "email_placeholder": "العنصر النائب للبريد الإلكتروني",
+        "button_label": "تسمية الزر",
+        "notice_info": "معلومات الإشعار",
+        "banner_image": "صورة البانر",
+        "info": "سيتم إخفاء الشعار تلقائيًا على الهاتف المحمول.",
+        "banner_width": "عرض الشعار",
+        "more_info": "مزيد من المعلومات"
+      }
+    },
+    "mobile-navigation-bar": {
+      "name": "شريط التنقل المحمول",
+      "info": "هذا القسم يظهر فقط على الهاتف المحمول. ",
+      "settings": {
+        "show_section": "تمكين شريط التنقل المحمول",
+        "show_shop": "عرض المحل",
+        "show_account": "إظهار الحساب",
+        "show_cart": "عرض العربة",
+        "show_homepage": "إظهار الصفحة الرئيسية",
+        "show_wishlist": "عرض قائمة الرغبات"
+      }
+    },
+    "announcement-bar": {
+      "name": "شريط اعلان",
+      "settings": {
+        "show_close": {
+          "label": "إظهار زر الإغلاق"
+        },
+        "homepage_only": {
+          "label": "الصفحة الرئيسية فقط"
+        },
+        "show_mobile": {
+          "label": "عرض على الجوال"
+        },
+        "show_separator_line": {
+          "label": "إظهار الخط الفاصل"
+        },
+        "marquee": {
+          "info": "تظهر الشاشة الاسمية فقط عندما يكون عدد الإعلانات أكثر من 1.",
+          "label": "إعداد سرادق",
+          "speed": {
+            "label": "سرعة"
+          },
+          "space_between": {
+            "label": "التباعد بين العناصر"
+          },
+          "icon_between": {
+            "label": "أيقونة بين العنصر",
+            "none": "لا أحد",
+            "dot": "نقطة",
+            "star": "نجم"
+          }
+        },
+        "slide": {
+          "info": "يعمل شريط التمرير فقط عندما يكون عدد الإعلانات أكثر من 1.",
+          "label": "إعداد المنزلق",
+          "change_every": {
+            "label": "تغيير كل"
+          }
+        },
+        "announcement_actions": {
+          "label": "يكتب",
+          "slide": {
+            "label": "شريحة"
+          },
+          "marquee": {
+            "label": "سرادق"
+          }
+        }
+      },
+      "blocks": {
+        "announcement": {
+          "name": "إعلان",
+          "settings": {
+            "text": {
+              "label": "نص"
+            },
+            "countdown_deadline": {
+              "label": "العد التنازلي",
+              "info": "على سبيل المثال "
+            }
+          }
+        }
+      }
+    },
+    "top-bar": {
+      "name": "الشريط العلوي",
+      "settings": {
+        "show_mobile": {
+          "label": "عرض على الجوال"
+        },
+        "show_separator_line": {
+          "label": "إظهار الخط الفاصل"
+        }
+      },
+      "blocks": {
+        "hidden_on_mobile": {
+          "label": "مخفي على الجوال"
+        },
+        "store_information": {
+          "name": "تخزين المعلومات",
+          "settings": {
+            "show_email": {
+              "label": "إظهار البريد الإلكتروني"
+            },
+            "show_phone": {
+              "label": "عرض الهاتف"
+            }
+          }
+        },
+        "social_link": {
+          "name": "الرابط الاجتماعي"
+        },
+        "text": {
+          "name": "نص"
+        },
+        "text_slider": {
+          "name": "شريط تمرير النص",
+          "settings": {
+            "text_1": {
+              "label": "النص 1"
+            },
+            "text_2": {
+              "label": "النص 2"
+            },
+            "text_3": {
+              "label": "النص 3"
+            },
+            "change_every": {
+              "label": "تغيير كل"
+            }
+          }
+        },
+        "link_list": {
+          "name": "قائمة الارتباط",
+          "settings": {
+            "menu": {
+              "label": "اختر القائمة"
+            }
+          }
+        },
+        "cur_lang": {
+          "name": "إضافات",
+          "settings": {
+            "show_language": {
+              "label": "إظهار اللغة"
+            },
+            "show_currency": {
+              "label": "إظهار العملة"
+            },
+            "show_our_store": {
+              "label": "أظهر متجرنا"
+            }
+          }
+        }
+      }
+    },
+    "main-cart-items": {
+      "name": "العربة الرئيسية",
+      "settings": {
+        "eb_cart_note": "تمكين ملاحظات سلة التسوق",
+        "show_estimate_shipping": "عرض تقدير الشحن",
+        "delivery": {
+          "label": "توصيل"
+        },
+        "guarantee": {
+          "label": "يضمن"
+        },
+        "payment": {
+          "label": "قسط",
+          "image": "صورة",
+          "image_width": "عرض الصورة"
+        },
+        "icon_box": {
+          "heading": "مربع أيقونة",
+          "icon_box_1": "مربع الأيقونة 1",
+          "icon_box_2": "مربع الأيقونة 2",
+          "icon_box_3": "مربع الأيقونة 3"
+        }
+      }
+    },
+    "testimonials_single": {
+      "name": "شهادات واحدة",
+      "presets": {
+        "name": "شهادات واحدة"
+      }
+    },
+    "collection_banner": {
+      "name": "راية المجموعة"
+    },
+    "slideshow": {
+      "name": "عرض الشرائح",
+      "settings": {
+        "slide_height": {
+          "label": "ارتفاع الشريحة",
+          "info": "للحصول على أفضل النتائج، استخدم صورة بنسبة عرض إلى ارتفاع تبلغ 16:9. "
+        },
+        "custom_height": {
+          "content": "ارتفاع مخصص",
+          "adapt": "التكيف مع الصورة الأولى",
+          "height_dk": "ارتفاع سطح المكتب",
+          "height_mb": "ارتفاع المحمول",
+          "info": "اعمل فقط عند اختيار \"مخصص\" في ارتفاع الشريحة"
+        },
+        "design": {
+          "label": "المحتوى على الهاتف المحمول"
+        },
+        "autorotate_speed": {
+          "label": "تغيير الشرائح كل",
+          "info": "العمل عند تحديد التشغيل التلقائي"
+        }
+      },
+      "blocks": {
+        "slider_item": {
+          "name": "شريحة الصورة",
+          "settings": {
+            "header": {
+              "content_image": "إعدادات الصورة",
+              "content_text": "محتوى",
+              "button_title": "زر"
+            },
+            "image": {
+              "info": "يوصى بأبعاد 1920 × 800 بكسل"
+            },
+            "image_mobile": {
+              "info": "يوصى بحجم 600 × 480 بكسل"
+            },
+            "content_background_color": {
+              "label": "لون الخلفية"
+            },
+            "content_opacity": {
+              "label": "العتامة"
+            },
+            "horizontal_position": {
+              "label": "الوضع الأفقي"
+            },
+            "vertical_position": {
+              "label": "الوضع العمودي"
+            },
+            "slider_effect": {
+              "label": "تأثير المنزلق",
+              "options__1": {
+                "label": "FadeIn"
+              },
+              "options__2": {
+                "label": "FadeInUp"
+              },
+              "options__3": {
+                "label": "FadeInDown"
+              },
+              "options__4": {
+                "label": "تكبير"
+              },
+              "options__5": {
+                "label": "تصغير"
+              }
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "عرض الشرائح"
+      }
+    },
+    "testimonials_product": {
+      "name": "شهادات المنتج",
+      "settings": {
+        "design": {
+          "info": "سوف يقوم Desgin morden بإخفاء الصور دائمًا"
+        },
+        "select_product": "حدد المنتج",
+        "show_image": "إظهار الصورة",
+        "show_verified_buyer": "إظهار المشتري الذي تم التحقق منه"
+      },
+      "presets": {
+        "name": "شهادات المنتج"
+      }
+    },
+    "image-comparison-slider": {
+      "name": "شريط تمرير مقارنة الصور",
+      "settings": {
+        "image": {
+          "label": "قبل وبعد الصورة",
+          "before": "قبل الصورة",
+          "after": "بعد الصورة",
+          "position": {
+            "label": "موضع",
+            "options__1": {
+              "label": "غادر"
+            },
+            "options__2": {
+              "label": "يمين"
+            }
+          }
+        },
+        "show_after_before_text": {
+          "label": "إظهار قبل/بعد النص"
+        }
+      },
+      "blocks": {
+        "product": {
+          "name": "منتج"
+        },
+        "image_banner": {
+          "name": "البند راية",
+          "settings": {
+            "image_label": "صورة البانر",
+            "image_info": "يوصى بأبعاد 950 × 700 بكسل",
+            "image_mobile_label": "صورة بانر للجوال",
+            "image_mobile_info": "يوصى بحجم 380 × 280 بكسل"
+          }
+        }
+      },
+      "presets": {
+        "name": "شريط تمرير مقارنة الصور"
+      }
+    },
+    "countdown": {
+      "name": "توقيت العد التنازلي",
+      "content": "إعداد المحتوى",
+      "settings": {
+        "label": "إعداد مؤقت العد التنازلي",
+        "layout": {
+          "desktop_height": "ارتفاع سطح المكتب",
+          "mobile_height": "ارتفاع المحمول",
+          "timer_style": {
+            "label": "نمط الموقت",
+            "options__1": {
+              "label": "تقصير"
+            },
+            "options__2": {
+              "label": "ضوء هايت"
+            }
+          }
+        }
+      },
+      "blocks": {
+        "timer": {
+          "name": "الموقت",
+          "settings": {
+            "end_time": {
+              "label": "وقت الانتهاء",
+              "info": "على سبيل المثال "
+            },
+            "expired_message": {
+              "label": "رسالة منتهية الصلاحية",
+              "info": "سيتم عرض هذه الرسالة عند انتهاء الوقت."
+            },
+            "style": {
+              "label": "أسلوب",
+              "normal": "طبيعي",
+              "highlight": "تسليط الضوء"
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "توقيت العد التنازلي"
+      }
+    },
+    "fake-order": {
+      "name": "أمر مزيف",
+      "settings": {
+        "show_fake_order": {
+          "label": "إظهار الطلب المزيف"
+        },
+        "fake_product": {
+          "label": "حدد المنتج"
+        },
+        "fake_user": {
+          "label": "قائمة شراء المستخدم"
+        },
+        "text_verify": {
+          "label": "التحقق من التسمية"
+        },
+        "delay_time": {
+          "label": "تأخير الوقت",
+          "info": "بالميلي ثانية (1000 = 1 ثانية)"
+        },
+        "display_time": {
+          "label": "وقت العرض"
+        },
+        "disable_mobile": {
+          "label": "تعطيل في الجوال"
+        }
+      }
+    },
+    "main-page": {
+      "name": "الصفحة الرئيسية"
+    },
+    "before-you-leave": {
+      "name": "قبل أن تغادر",
+      "settings": {
+        "header": {
+          "recommended_products": "المنتجات الموصى بها",
+          "content_popup": "محتوى"
+        },
+        "show_time": {
+          "label": "عرض الوقت بعد (دقائق)"
+        },
+        "banner": {
+          "label": "صورة البانر",
+          "info": "يوصى بحجم 380 × 350 بكسل"
+        },
+        "collection": {
+          "label": "مجموعة"
+        },
+        "heading": {
+          "label": "عنوان"
+        },
+        "sub_heading": {
+          "label": "عنوان فرعي"
+        },
+        "desc": {
+          "label": "وصف",
+          "info": "* [discount_code] هو اسم المتغير الذي سيتم استبداله تلقائيًا، ويجب عدم تغييره. "
+        },
+        "color_scheme": {
+          "info": "لتعديل جميع ألوان السمة الخاصة بك، انتقل إلى إعدادات سمة الألوان الخاصة بك."
+        },
+        "code": {
+          "label": "رمز الخصم"
+        },
+        "button_label": {
+          "label": "تسمية الزر"
+        }
+      }
+    },
+    "collection-main": {
+      "name": "صفحة التجميع",
+      "settings": {
+        "filter": "التصفية والفرز",
+        "enable_filtering": "تمكين التصفية",
+        "show_filter_counts": "إظهار أعداد المرشحات",
+        "header": {
+          "toolbar": "إعدادات شريط الأدوات",
+          "product_grid": "شبكة المنتج",
+          "promotion": "صورة الترويج",
+          "info": "العمل فقط مع تخطيط الشبكة",
+          "mobile_options": "خيارات الجوال"
+        },
+        "filter_layout": {
+          "label": "تخطيط مرشح سطح المكتب",
+          "info": "الدرج هو تخطيط المحمول الافتراضي.",
+          "horizontal": "أفقي",
+          "vertical": "رَأسِيّ",
+          "drawer": "درج"
+        },
+        "default_filter": {
+          "label": "تخطيط المرشح الافتراضي",
+          "info": "سطح المكتب فقط ",
+          "open_all": "جميع المرشحات مفتوحة ",
+          "close_all": "جميع المرشحات مغلقة",
+          "first_open": "الفلتر الأول مفتوح"
+        },
+        "toolbar": {
+          "number_products_per_page": "تمكين عدد المنتجات لكل صفحة",
+          "sorting": "تمكين الفرز",
+          "grid_list": "تمكين الشبكة، القائمة"
+        },
+        "promotion": {
+          "image": "صورة تحميل الصورة",
+          "link": "وصلة",
+          "postion": "الموقف"
+        },
+        "vertical_posion": {
+          "label": "موضع الفلتر الرأسي لسطح المكتب",
+          "left": "غادر",
+          "right": "يمين"
+        }
+      },
+      "blocks": {
+        "categories": {
+          "name": "فئات",
+          "settings": {
+            "title": "عنوان",
+            "menu": "اختر القائمة",
+            "info": "يعرض عناصر قائمة المستوى الأول فقط."
+          }
+        },
+        "filter": {
+          "name": "المرشحات",
+          "settings": {
+            "info": "قم بتخصيص المرشحات باستخدام تطبيق البحث والاكتشاف. "
+          }
+        },
+        "popular_product": {
+          "name": "المنتجات المميزة",
+          "settings": {
+            "title": "عنوان",
+            "collection": "حدد المجموعة",
+            "items_to_show": "العناصر المطلوب عرضها"
+          }
+        },
+        "image_banner": {
+          "name": "صورة البانر",
+          "settings": {
+            "image": {
+              "label": "صورة"
+            },
+            "url": {
+              "label": "وصلة"
+            },
+            "open_link": {
+              "label": "فتح الرابط في نافذة جديدة"
+            }
+          }
+        },
+        "html": {
+          "name": "HTML مخصص",
+          "settings": {
+            "title": "عنوان",
+            "content": "محتوى"
+          }
+        }
+      }
+    },
+    "search-main": {
+      "name": "صفحة البحث"
+    },
+    "collections-list-page": {
+      "name": "صفحة قائمة المجموعات",
+      "settings": {
+        "header": {
+          "collection": "مجموعة",
+          "pagination": "ترقيم الصفحات"
+        },
+        "show_count_product": "إظهار عدد المنتجات",
+        "image_ratio": {
+          "info": "أضف الصور عن طريق تحرير مجموعاتك. "
+        },
+        "information_position": {
+          "label": "موقف المعلومات",
+          "overlay_image": {
+            "label": "صورة تراكب"
+          },
+          "beside_image": {
+            "label": "بجانب الصورة"
+          }
+        },
+        "collections": {
+          "header": "المجموعات",
+          "label": "مجموعات للعرض",
+          "info": "يتم سرد جميع مجموعاتك بشكل افتراضي. ",
+          "all": {
+            "label": "الجميع"
+          },
+          "selected": {
+            "label": "مختارة"
+          }
+        },
+        "pagination": {
+          "label": "نوع ترقيم الصفحات",
+          "button_show_more": "زر تحميل المزيد من التسمية",
+          "page_number": {
+            "label": "رقم الصفحة"
+          },
+          "load_more_button": {
+            "label": "زر تحميل المزيد"
+          },
+          "infinite_scroll": {
+            "label": "التمرير اللانهائي"
+          }
+        },
+        "sort_collections": {
+          "label": "ترتيب المجموعات حسب:",
+          "alphabetical": {
+            "label": "أبجديًا، من الألف إلى الياء"
+          },
+          "alphabetical_reversed": {
+            "label": "أبجديًا، Z-A"
+          },
+          "date_reversed": {
+            "label": "التاريخ، الجديد إلى القديم"
+          },
+          "date": {
+            "label": "التاريخ، القديم إلى الجديد"
+          },
+          "products_high": {
+            "label": "عدد المنتجات، من الأعلى إلى الأقل"
+          },
+          "products_low": {
+            "label": "عدد المنتجات، من الأقل إلى الأعلى"
+          }
+        },
+        "collections_design": {
+          "label": "تصميم المجموعات",
+          "layout1": {
+            "label": "صورة تراكب المحتوى"
+          },
+          "layout2": {
+            "label": "المحتوى بجانب الصورة"
+          }
+        }
+      },
+      "blocks": {
+        "collection": {
+          "name": "مجموعة",
+          "settings": {
+            "collection": "مجموعة",
+            "image": "صورة المجموعة",
+            "title_collection": "عنوان المجموعة"
+          }
+        }
+      },
+      "presets": {
+        "name": "صفحة قائمة المجموعات"
+      }
+    },
+    "subcollection-list": {
+      "name": "المجموعة الفرعية"
+    },
+    "newsletters": {
+      "name": "النشرة الإخبارية",
+      "content": "إعداد النشرة الإخبارية",
+      "settings": {
+        "button_text": "تسمية الزر",
+        "background_image": "صورة الخلفية",
+        "form_layout": {
+          "label": "تصميم",
+          "vertical": {
+            "label": "رَأسِيّ"
+          },
+          "horizontal": {
+            "label": "أفقي"
+          }
+        }
+      },
+      "presets": {
+        "name": "النشرة الإخبارية"
+      }
+    },
+    "counter": {
+      "name": "عداد",
+      "settings": {
+        "label": "عام",
+        "speed": {
+          "label": "سرعة"
+        }
+      },
+      "blocks": {
+        "counter": {
+          "name": "البند العداد",
+          "settings": {
+            "starting_number": {
+              "label": "رقم البداية"
+            },
+            "ending_number": {
+              "label": "رقم النهاية"
+            },
+            "unit": {
+              "label": "وحدة"
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "عداد"
+      }
+    },
+    "tiktok-video": {
+      "name": "فيديو تيك توك",
+      "settings": {
+        "auto_play": "اللعب التلقائي",
+        "tiktok_handle": "مقبض تيكتوك",
+        "general": {
+          "label": "عام"
+        }
+      },
+      "blocks": {
+        "video": {
+          "name": "تيكتوك",
+          "settings": {
+            "tiktok_embed_url": "عنوان URL لتضمين الفيديو",
+            "info": "يرجى التحقق من المستند إلى [راجع كيفية الحصول على عنوان url لتضمين الفيديو]()"
+          }
+        }
+      },
+      "presets": {
+        "name": "فيديو تيك توك"
+      }
+    },
+    "page-compare": {
+      "name": "يقارن"
+    },
+    "page-wishlist": {
+      "name": "قائمة الرغبات"
+    },
+    "page-recently": {
+      "name": "تم عرضها مؤخرًا"
+    },
+    "help-center": {
+      "name": "مركز المساعدة",
+      "settings": {
+        "button": {
+          "label": "تسمية الزر",
+          "link": "رابط الزر"
+        },
+        "image_size": {
+          "label": "حجم الصورة"
+        },
+        "description_2": {
+          "label": "الوصف 2"
+        }
+      }
+    },
+    "faqs-page": {
+      "name": "التعليمات",
+      "settings": {
+        "header": {
+          "general": "رسالة الأسئلة الشائعة",
+          "button": "زر"
+        }
+      },
+      "blocks": {
+        "title": {
+          "name": "عنوان"
+        },
+        "question": {
+          "name": "سؤال",
+          "settings": {
+            "question": "سؤال",
+            "answer": "إجابة"
+          }
+        }
+      }
+    },
+    "promotion_banner": {
+      "name": "راية الترويج",
+      "settings": {
+        "background_image": {
+          "label": "صورة الخلفية"
+        }
+      },
+      "block": {
+        "name": "محتوى",
+        "button_copy": {
+          "name": "نسخة الزر",
+          "settings": {
+            "button_label": "تسمية نسخ الزر",
+            "button_link": "رابط نسخ الزر",
+            "button_type": "نوع نسخة الزر"
+          }
+        },
+        "button": {
+          "name": "زر",
+          "settings": {
+            "button_label": "تسمية الزر",
+            "button_link": "رابط الزر",
+            "button_type": "نوع الزر"
+          }
+        }
+      }
+    },
+    "breadcrumbs": {
+      "name": "فتات الخبز",
+      "settings": {
+        "next_prev": "عرض المنتج السابق التالي"
+      }
+    },
+    "blog-post": {
+      "name": "مدونة",
+      "settings": {
+        "blog": {
+          "label": "فئة المدونة"
+        },
+        "header": {
+          "label": "مشاركة المدونة"
+        },
+        "blog_setting": {
+          "show_category": "إظهار الفئة",
+          "show_author": "عرض المؤلف",
+          "show_date": "عرض تاريخ النشر",
+          "show_comment_count": "إظهار عدد التعليقات",
+          "show_excerpts": "عرض مقتطفات",
+          "show_tag": "إظهار العلامات",
+          "show_share": "إظهار أيقونات المشاركة"
+        }
+      },
+      "presets": {
+        "name": "مشاركة المدونة"
+      }
+    },
+    "main-article": {
+      "name": "مشاركة المدونة",
+      "blocks": {
+        "featured_image": {
+          "label": "صورة مميزة",
+          "settings": {
+            "image_height": {
+              "label": "ارتفاع الصورة",
+              "options__1": {
+                "label": "التكيف مع الصورة"
+              },
+              "options__2": {
+                "label": "صغير"
+              },
+              "options__3": {
+                "label": "واسطة"
+              },
+              "options__4": {
+                "label": "كبير"
+              }
+            }
+          }
+        },
+        "related": {
+          "heading": "عنوان",
+          "title": "مقالات ذات صلة"
+        },
+        "title": {
+          "label": "عنوان"
+        },
+        "blog_meta": {
+          "label": "بلوق التعريف"
+        },
+        "category": {
+          "label": "فئة"
+        },
+        "content": {
+          "label": "محتوى"
+        },
+        "share": {
+          "label": "يشارك"
+        },
+        "tag": {
+          "label": "علامة"
+        },
+        "prev_next_articles": {
+          "label": "المقالات السابقة والتالية"
+        },
+        "content_article": {
+          "label": "محتوى"
+        }
+      }
+    },
+    "overlay_group": {
+      "name": "مجموعة تراكب"
+    },
+    "age-verifier-popup": {
+      "name": "النافذة المنبثقة للتحقق من العمر",
+      "settings": {
+        "general": "عام",
+        "decline_heading": "رفض العنوان",
+        "show_on_design": {
+          "label": "تظهر في وضع التصميم"
+        },
+        "color_scheme": {
+          "label": "مخطط اللون"
+        },
+        "content_background": {
+          "label": "لون خلفية المحتوى"
+        },
+        "show_logo": {
+          "label": "إظهار الشعار"
+        },
+        "Decline-content": {
+          "content": "رفض المحتوى"
+        },
+        "paragraph": {
+          "content": "ستكون هذه المعلومات مرئية إذا كان المستخدم لا يستوفي معايير التحقق من العمر."
+        },
+        "decline_text": {
+          "label": "نص"
+        },
+        "button_return": {
+          "label": "نص زر العودة"
+        }
+      },
+      "blocks": {
+        "heading": {
+          "name": "إعداد المحتوى"
+        },
+        "description": {
+          "name": "وصف"
+        },
+        "button": {
+          "name": "زر",
+          "settings": {
+            "button_decline": {
+              "label": "رفض تسمية الزر"
+            },
+            "button_approve": {
+              "label": "الموافقة على تسمية الزر"
+            }
+          }
+        }
+      }
+    },
+    "page-sale-banner": {
+      "name": "صفحة شعار المبيعات",
+      "settings": {
+        "color_scheme": {
+          "label": "مخطط اللون"
+        },
+        "text_size": {
+          "label": "حجم النص",
+          "options__1": {
+            "label": "صغير"
+          },
+          "options__2": {
+            "label": "واسطة"
+          },
+          "options__3": {
+            "label": "كبير"
+          }
+        },
+        "text_transform": {
+          "label": "تحويل عنوان النص",
+          "options__1": {
+            "label": "تقصير"
+          },
+          "options__2": {
+            "label": "الاستفادة"
+          },
+          "options__3": {
+            "label": "أحرف كبيرة"
+          }
+        },
+        "heading_fw": {
+          "label": "وزن خط العنوان"
+        }
+      },
+      "blocks": {
+        "item": {
+          "name": "عنصر بيع لافتة",
+          "settings": {
+            "sale_label": {
+              "label": "تسمية البيع"
+            },
+            "eb_animation_label": {
+              "label": "تمكين تسمية الرسوم المتحركة"
+            },
+            "sale_title": {
+              "label": "عنوان البيع"
+            },
+            "sale_desc": {
+              "label": "وصف البيع"
+            },
+            "sale_code": {
+              "label": "كود البيع"
+            },
+            "banner_width": {
+              "label": "عرض السلعة"
+            }
+          }
+        }
+      }
+    },
+    "brand-logo": {
+      "name": "شعار العلامة التجارية",
+      "settings": {
+        "brand_setting": {
+          "label": "شعار العلامة التجارية",
+          "framed": "مؤطر",
+          "logo_opacity": "عتامة الشعار",
+          "open_link_newtab": "افتح الرابط في علامة تبويب جديدة",
+          "img_width": {
+            "label": "عرض الصورة",
+            "info": "يوصى بحجم 200 × 200 بكسل.png",
+            "info_block": "يوصى بأبعاد 320 × 320.png"
+          }
+        },
+        "block": {
+          "brand": "البند العلامة التجارية",
+          "image": "صورة",
+          "link": "وصلة"
+        }
+      },
+      "presets": {
+        "name": "شعار العلامة التجارية"
+      }
+    },
+    "testimonials": {
+      "name": "الشهادات",
+      "settings": {
+        "testimonials_setting": {
+          "show_rate": "عرض التقييم",
+          "show_author_image": "إظهار صورة المؤلف",
+          "show_author_name": "إظهار اسم المؤلف",
+          "show_author_info": "عرض معلومات المؤلف",
+          "show_date_published": "عرض تاريخ النشر",
+          "img_width_info": "يعمل فقط عند تحديد إعداد موضع الصورة لليسار أو لليمين",
+          "framed": "مؤطر",
+          "img_position": {
+            "label": "موضع الصورة",
+            "top": {
+              "label": "قمة"
+            },
+            "right": {
+              "label": "يمين"
+            },
+            "bottom": {
+              "label": "قاع"
+            },
+            "left": {
+              "label": "غادر"
+            }
+          },
+          "img_style": {
+            "label": "نمط الصورة",
+            "options__1": {
+              "label": "مربع (1:1)"
+            },
+            "options__2": {
+              "label": "مدور"
+            }
+          }
+        },
+        "header": {
+          "heading": "عنوان القسم",
+          "heading_setting": "إعداد الشهادة"
+        },
+        "block": {
+          "add_testimonial": "البند الشهادات",
+          "rating": "نجمة التقييم",
+          "author_image": "صورة",
+          "author_name": "اسم",
+          "author_text": "يقتبس",
+          "author_address": "معلومات المؤلف",
+          "author_published": "تم النشر",
+          "show_author_image": "إظهار صورة المؤلف",
+          "show_rating": "عرض التقييم",
+          "logo": "الشعار"
+        }
+      },
+      "presets": {
+        "name": "الشهادات"
+      }
+    },
+    "divider": {
+      "name": "مقسم",
+      "settings": {
+        "height": {
+          "label": "ارتفاع"
+        },
+        "color": {
+          "label": "لون"
+        }
+      }
+    },
+    "faq": {
+      "name": "التعليمات",
+      "settings": {
+        "block": {
+          "add_faq": "محتوى",
+          "title_question": "سؤال",
+          "content_quenstion": "إجابة"
+        }
+      },
+      "presets": {
+        "name": "التعليمات"
+      }
+    },
+    "scrolling_text": {
+      "name": "التمرير النص",
+      "settings": {
+        "scrolling": {
+          "label": "التمرير",
+          "info": "يعمل التمرير فقط عندما يكون عدد عناصر التمرير أكثر من 1."
+        },
+        "direction": {
+          "label": "اتجاه",
+          "left": {
+            "label": "غادر"
+          },
+          "right": {
+            "label": "يمين"
+          }
+        },
+        "icon_between_item": {
+          "label": "أيقونة بين العنصر",
+          "unset": {
+            "label": "غير محدد"
+          },
+          "dot": {
+            "label": "نقطة"
+          },
+          "star": {
+            "label": "يبدأ"
+          },
+          "wireless": {
+            "label": "لاسلكي"
+          },
+          "hight_light": {
+            "label": "ضوء هايت"
+          },
+          "image": {
+            "label": "صورة"
+          }
+        },
+        "speed": {
+          "label": "سرعة"
+        },
+        "space_between_text": {
+          "label": "المسافة بين النص"
+        },
+        "use_heading_font": {
+          "label": "استخدم خط العنوان"
+        }
+      }
+    },
+    "icon_box": {
+      "name": "مربع أيقونة",
+      "settings": {
+        "type": {
+          "label": "يكتب",
+          "default": {
+            "label": "تقصير"
+          },
+          "frame": {
+            "label": "إطار"
+          },
+          "border_between": {
+            "label": "الحدود بين العنصر"
+          }
+        },
+        "icon_setting": {
+          "label": "إعداد الأيقونة"
+        },
+        "icon_position": {
+          "label": "موقف الأيقونة",
+          "top": {
+            "label": "قمة"
+          },
+          "right": {
+            "label": "يمين"
+          },
+          "bottom": {
+            "label": "قاع"
+          },
+          "left": {
+            "label": "غادر"
+          }
+        },
+        "icon_size": {
+          "label": "حجم الأيقونة"
+        }
+      }
+    },
+    "rich_text": {
+      "name": "نص غني",
+      "expand_content": {
+        "label": "قم بتوسيع المحتوى",
+        "enable_expand_content": {
+          "label": "تمكين توسيع المحتوى"
+        }
+      }
+    },
+    "image_with_text_overlay": {
+      "name": "صورة مع تراكب النص",
+      "blocks": {
+        "timer": {
+          "name": "الموقت",
+          "settings": {
+            "end_time": {
+              "label": "وقت الانتهاء",
+              "info": "على سبيل المثال "
+            },
+            "expired_message": {
+              "label": "رسالة منتهية الصلاحية",
+              "info": "سيتم عرض هذه الرسالة عند انتهاء الوقت."
+            },
+            "style": {
+              "label": "أسلوب",
+              "normal": "طبيعي",
+              "highlight": "تسليط الضوء"
+            }
+          }
+        }
+      }
+    },
+    "video_with_text_overlay": {
+      "name": "فيديو مع تراكب النص"
+    },
+    "google_map": {
+      "name": "خريطة جوجل",
+      "map_height": {
+        "label": "ارتفاع الخريطة"
+      },
+      "map_iframe": {
+        "label": "خريطة جوجل iframe",
+        "info": "يُرجى اتباع هذا الرابط لمعرفة كيفية [تضمين خريطة](https://developers.google.com/maps/documentation/embed/embedding-map)"
+      }
+    },
+    "html_custom": {
+      "name": "HTML مخصص",
+      "html": {
+        "label": "HTML",
+        "info": "يجب أن تكون على دراية بلغات تصميم الويب مثل HTML وCSS."
+      }
+    },
+    "custom_liquid": {
+      "name": "سائل مخصص",
+      "label": "كود السائل",
+      "info": "أضف مقتطفات من التطبيق أو تعليمات برمجية أخرى لإنشاء تخصيصات متقدمة. "
+    },
+    "multi_content": {
+      "name": "محتوى متعدد",
+      "content_background_color": {
+        "label": "لون خلفية المحتوى"
+      },
+      "block_settings": {
+        "show_below_content_video": {
+          "label": "عرض المحتوى أسفل الفيديو"
+        },
+        "header": {
+          "Content_1": "المحتوى 1",
+          "Content_2": "المحتوى 2"
+        },
+        "label": "إعداد الكتلة",
+        "vertical_align": {
+          "label": "المحاذاة العمودية",
+          "top": {
+            "label": "قمة"
+          },
+          "middle": {
+            "label": "وسط"
+          },
+          "bottom": {
+            "label": "قاع"
+          }
+        },
+        "equal_height_adjustment": {
+          "label": "تعديل الارتفاع المتساوي"
+        },
+        "image_with_text_below": {
+          "label": "الصورة مع النص أدناه"
+        },
+        "text": {
+          "label": "نص"
+        }
+      }
+    },
+    "custom-colors": {
+      "name": "ألوان مخصصة",
+      "settings": {
+        "paragraph": {
+          "content__1": "يتيح لك هذا القسم إنشاء ألوان مخصصة أو إضافة صور توضيحية للألوان.",
+          "content__2": "تحتاج إلى التبديل إلى إعداد عينات الألوان في إعدادات السمة > عينات الألوان > نوع عنصر العينة. "
+        }
+      },
+      "blocks": {
+        "color": {
+          "name": "لون",
+          "custom_color_name": {
+            "label": "اسم اللون"
+          },
+          "custom_color_code": {
+            "label": "رمز اللون"
+          },
+          "custom_color_image": {
+            "label": "صورة ملونة"
+          }
+        }
+      }
+    },
+    "outfit-idea": {
+      "name": "فكرة الزي",
+      "settings": {
+        "select_product": "حدد المنتج",
+        "block": {
+          "add_idea": "أضف فكرة",
+          "image": "اختر صورة"
+        }
+      }
+    },
+    "products-grid": {
+      "name": "شبكة المنتجات",
+      "settings": {
+        "products": {
+          "header": "منتجات",
+          "collection": "مجموعة",
+          "rows_on_desktop": "صفوف على سطح المكتب",
+          "action_with_additional_products": {
+            "label": "العمل مع منتجات إضافية",
+            "load_more": "تحميل المزيد",
+            "view_all": "عرض الكل"
+          },
+          "button_label": "تسمية الزر",
+          "use_outline_button_style": "استخدم نمط زر المخطط التفصيلي"
+        }
+      }
+    },
+    "products-carousel": {
+      "name": "دائري المنتجات",
+      "settings": {
+        "products": {
+          "header": "منتجات",
+          "collection": "مجموعة"
+        }
+      }
+    },
+    "products-set": {
+      "name": "مجموعة المنتجات"
+    },
+    "related-products": {
+      "name": "المنتج ذو الصلة",
+      "settings": {
+        "products": {
+          "header": "منتجات"
+        }
+      }
+    },
+    "products-recently-viewed": {
+      "name": "المنتجات التي تم عرضها مؤخرا",
+      "settings": {
+        "products": {
+          "header": "منتجات"
+        }
+      }
+    },
+    "products-deal": {
+      "name": "صفقة المنتجات",
+      "settings": {
+        "products": {
+          "header": "منتجات",
+          "collection": "مجموعة"
+        },
+        "deal": {
+          "header": "اتفاق",
+          "messages": "رسالة",
+          "end_time": {
+            "label": "وقت الانتهاء",
+            "info": "على سبيل المثال "
+          },
+          "timer_style": {
+            "label": "نمط الموقت",
+            "default": {
+              "label": "تقصير"
+            },
+            "highlight": {
+              "label": "تسليط الضوء"
+            }
+          }
+        }
+      }
+    },
+    "products-list": {
+      "name": "قائمة المنتجات",
+      "settings": {
+        "products": {
+          "header": "منتجات",
+          "columns_per_row": "أعمدة لكل صف",
+          "items_per_row": "العناصر لكل صف"
+        }
+      },
+      "blocks": {
+        "name": "مجموعة",
+        "collection": "مجموعة",
+        "collection_title": {
+          "label": "عنوان المجموعة",
+          "info": "اتركه فارغًا لاستخدام عنوان المجموعة"
+        }
+      }
+    },
+    "product-single-layout": {
+      "blocks": {
+        "title": {
+          "name": "عنوان المنتج"
+        },
+        "price": {
+          "name": "سعر",
+          "settings": {
+            "show_badge": "إظهار الشارة"
+          }
+        },
+        "rate": {
+          "name": "تصنيف المنتج",
+          "settings": {
+            "paragraph": "لعرض التقييم، قم بإضافة تطبيق تقييم المنتج. "
+          }
+        },
+        "variant_picker": {
+          "name": "منتقي البديل"
+        },
+        "buy_buttons": {
+          "name": "شراء الأزرار",
+          "settings": {
+            "show_dynamic_checkout_buttons": {
+              "label": "إظهار أزرار الخروج الديناميكية",
+              "info": "باستخدام طرق الدفع المتوفرة في متجرك، يرى العملاء خياراتهم المفضلة، مثل PayPal أو Apple Pay. "
+            }
+          }
+        },
+        "description": {
+          "name": "وصف"
+        },
+        "custom_liquid": {
+          "name": "سائل مخصص",
+          "settings": {
+            "custom_liquid": {
+              "label": "سائل مخصص",
+              "info": "أضف مقتطفات من التطبيق أو أكواد Liquid أخرى لإنشاء تخصيصات متقدمة."
+            }
+          }
+        },
+        "product_meta": {
+          "name": "تعريف المنتج",
+          "settings": {
+            "show_available": "عرض متاح",
+            "show_sku": "إظهار رمز التخزين التعريفي",
+            "show_collections": "عرض المجموعات",
+            "show_tags": "إظهار العلامات",
+            "show_vendor": "عرض البائع",
+            "show_type": "نوع العرض"
+          }
+        },
+        "countdown": {
+          "name": "العد التنازلي",
+          "settings": {
+            "countdown_message": "رسالة العد التنازلي",
+            "timer_style": {
+              "label": "نمط الموقت",
+              "default": "تقصير",
+              "highlight": "تسليط الضوء"
+            }
+          }
+        },
+        "text": {
+          "name": "نص",
+          "settings": {
+            "text": "نص"
+          }
+        }
+      }
+    },
+    "quickview": {
+      "name": "نظرة سريعة",
+      "settings": {
+        "paragraph": "يتيح لك هذا القسم تخصيص نافذة العرض السريع المنبثقة."
+      }
+    },
+    "featured-product": {
+      "name": "منتج مميز",
+      "settings": {
+        "product": "منتج",
+        "center": "معلومات المركز ",
+        "media": {
+          "header": "وسائط",
+          "desktop_media_width": "عرض وسائط سطح المكتب",
+          "desktop_main_image_position": {
+            "label": "موضع الصورة الرئيسية لسطح المكتب",
+            "left": "غادر",
+            "right": "يمين"
+          },
+          "desktop_thumbnails_position": {
+            "label": "موضع الصور المصغرة لسطح المكتب",
+            "left": "غادر",
+            "bottom": "قاع",
+            "hide": "يخفي"
+          },
+          "enable_video_autoplay": {
+            "label": "تمكين التشغيل التلقائي للفيديو",
+            "info": "يتم كتم صوت الفيديو تلقائيًا للسماح بالتشغيل التلقائي."
+          },
+          "enable_video_looping": "تمكين تكرار الفيديو"
+        }
+      }
+    },
+    "collection-list": {
+      "name": "قائمة المجموعة",
+      "settings": {
+        "collection": {
+          "header": "إعدادات التجميع",
+          "collection_information_position": {
+            "label": "موضع",
+            "overlay_image": "صورة تراكب",
+            "below_image": "الصورة أدناه",
+            "content_below_image": "معلومات المجموعة أسفل إعدادات الصورة"
+          },
+          "show_description": {
+            "label": "إظهار الوصف",
+            "info": "يعمل فقط عند تحديد Morden في إعداد التصميم."
+          },
+          "rounded_image": "صورة مدورة",
+          "image_custom_width": {
+            "label": "عرض الصورة المخصص",
+            "info": "يعمل فقط عند تحديد الصورة أدناه في إعداد موضع معلومات المجموعة."
+          },
+          "image_width": "عرض الصورة",
+          "show_product_count": "إظهار عدد المنتجات"
+        },
+        "collection_information": {
+          "header": "معلومات المجموعة",
+          "collection_name": "=== اسم المجموعة ==="
+        },
+        "product_count": {
+          "header": "=== عدد المنتجات ==="
+        }
+      },
+      "blocks": {
+        "name": "مجموعة",
+        "collection": "مجموعة",
+        "collection_image": {
+          "label": "صورة",
+          "info": "اتركه فارغًا لاستخدام صورة المجموعة"
+        },
+        "collection_title": {
+          "label": "عنوان المجموعة",
+          "info": "اتركه فارغًا لاستخدام عنوان المجموعة"
+        }
+      }
+    },
+    "collection-packery": {
+      "name": "جمع التعبئة والتغليف",
+      "settings": {
+        "collection": {
+          "header": "إعدادات التجميع",
+          "show_product_count": "إظهار عدد المنتجات"
+        },
+        "collection_information": {
+          "header": "معلومات المجموعة",
+          "collection_name": "اسم المجموعة"
+        }
+      },
+      "blocks": {
+        "name": "مجموعة",
+        "collection": "مجموعة",
+        "collection_image": {
+          "label": "صورة",
+          "info": "اتركه فارغًا لاستخدام صورة المجموعة"
+        },
+        "collection_title": {
+          "label": "عنوان المجموعة",
+          "info": "اتركه فارغًا لاستخدام عنوان المجموعة"
+        }
+      }
+    },
+    "collection-tab": {
+      "name": "علامة تبويب المجموعة",
+      "settings": {
+        "collection": {
+          "header": "علامة تبويب المجموعة",
+          "tab_header_style": {
+            "label": "نمط رأس علامة التبويب",
+            "horizontal": "أفقي",
+            "select": "يختار"
+          },
+          "horizontal_tab_style": {
+            "label": "نمط علامة التبويب الأفقية",
+            "underline": "تسطير",
+            "fill": "يملأ"
+          }
+        },
+        "grid_settings": {
+          "header": "إعدادات الشبكة",
+          "rows": "الصفوف",
+          "show_load_more_button": "إظهار زر تحميل المزيد",
+          "button_label": "تسمية الزر",
+          "button_type": {
+            "label": "نوع الزر",
+            "primary": "أساسي",
+            "outline": "الخطوط العريضة",
+            "link": "وصلة"
+          }
+        }
+      },
+      "blocks": {
+        "name": "مجموعة",
+        "collection": "مجموعة",
+        "collection_image": {
+          "label": "صورة",
+          "info": "اتركه فارغًا لاستخدام صورة المجموعة"
+        },
+        "collection_title": {
+          "label": "عنوان المجموعة",
+          "info": "اتركه فارغًا لاستخدام عنوان المجموعة"
+        }
+      }
+    },
+    "lookbook-product": {
+      "name": "منتج لوكبوك",
+      "settings": {
+        "lookbook_image": {
+          "header": "صورة كتاب البحث",
+          "image": "صورة",
+          "position": {
+            "label": "موضع",
+            "left": "غادر",
+            "right": "يمين"
+          },
+          "hotspot_style": {
+            "label": "نمط النقطة الساخنة",
+            "plus": "زائد",
+            "dot": "نقطة"
+          }
+        }
+      },
+      "blocks": {
+        "name": "أضف المنتج",
+        "product": "منتج",
+        "position": {
+          "header": "موضع",
+          "offset_top": "أعلى الأوفست",
+          "offset_left": "إزاحة اليسار"
+        }
+      }
+    },
+    "lookbook-image": {
+      "name": "صورة كتاب البحث",
+      "settings": {
+        "lookbook_image": {
+          "header": "صورة كتاب البحث",
+          "position": {
+            "label": "موضع",
+            "left": "غادر",
+            "right": "يمين"
+          },
+          "hotspot_style": {
+            "label": "نمط النقطة الساخنة",
+            "plus": "زائد",
+            "dot": "نقطة"
+          },
+          "action_when_click_on_hotspot": {
+            "label": "الإجراء عند النقر على نقطة الاتصال",
+            "open": "افتح النافذة المنبثقة",
+            "go_to_page": "انتقل إلى صفحة تفاصيل المنتج"
+          }
+        }
+      },
+      "blocks": {
+        "name": "البند Lookbook",
+        "lookbook_image": "صورة كتاب البحث",
+        "product__1": {
+          "name": "المنتج 1",
+          "product": "منتج",
+          "offset_top": "أعلى الأوفست",
+          "offset_left": "إزاحة اليسار"
+        },
+        "product__2": {
+          "name": "المنتج 2",
+          "product": "منتج",
+          "offset_top": "أعلى الأوفست",
+          "offset_left": "إزاحة اليسار"
+        },
+        "product__3": {
+          "name": "المنتج 3",
+          "product": "منتج",
+          "offset_top": "أعلى الأوفست",
+          "offset_left": "إزاحة اليسار"
+        },
+        "product__4": {
+          "name": "المنتج 4",
+          "product": "منتج",
+          "offset_top": "أعلى الأوفست",
+          "offset_left": "إزاحة اليسار"
+        },
+        "product__5": {
+          "name": "المنتج 5",
+          "product": "منتج",
+          "offset_top": "أعلى الأوفست",
+          "offset_left": "إزاحة اليسار"
+        }
+      }
+    },
+    "shopable-video": {
+      "name": "فيديو قابل للتسوق",
+      "settings": {
+        "video_settings": {
+          "header": "إعدادات الفيديو",
+          "autoplay": "اللعب التلقائي"
+        }
+      },
+      "blocks": {
+        "name": "فيديو",
+        "product": "منتج",
+        "poster_image": "صورة الملصق",
+        "video_url": {
+          "label": "رابط الفيديو",
+          "info": "يقبل روابط YouTube أو Vimeo"
+        },
+        "video_local": {
+          "label": "فيديو محلي"
+        }
+      }
+    },
+    "instagram": {
+      "name": "انستغرام",
+      "settings": {
+        "instagram_settings": {
+          "header": "إعدادات الانستقرام",
+          "instagram_image_source": {
+            "label": "مصدر الصورة انستقرام",
+            "manual_upload": "التحميل اليدوي",
+            "generate_via_instagram_access_token": "إنشاء عبر رمز الوصول إلى Instagram",
+            "info": "إذا اخترت التحميل اليدوي، فيرجى إضافة قالب وتحميل الصورة"
+          },
+          "instagram_access_token": "رمز الوصول إلى Instagram"
+        }
+      },
+      "blocks": {
+        "name": "تحميل يدوي على الانستقرام",
+        "image": "صورة",
+        "local_video": "فيديو محلي",
+        "link": "وصلة"
+      }
+    },
+    "instagram-shop": {
+      "name": "متجر انستجرام",
+      "settings": {
+        "instagram_settings": {
+          "header": "إعدادات الانستقرام",
+          "instagram_image_source": {
+            "label": "مصدر الصورة انستقرام",
+            "manual_upload": "التحميل اليدوي",
+            "generate_via_instagram_access_token": "إنشاء عبر رمز الوصول إلى Instagram",
+            "info": "إذا اخترت التحميل اليدوي، فيرجى إضافة قالب وتحميل الصورة"
+          },
+          "instagram_access_token": "رمز الوصول إلى Instagram"
+        }
+      },
+      "blocks": {
+        "name": "متجر انستجرام",
+        "image": "صورة",
+        "local_video": "فيديو محلي",
+        "link": "رابط الانستقرام",
+        "more_info": "مزيد من المعلومات",
+        "instagram_post_name": "اسم منشور الانستقرام",
+        "product__1": {
+          "name": "المنتج 1",
+          "product": "منتج",
+          "offset_top": "أعلى الأوفست",
+          "offset_left": "إزاحة اليسار"
+        },
+        "product__2": {
+          "name": "المنتج 2",
+          "product": "منتج",
+          "offset_top": "أعلى الأوفست",
+          "offset_left": "إزاحة اليسار"
+        },
+        "product__3": {
+          "name": "المنتج 3",
+          "product": "منتج",
+          "offset_top": "أعلى الأوفست",
+          "offset_left": "إزاحة اليسار"
+        },
+        "product__4": {
+          "name": "المنتج 4",
+          "product": "منتج",
+          "offset_top": "أعلى الأوفست",
+          "offset_left": "إزاحة اليسار"
+        },
+        "product__5": {
+          "name": "المنتج 5",
+          "product": "منتج",
+          "offset_top": "أعلى الأوفست",
+          "offset_left": "إزاحة اليسار"
+        }
+      }
+    },
+    "main-product": {
+      "name": "معلومات المنتج",
+      "blocks": {
+        "title": {
+          "name": "عنوان المنتج"
+        },
+        "badges": {
+          "name": "شارات المنتج"
+        },
+        "review_and_sold": {
+          "name": "مراجعة وبيعها",
+          "settings": {
+            "show_review": "عرض المراجعة",
+            "fake_sold_products": {
+              "header": "المنتجات المباعة وهمية",
+              "show_sold_products": "عرض المنتجات المباعة",
+              "sold": {
+                "label": "مُباع",
+                "info": "مثال: 8،10،12،15،17،22"
+              },
+              "hours": {
+                "label": "ساعات",
+                "info": "مثال: 10،12،15،16،18،20،24"
+              }
+            }
+          }
+        },
+        "price": {
+          "name": "سعر"
+        },
+        "buy_buttons": {
+          "name": "شراء الأزرار",
+          "settings": {
+            "show_dynamic_checkout": {
+              "label": "إظهار أزرار الخروج الديناميكية",
+              "info": "باستخدام طرق الدفع المتاحة في متجرك، يرى العملاء خيارهم المفضل، مثل PayPal أو Apple Pay. "
+            },
+            "show_gift_card_recipient": {
+              "label": "إظهار نموذج معلومات المستلم لبطاقات الهدايا",
+              "info": "يسمح للمشترين بإرسال بطاقات الهدايا في تاريخ محدد مع رسالة شخصية. "
+            },
+            "show_wishlist": "عرض قائمة الرغبات",
+            "show_compare": "إظهار المقارنة"
+          }
+        },
+        "live_view": {
+          "name": "عرض حي",
+          "settings": {
+            "min_number": "رقم الحد الأدنى",
+            "max_number": "العدد الأقصى",
+            "interval_time": "الوقت الفاصل",
+            "content": "محتوى"
+          }
+        },
+        "variant_picker": {
+          "name": "منتقي البديل",
+          "settings": {
+            "picker_type": {
+              "label": "يكتب",
+              "options__1": {
+                "label": "اسقاط"
+              },
+              "options__2": {
+                "label": "حبوب"
+              }
+            },
+            "size_guide": {
+              "heading": "مخطط الحجم",
+              "info": "احصل على معلومات مخطط الحجم من الصفحة المحددة.",
+              "settings": {
+                "show_size_guide": "عرض حجم الرسم البياني",
+                "size_guide_label": "تسمية الرسم البياني للحجم",
+                "size_guide_page": "صفحة الرسم البياني للحجم",
+                "custom_size_guide": {
+                  "label": "مخطط حجم مخصص",
+                  "info__1": "استخدام مخططات مقاسات محددة لكل مجموعة أو منتج.",
+                  "info__2": "لاستخدام مخططات حجم مخصصة للمنتج أو المجموعة، قم بإنشاء حقل تعريف بمساحة الاسم والمفتاح: \"custom.size_chart\".[مزيد من المعلومات](https://help.shopify.com/manual/online-store/themes/customizing-themes "
+                }
+              }
+            }
+          }
+        },
+        "delivery_return": {
+          "name": "عودة التسليم",
+          "settings": {
+            "design_type": {
+              "label": "تصميم",
+              "option__1": "رَأسِيّ",
+              "option__2": "أفقي"
+            },
+            "delivery_content": {
+              "header": "محتوى التسليم",
+              "icon": {
+                "label": "رمز",
+                "options__1": "سفينة"
+              },
+              "content": "محتوى"
+            },
+            "return_content": {
+              "header": "إرجاع المحتوى",
+              "icon": {
+                "label": "رمز",
+                "options__1": "أمر الإرجاع"
+              },
+              "content": "محتوى"
+            },
+            "discount_content": {
+              "header": "محتوى الخصم",
+              "icon": {
+                "label": "رمز",
+                "options__1": "تخفيض"
+              },
+              "content": "محتوى"
+            }
+          }
+        },
+        "model_size": {
+          "name": "حجم النموذج"
+        },
+        "trust_badge": {
+          "name": "شارة الثقة",
+          "settings": {
+            "show_icon": "إظهار الأيقونة",
+            "message": "رسالة",
+            "trust_badge_image": "صورة شارة الثقة",
+            "image_width": "عرض الصورة"
+          }
+        },
+        "collapsible_row": {
+          "name": "صف قابل للطي",
+          "settings": {
+            "heading": "عنوان",
+            "content": "محتوى",
+            "use_product_description": "استخدام وصف المنتج",
+            "open": {
+              "label": "فتح المحتوى"
+            }
+          }
+        },
+        "countdown_timer": {
+          "name": "توقيت العد التنازلي",
+          "settings": {
+            "timer_style": {
+              "label": "أسلوب",
+              "default": "تقصير",
+              "highlight": "تسليط الضوء"
+            },
+            "content": "محتوى",
+            "info": "اتبع هذا الرابط لمعرفة [كيفية إعداد مؤقت العد التنازلي]()"
+          }
+        },
+        "notify_when_restock": {
+          "name": "إعلام عند إعادة التخزين"
+        },
+        "product_addons": {
+          "name": "إضافات المنتج",
+          "settings": {
+            "show_compare_color": "عرض مقارنة اللون",
+            "show_ask_question": "عرض طرح سؤال",
+            "show_share": "عرض المشاركة"
+          }
+        },
+        "short_description": {
+          "name": "وصف قصير",
+          "settings": {
+            "excerpt_length": "طول المقتطف (عدد صحيح)"
+          }
+        },
+        "pickup_avaiability": {
+          "name": "توافر بيك اب"
+        },
+        "complementary_products": {
+          "name": "المنتجات التكميلية",
+          "settings": {
+            "paragraph": {
+              "content": "لتحديد المنتجات التكميلية، قم بإضافة تطبيق البحث والاكتشاف. "
+            },
+            "heading": {
+              "label": "عنوان"
+            },
+            "product_list_limit": {
+              "label": "الحد الأقصى من المنتجات للعرض"
+            },
+            "products_per_page": {
+              "label": "عدد المنتجات في كل صفحة"
+            },
+            "show_navigation": "إظهار الملاحة",
+            "show_pagination": "إظهار ترقيم الصفحات",
+            "product_card": {
+              "header": "بطاقة المنتج",
+              "enable_quick_add": "تمكين زر الإضافة السريعة"
+            }
+          }
+        },
+        "product_custom_field": {
+          "name": "الحقل المخصص للمنتج",
+          "settings": {
+            "heading": "عنوان",
+            "description": "وصف",
+            "field_type": {
+              "label": "نوع الحقل",
+              "text": "النص الميداني",
+              "enable_field_text": "تمكين نص الحقل",
+              "field_image": "صورة ميدانية",
+              "enable_field_image": "تمكين الصورة الميدانية",
+              "upload_image": "تحميل الصورة"
+            },
+            "field_label": "تسمية الحقل"
+          }
+        },
+        "stock_countdown": {
+          "name": "العد التنازلي للأسهم",
+          "settings": {
+            "message": {
+              "label": "رسالة",
+              "info": "استخدم الرمز القصير [count] لعرض الكمية المتبقية من المنتجات في المخزون. "
+            },
+            "stock_items": {
+              "label": "عناصر المخزون",
+              "info": "إظهار متى يكون المخزون أقل من (X) من العناصر"
+            }
+          }
+        },
+        "product_grouped": {
+          "name": "المنتج مجمعة",
+          "settings": {
+            "info": "اتبع هذا الرابط لمعرفة [كيفية إعداد مجموعة المنتجات](https://help.shopify.com/manual/online-store/themes/customizing-themes/add-gift-card-recipient-fields)",
+            "heading": "عنوان"
+          }
+        },
+        "more_colors": {
+          "name": "المزيد من الألوان",
+          "settings": {
+            "info": "اتبع هذا الرابط لمعرفة [كيفية إعداد المزيد من الألوان](https://help.shopify.com/manual/online-store/themes/customizing-themes/add-gift-card-recipient-fields)",
+            "heading": "عنوان",
+            "image_width": "عرض الصورة"
+          }
+        },
+        "custom_liquid": {
+          "name": "سائل مخصص",
+          "settings": {
+            "custom_liquid": {
+              "label": "سائل مخصص",
+              "info": "أضف مقتطفات من التطبيق أو أكواد Liquid أخرى لإنشاء تخصيصات متقدمة."
+            }
+          }
+        },
+        "text": {
+          "name": "نص",
+          "settings": {
+            "heading": "عنوان",
+            "content": "محتوى"
+          }
+        },
+        "product_meta": {
+          "name": "تعريف المنتج",
+          "settings": {
+            "show_barcode": "إظهار الباركود",
+            "barcode_info": "اتبع هذا الرابط لمعرفة [كيفية استخدام الرمز الشريطي](https://help.shopify.com/en/manual/shipping/understanding-shipping/barcodes)",
+            "show_available": "عرض متاح",
+            "show_sku": "إظهار رمز التخزين التعريفي",
+            "show_collections": "عرض المجموعات",
+            "show_vendor": "عرض البائع",
+            "show_tags": "إظهار العلامات",
+            "show_type": "نوع العرض"
+          }
+        }
+      },
+      "settings": {
+        "all": {
+          "enable_sticky_content_on_desktop": "تمكين المحتوى اللاصق على سطح المكتب",
+          "enable_skeleton_loading": "تمكين تحميل الهيكل العظمي"
+        },
+        "media": {
+          "header": "وسائط",
+          "paragraph": "تعرف على المزيد حول أنواع الوسائط",
+          "desktop_media_width": "عرض وسائط سطح المكتب",
+          "desktop_layout": {
+            "label": "تخطيط سطح المكتب",
+            "thumbnail_left": "الصورة المصغرة لليسار",
+            "thumbnail_bottom": "الصورة المصغرة أسفل",
+            "hidden_thumbnail": "الصورة المصغرة المخفية",
+            "grid_1_column": "شبكة 1 عمود",
+            "grid_2_column": "شبكة 2 عمود",
+            "stack": "كومة"
+          },
+          "image_zoom": {
+            "label": "تكبير الصورة",
+            "no_zoom": "لا التكبير",
+            "open_lightbox": "افتح العرض المبسط",
+            "inner_zoom_circle": "دائرة التكبير الداخلية",
+            "inner_zoom_square": "مربع التكبير الداخلي",
+            "external_zoom": "التكبير الخارجي"
+          },
+          "enable_video_looping": "تمكين تكرار الفيديو",
+          "enable_video_autoplay": {
+            "label": "تمكين التشغيل التلقائي للفيديو",
+            "info": "يتم كتم صوت مقاطع الفيديو تلقائيًا للسماح بالتشغيل التلقائي"
+          }
+        },
+        "color_swatches": {
+          "header": "عينات اللون",
+          "user_variants_image_group": {
+            "label": "استخدام مجموعة الصور المتغيرات",
+            "info": "يرجى اتباع المستند لإعداد مجموعة صور المتغيرات [اقرأ المزيد](https://blueskytechco.gitbook.io/glimo-shopify/product-page-settings/variant-image-group)"
+          }
+        },
+        "frequently_bought_together": {
+          "header": "يتم شراؤها معًا بشكل متكرر",
+          "enable": "تمكين شراؤها في كثير من الأحيان معا"
+        },
+        "sticky_add_to_cart": {
+          "header": "إضافة لزجة إلى سلة التسوق",
+          "enable_on_desktop": "تمكين على سطح المكتب",
+          "enable_on_mobile": "تمكين على الهاتف المحمول"
+        },
+        "mobile_options": {
+          "label": "خيارات الجوال",
+          "show_thumbnails": "عرض الصور المصغرة",
+          "hidden_thumbnail": "الصور المصغرة المخفية",
+          "info": "يعمل فقط عند اختيار الصورة المصغرة لليسار أو الصورة المصغرة للأسفل في إعدادات تخطيط سطح المكتب"
+        }
+      }
+    },
+    "main-blog": {
+      "name": "مشاركات المدونة",
+      "settings": {
+        "header": {
+          "sidebar": "الشريط الجانبي",
+          "blog": "مدونة",
+          "posts": "إعدادات المشاركات"
+        },
+        "sidebar": {
+          "enable": "تمكين الشريط الجانبي",
+          "sidebar_position": {
+            "label": "موقف الشريط الجانبي لسطح المكتب",
+            "left": "غادر",
+            "right": "يمين"
+          }
+        },
+        "blog": {
+          "layout": {
+            "label": "تَخطِيط",
+            "list": "قائمة",
+            "grid": "شبكة"
+          },
+          "items_per_row_on_desktop": {
+            "info": "تعمل فقط عند تحديد الشبكة في إعداد التخطيط"
+          }
+        },
+        "blog_setting": {
+          "show_author": "إظهار مؤلف المشاركة",
+          "show_date": "عرض تاريخ النشر",
+          "show_comment_count": "إظهار عدد التعليقات",
+          "show_excerpts": "عرض مقتطف من المشاركة",
+          "show_readmore": "إظهار زر قراءة المزيد",
+          "readmore": {
+            "label": "إزالة نمط الزر",
+            "primary": "أساسي",
+            "secondary": "ثانوي",
+            "link": "وصلة"
+          }
+        }
+      },
+      "blocks": {
+        "Categories": {
+          "name": "فئات",
+          "settings": {
+            "title": {
+              "label": "عنوان"
+            },
+            "menu": {
+              "label": "اختر القائمة",
+              "info": "يعرض عناصر قائمة المستوى الأول فقط."
+            }
+          }
+        },
+        "tags": {
+          "name": "علامات المدونة",
+          "settings": {
+            "title": {
+              "label": "عنوان"
+            }
+          }
+        },
+        "recent_post": {
+          "name": "آخر مشاركة",
+          "settings": {
+            "title": {
+              "label": "عنوان"
+            },
+            "maximum": {
+              "label": "العناصر المطلوب عرضها"
+            }
+          }
+        },
+        "image_banner": {
+          "name": "صورة البانر",
+          "settings": {
+            "image": {
+              "label": "تحميل الصورة"
+            },
+            "url": {
+              "label": "وصلة"
+            },
+            "open_link": {
+              "label": "افتح في علامة تبويب جديدة"
+            }
+          }
+        }
+      }
+    },
+    "contact": {
+      "name": "اتصال",
+      "settings": {
+        "iframe": {
+          "label": "إطار العمل"
+        },
+        "agree": {
+          "label": "أنا أوافق على"
+        }
+      },
+      "block": {
+        "contact": {
+          "settings": {
+            "show_privacy": {
+              "label": "إظهار الخصوصية"
+            },
+            "name": {
+              "label": "اسم"
+            },
+            "email": {
+              "label": "بريد إلكتروني"
+            },
+            "your_comment": {
+              "label": "رسالة"
+            },
+            "button_label": {
+              "label": "تسمية الزر"
+            }
+          }
+        },
+        "text_block": {
+          "label": "كتلة النص",
+          "settings": {
+            "content": {
+              "label": "محتوى"
+            }
+          }
+        }
+      }
+    },
+    "page_404": {
+      "name": "الصفحة 404",
+      "blocks": {
+        "button": {
+          "settings": {
+            "first_button_label": {
+              "label": "تسمية الزر"
+            },
+            "first_button_link": {
+              "label": "رابط الزر"
+            }
+          }
+        }
+      }
+    }
+  },
+  "page": {}
+}
