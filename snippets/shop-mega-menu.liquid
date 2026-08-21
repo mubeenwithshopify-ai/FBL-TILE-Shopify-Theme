@@ -1,0 +1,164 @@
+{%- comment -%}
+  Custom SHOP Mega Menu
+
+  Column 1:
+  Normal Shopify navigation menu
+
+  Column 2:
+  Normal Shopify navigation menu
+
+  Column 3:
+  Shopify navigation menu containing collection links.
+  Collection links are rendered as 200x200 image cards.
+{%- endcomment -%}
+
+{%- assign column_1_menu = shop_menu_column_1 -%}
+{%- assign column_2_menu = shop_menu_column_2 -%}
+{%- assign collection_menu = shop_menu_collection -%}
+
+<div class="shop-mega-menu">
+
+  <div class="shop-mega-menu__inner">
+
+    {%- comment -%}
+      COLUMN 1
+    {%- endcomment -%}
+
+    <div class="shop-mega-menu__text-column">
+
+      {%- if column_1_menu != blank -%}
+
+        <h3 class="shop-mega-menu__heading">
+          {{ column_1_menu.title }}
+        </h3>
+
+        <ul class="shop-mega-menu__link-list list-unstyled">
+
+          {%- for link in column_1_menu.links -%}
+
+            <li class="shop-mega-menu__link-item">
+
+              <a
+                href="{{ link.url }}"
+                class="shop-mega-menu__link no-underline"
+              >
+                {{ link.title }}
+              </a>
+
+            </li>
+
+          {%- endfor -%}
+
+        </ul>
+
+      {%- endif -%}
+
+    </div>
+
+
+    {%- comment -%}
+      COLUMN 2
+    {%- endcomment -%}
+
+    <div class="shop-mega-menu__text-column">
+
+      {%- if column_2_menu != blank -%}
+
+        <h3 class="shop-mega-menu__heading">
+          {{ column_2_menu.title }}
+        </h3>
+
+        <ul class="shop-mega-menu__link-list list-unstyled">
+
+          {%- for link in column_2_menu.links -%}
+
+            <li class="shop-mega-menu__link-item">
+
+              <a
+                href="{{ link.url }}"
+                class="shop-mega-menu__link no-underline"
+              >
+                {{ link.title }}
+              </a>
+
+            </li>
+
+          {%- endfor -%}
+
+        </ul>
+
+      {%- endif -%}
+
+    </div>
+
+
+    {%- comment -%}
+      COLUMN 3
+      COLLECTION CARDS
+    {%- endcomment -%}
+
+    <div class="shop-mega-menu__collection-column">
+
+      {%- if collection_menu != blank -%}
+
+        <h3 class="shop-mega-menu__heading">
+          {{ collection_menu.title }}
+        </h3>
+
+        <div class="shop-mega-menu__collection-grid">
+
+          {%- for link in collection_menu.links -%}
+
+            {%- if link.type == 'collection_link' and link.object != blank -%}
+
+              {%- assign collection = link.object -%}
+
+              <a
+                href="{{ collection.url }}"
+                class="shop-mega-menu__collection-card"
+                aria-label="{{ collection.title | escape }}"
+              >
+
+                <div class="shop-mega-menu__collection-image">
+
+                  {%- if collection.featured_image != blank -%}
+
+                    {{
+                      collection.featured_image
+                      | image_url: width: 500
+                      | image_tag:
+                        width: 200,
+                        height: 200,
+                        widths: '200, 300, 400, 500',
+                        sizes: '200px',
+                        loading: 'lazy',
+                        alt: collection.title
+                    }}
+
+                  {%- else -%}
+
+                    {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+
+                  {%- endif -%}
+
+                </div>
+
+                <div class="shop-mega-menu__collection-title">
+                  {{ collection.title }}
+                </div>
+
+              </a>
+
+            {%- endif -%}
+
+          {%- endfor -%}
+
+        </div>
+
+      {%- endif -%}
+
+    </div>
+
+  </div>
+
+</div>

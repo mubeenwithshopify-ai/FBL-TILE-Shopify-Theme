@@ -1,0 +1,85 @@
+<!-- TEMPORARY DIAGNOSTIC — remove after debugging -->
+<div id="calc-diagnostic" style="position:fixed;bottom:0;left:0;right:0;max-height:40vh;overflow-y:auto;background:#111;color:#0f0;font:12px monospace;padding:10px;z-index:999999;border-top:3px solid red;">
+  <div style="color:#fff;font-weight:bold;margin-bottom:6px;">
+    CALCULATOR DIAGNOSTIC — click a size/finish swatch and watch this box
+    <button onclick="document.getElementById('calc-diagnostic').remove()" style="float:right;background:red;color:#fff;border:none;padding:2px 8px;cursor:pointer;">close</button>
+  </div>
+  <div id="calc-diagnostic-log"></div>
+</div>
+
+<script>
+(function () {
+  var logBox = document.getElementById('calc-diagnostic-log');
+
+  function log(msg, color) {
+    var line = document.createElement('div');
+    line.style.color = color || '#0f0';
+    line.style.borderBottom = '1px solid #333';
+    line.style.padding = '2px 0';
+    line.textContent = new Date().toLocaleTimeString() + '  ' + msg;
+    logBox.insertBefore(line, logBox.firstChild);
+  }
+
+  var section = document.querySelector('[data-section]');
+  var variantInput = section
+    ? section.querySelector('input.product-variant-id[name="id"]')
+    : null;
+
+  log('Section found: ' + !!section, section ? '#0f0' : 'red');
+  log(
+    'Variant-id input found: ' + !!variantInput + (variantInput ? ' | current value: ' + variantInput.value : ''),
+    variantInput ? '#0f0' : 'red'
+  );
+
+  var calcRoot = document.querySelector('[data-product-calculator]');
+  log('Calculator root found: ' + !!calcRoot, calcRoot ? '#0f0' : 'red');
+
+  // Log every change event anywhere on the page.
+  document.addEventListener(
+    'change',
+    function (e) {
+      var t = e.target;
+      log(
+        'CHANGE event -> tag: ' + t.tagName + ' | name: ' + (t.name || '(none)') +
+        ' | value: ' + (t.value || '(none)') + ' | class: ' + (t.className || '(none)'),
+        'yellow'
+      );
+
+      if (t === variantInput) {
+        log('>>> This IS the variant-id input. New value: ' + t.value, 'cyan');
+      }
+    },
+    true
+  );
+
+  // Log every click on anything that looks like a swatch/label.
+  document.addEventListener(
+    'click',
+    function (e) {
+      var t = e.target.closest('label, .product__color-swatches--js, input[type="radio"]');
+      if (t) {
+        log(
+          'CLICK on -> tag: ' + t.tagName + ' | for/name: ' + (t.getAttribute('for') || t.name || '(none)') +
+          ' | data-value: ' + (t.getAttribute('data-value') || '(none)'),
+          '#0af'
+        );
+      }
+    },
+    true
+  );
+
+  // Poll the variant-id input's value every 300ms and log if it changes,
+  // in case something updates it without firing a change event.
+  if (variantInput) {
+    var lastValue = variantInput.value;
+    setInterval(function () {
+      if (variantInput.value !== lastValue) {
+        log('>>> Variant-id VALUE CHANGED (no event needed to detect this): ' + lastValue + ' -> ' + variantInput.value, 'magenta');
+        lastValue = variantInput.value;
+      }
+    }, 300);
+  }
+
+  log('Diagnostic ready. Click a swatch now.', '#fff');
+})();
+</script>

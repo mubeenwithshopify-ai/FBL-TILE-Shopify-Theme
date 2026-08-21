@@ -1,0 +1,44 @@
+{% if localization.available_countries.size > 1 %}
+  <localization-form>
+    {%- assign form_id = 'localization-country-' | append: section.id -%}
+    {% form 'localization', id: form_id %}
+      <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">
+      <div class="disclosure relative flex align-center">
+        <div class="button-localization whitespace-nowrap pointer disclosure__button show-overlay flex align-center gap-10">
+          {{ localization.country.name }}
+          ({{ localization.country.currency.iso_code }}
+          {{ localization.country.currency.symbol }})
+          <svg class="icon-down flex-10" width="10" height="6">
+            <use href="#icon-arrow-down" />
+          </svg>
+        </div>
+        <div class="disclosure__list custom-scrollbar shadow transition invisible z-10 absolute left-0 {% if logo_position != 'in_mega_menu' %} right-0{% endif %} color-default">
+          <icon-close class="pointer-none border inline-flex hidden-1025 mx-auto rounded-50 overflow-hidden absolute top-0 inset-x-0 w-50 h-50 content-center heading-color bg-white">
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" class="transition">
+              <use href="#icon-close" />
+            </svg>
+          </icon-close>
+          <ul class="h-full overflow-y-auto list-unstyled">
+            {% for country in localization.available_countries %}
+              <li class="disclosure__item" tabindex="-1">
+                <a
+                  href="#"
+                  class="no-underline py-4 block smooth-padding-hover text-color hover-heading-color"
+                  {% if country.iso_code == localization.country.iso_code %}
+                    aria-current="true"
+                  {% endif %}
+                  data-value="{{ country.iso_code }}"
+                  arial-label="{{ country.name }}"
+                >
+                  {{ country.name }}
+                  ({{ country.currency.iso_code }}
+                  {{ country.currency.symbol }})
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    {% endform %}
+  </localization-form>
+{% endif %}

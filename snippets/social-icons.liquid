@@ -1,0 +1,211 @@
+{%- if settings.facebook != blank
+  or settings.instagram != blank
+  or settings.twitter != blank
+  or settings.tiktok != blank
+  or settings.youtube != blank
+  or settings.pinterest != blank
+  or settings.vimeo != blank
+  or settings.linkedin != blank
+  or settings.whatsapp != blank
+  or settings.tumblr != blank
+  or settings.snapchat != blank
+-%}
+  <ul class="list-social list-unstyled flex align-center flex-wrap gap" style="--col-gap: 15px;">
+    {%- if settings.facebook != blank -%}
+      <li class="list-social__item inline-flex">
+        <a
+          href="{{ settings.facebook }}"
+          class=" inline-flex hover-heading-color content-center tooltip relative"
+          target="_blank"
+          aria-label="{{ 'general.social.links.facebook' | t }}"
+        >
+          <svg width="8" height="15" viewBox="0 0 8 15" fill="none">
+            <path fill="currentColor" d="M1.7778 3.33336V5.00005H0V7.50004H1.7778V15H5.33333V7.50004H7.6978L8 5.00005H5.33333V3.54169C5.33333 2.86673 5.40445 2.50837 6.51553 2.50837H8V0H5.61781C2.77338 7.16144e-05 1.7778 1.25003 1.7778 3.33336Z" />
+          </svg>
+
+          <span class="tooltip-content invisible rounded-3 absolute pointer-none tooltip-bottom">
+            {{- 'general.social.links.facebook' | t -}}
+          </span>
+        </a>
+      </li>
+    {%- endif -%}
+    {%- if settings.instagram != blank -%}
+      <li class="list-social__item inline-flex">
+        <a
+          href="{{ settings.instagram }}"
+          class=" inline-flex hover-heading-color content-center tooltip relative"
+          target="_blank"
+          aria-label="{{ 'general.social.links.instagram' | t }}"
+        >
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+            <path fill="currentColor" d="M12 0H2.99999C1.34315 0 0 1.34315 0 2.99999V12C0 13.6569 1.34315 15 2.99999 15H12C13.6569 15 15 13.6569 15 12V3.00005C15.0001 1.34315 13.6569 0 12 0ZM10.5 2.25001H12.75V4.50001H10.5V2.25001ZM7.5 4.50008C9.15684 4.50008 10.5 5.84322 10.5 7.50006C10.5 9.15691 9.15684 10.5001 7.5 10.5001C5.84316 10.5001 4.50001 9.15691 4.50001 7.50006C4.50001 5.84322 5.84316 4.50008 7.5 4.50008ZM13.5 12.0001C13.5 12.8285 12.8284 13.5001 12 13.5001H2.99999C2.17157 13.5001 1.49996 12.8285 1.49996 12.0001V6.75002H3.07495C2.62455 9.19416 4.24072 11.5407 6.68486 11.9911C9.129 12.4416 11.4755 10.8253 11.926 8.38121C11.9795 8.09065 12.0043 7.79552 12 7.50006C11.9963 7.24837 11.9712 6.99752 11.925 6.75008H13.5V12.0001H13.5Z"/>
+          </svg>
+          <span class="tooltip-content invisible rounded-3 absolute pointer-none tooltip-bottom">
+            {{- 'general.social.links.instagram' | t -}}
+          </span>
+        </a>
+      </li>
+    {%- endif -%}
+    {%- if settings.twitter != blank -%}
+      <li class="list-social__item inline-flex">
+        <a
+          href="{{ settings.twitter }}"
+          class=" inline-flex hover-heading-color content-center tooltip relative"
+          target="_blank"
+          aria-label="{{ 'general.social.links.twitter' | t }}"
+        >
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+            <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M4.89795 0H0.0824736L5.66219 8.28512L0 15H1.98459L6.54332 9.59344L10.1845 15H15L9.22049 6.4184L14.6323 0H12.6478L8.33923 5.1099L4.89795 0ZM6.87418 7.40484L2.85261 1.53576H4.01674L7.43847 6.52957L7.98476 7.32678L12.2194 13.5068H11.0553L7.47408 8.28029L6.87418 7.40484Z" fill="#555555"/>
+          </svg>
+
+          <span class="tooltip-content invisible rounded-3 absolute pointer-none tooltip-bottom">
+            {{- 'general.social.links.twitter' | t -}}
+          </span>
+        </a>
+      </li>
+    {%- endif -%}
+    {%- if settings.tiktok != blank -%}
+      <li class="list-social__item inline-flex">
+        <a
+          href="{{ settings.tiktok }}"
+          class=" inline-flex hover-heading-color content-center tooltip relative"
+          target="_blank"
+          aria-label="{{ 'general.social.links.instagram' | t }}"
+        >
+          <svg width="14" height="15" viewBox="0 0 14 15" fill="none">
+            <path fill="currentColor" d="M5.07645 15C3.73009 15 2.43888 14.4957 1.48686 13.5981C0.534838 12.7005 0 11.4831 0 10.2136C0 8.94421 0.534838 7.72678 1.48686 6.82917C2.43888 5.93155 3.73009 5.42727 5.07645 5.42727H6.31591V7.76318H5.07645C4.56156 7.76318 4.05824 7.90714 3.63013 8.17685C3.20202 8.44656 2.86834 8.8299 2.67131 9.27841C2.47427 9.72692 2.42271 10.2205 2.52316 10.6966C2.62361 11.1727 2.87155 11.6101 3.23563 11.9534C3.59971 12.2966 4.06358 12.5304 4.56857 12.6251C5.07356 12.7198 5.597 12.6712 6.07269 12.4854C6.54838 12.2997 6.95496 11.985 7.24102 11.5814C7.52707 11.1778 7.67975 10.7032 7.67975 10.2177V0H10.1572V1.16727C10.1572 1.81826 10.4315 2.44258 10.9197 2.9029C11.4079 3.36321 12.0701 3.62182 12.7605 3.62182H14V5.95364H12.7519C11.8343 5.95488 10.934 5.71907 10.1486 5.27182V10.2136C10.1474 11.482 9.6128 12.6982 8.66196 13.5955C7.71113 14.4927 6.4217 14.9978 5.07645 15Z"/>
+          </svg>
+
+          <span class="tooltip-content invisible rounded-3 absolute pointer-none tooltip-bottom">
+            {{- 'general.social.links.tiktok' | t -}}
+          </span>
+        </a>
+      </li>
+    {%- endif -%}
+    {%- if settings.youtube != blank -%}
+      <li class="list-social__item inline-flex">
+        <a
+          href="{{ settings.youtube }}"
+          class=" inline-flex hover-heading-color content-center tooltip relative"
+          target="_blank"
+          aria-label="{{ 'general.social.links.instagram' | t }}"
+        >
+          <svg width="20" height="14" viewBox="0 0 20 14" fill="none">
+            <path fill="currentColor" d="M19.5879 2.19067C19.3575 1.33405 18.6819 0.658786 17.8252 0.428126C16.2602 0 9.99977 0 9.99977 0C9.99977 0 3.73963 0 2.17456 0.411894C1.33435 0.64231 0.642335 1.33417 0.411866 2.19067C0 3.75525 0 7 0 7C0 7 0 10.2611 0.411866 11.8093C0.642579 12.6658 1.31787 13.3411 2.17469 13.5718C3.75611 14 10 14 10 14C10 14 16.2602 14 17.8252 13.5881C18.682 13.3576 19.3575 12.6823 19.5882 11.8258C19.9999 10.2611 19.9999 7.01648 19.9999 7.01648C19.9999 7.01648 20.0164 3.75525 19.5879 2.19067ZM8.00661 9.99761V4.00239L13.2124 7L8.00661 9.99761Z" />
+          </svg>
+
+          <span class="tooltip-content invisible rounded-3 absolute pointer-none tooltip-bottom">
+            {{- 'general.social.links.youtube' | t -}}
+          </span>
+        </a>
+      </li>
+    {%- endif -%}
+    {%- if settings.pinterest != blank -%}
+      <li class="list-social__item inline-flex">
+        <a
+          href="{{ settings.pinterest }}"
+          class=" inline-flex hover-heading-color content-center tooltip relative"
+          target="_blank"
+          aria-label="{{ 'general.social.links.pinterest' | t }}"
+        >
+          <svg width="14" height="15" viewBox="0 0 14 15" fill="none">
+            <path fill="currentColor" d="M6.90225 0C2.51602 0.000625009 0.18457 2.63504 0.18457 5.50758C0.18457 6.83947 0.978611 8.50137 2.25001 9.02825C2.61269 9.18138 2.56469 8.9945 2.87671 7.87574C2.90138 7.78261 2.88871 7.70198 2.8087 7.61511C0.991278 5.64445 2.45402 1.59315 6.6429 1.59315C12.7052 1.59315 11.5725 9.45701 7.69762 9.45701C6.6989 9.45701 5.95487 8.722 6.19021 7.81261C6.47556 6.72947 7.03426 5.56508 7.03426 4.78444C7.03426 2.81691 3.90743 3.10879 3.90743 5.71571C3.90743 6.52134 4.21144 7.0651 4.21144 7.0651C4.21144 7.0651 3.20539 10.8752 3.01872 11.587C2.7027 12.7921 3.06138 14.7427 3.09272 14.9108C3.11205 15.0033 3.22273 15.0327 3.28473 14.9565C3.38407 14.8346 4.60013 13.2083 4.94081 12.0327C5.06482 11.6045 5.57351 9.86701 5.57351 9.86701C5.90886 10.4345 6.87558 10.9095 7.90563 10.9095C10.9698 10.9095 13.1846 8.38449 13.1846 5.25132C13.1739 2.24753 10.4318 0 6.90225 0Z"/>
+          </svg>
+
+          <span class="tooltip-content invisible rounded-3 absolute pointer-none tooltip-bottom">
+            {{- 'general.social.links.pinterest' | t -}}
+          </span>
+        </a>
+      </li>
+    {%- endif -%}
+    {%- if settings.vimeo != blank -%}
+      <li class="list-social__item inline-flex">
+        <a
+          href="{{ settings.vimeo }}"
+          class=" inline-flex hover-heading-color content-center tooltip relative"
+          target="_blank"
+          aria-label="{{ 'general.social.links.vimeo' | t }}"
+        >
+          <svg width="18" height="15" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill="currentColor" d="M9.86034 4.03645C11.8172 2.86151 12.8718 4.5176 11.8687 6.38958C10.8634 8.26906 9.94089 9.49449 9.46296 9.49449C8.99362 9.49449 8.62202 8.23362 8.07214 6.04482C7.50829 3.77762 7.50829 -0.309998 5.1498 0.153967C2.92019 0.594305 0 4.08478 0 4.08478L0.6938 4.99875C0.6938 4.99875 2.13295 3.86354 2.61195 4.42846C3.0974 4.99875 4.935 11.8465 5.54288 13.1128C6.07343 14.2222 7.54588 15.6861 9.15472 14.6421C10.7786 13.5918 16.1389 9.01442 17.0991 3.59827C18.0571 -1.80822 10.6379 -0.67623 9.86034 4.03645Z" />
+          </svg>
+
+          <span class="tooltip-content invisible rounded-3 absolute pointer-none tooltip-bottom">
+            {{- 'general.social.links.vimeo' | t -}}
+          </span>
+        </a>
+      </li>
+    {%- endif -%}
+    {%- if settings.linkedin != blank -%}
+      <li class="list-social__item inline-flex">
+        <a
+          href="{{ settings.linkedin }}"
+          class=" inline-flex hover-heading-color content-center tooltip relative"
+          target="_blank"
+          aria-label="{{ 'general.social.links.linkedin' | t }}"
+        >
+          <svg width="16" height="15" viewBox="0 0 16 15" fill="none">
+            <path fill="currentColor" d="M15.1846 15V9.50625C15.1846 6.80625 14.6033 4.74375 11.4533 4.74375C9.93457 4.74375 8.92207 5.56875 8.50957 6.35625H8.47207V4.9875H5.49082V15H8.60332V10.0313C8.60332 8.71875 8.84707 7.4625 10.4596 7.4625C12.0533 7.4625 12.0721 8.94375 12.0721 10.1063V14.9812H15.1846V15Z" />
+            <path fill="currentColor" d="M0.428312 4.98749H3.54081V15H0.428312V4.98749Z" />
+            <path fill="currentColor" d="M1.98457 0C0.99082 0 0.18457 0.80625 0.18457 1.8C0.18457 2.79375 0.99082 3.61875 1.98457 3.61875C2.97832 3.61875 3.78457 2.79375 3.78457 1.8C3.78457 0.80625 2.97832 0 1.98457 0Z" />
+          </svg>
+
+          <span class="tooltip-content invisible rounded-3 absolute pointer-none tooltip-bottom">
+            {{- 'general.social.links.linkedin' | t -}}
+          </span>
+        </a>
+      </li>
+    {%- endif -%}
+    {%- if settings.whatsapp != blank -%}
+      <li class="list-social__item inline-flex">
+        <a
+          href="{{ settings.whatsapp }}"
+          class=" inline-flex hover-heading-color content-center tooltip relative"
+          target="_blank"
+          aria-label="{{ 'general.social.links.whatsapp' | t }}"
+        >
+          <svg width="16" height="15" viewBox="0 0 16 15" fill="none">
+            <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M12.9991 2.17987C11.589 0.774902 9.71375 0.000823973 7.71594 0C3.59926 0 0.248873 3.33426 0.247217 7.43234C0.246666 8.74237 0.590535 10.0212 1.24414 11.1484L0.18457 15L4.14385 13.9664C5.2348 14.5586 6.463 14.8707 7.7129 14.8711H7.71603C11.8323 14.8711 15.183 11.5366 15.1846 7.43829C15.1854 5.45215 14.4093 3.58475 12.9991 2.17987ZM7.71594 13.6158H7.71336C6.59951 13.6154 5.5071 13.3174 4.55387 12.7547L4.32729 12.6207L1.97779 13.2341L2.6049 10.9544L2.45726 10.7206C1.83584 9.737 1.5077 8.6001 1.50826 7.4328C1.50954 4.02658 4.29435 1.25537 7.71842 1.25537C9.3765 1.25592 10.9351 1.89935 12.1071 3.06711C13.2791 4.23486 13.9242 5.78705 13.9236 7.43784C13.9222 10.8443 11.1375 13.6158 7.71594 13.6158ZM11.121 8.98883C10.9344 8.89581 10.0169 8.44666 9.84576 8.38458C9.67484 8.3226 9.55028 8.29175 9.426 8.4776C9.30153 8.66345 8.94395 9.08185 8.83503 9.20572C8.72611 9.32968 8.61738 9.34525 8.43073 9.25223C8.24407 9.1593 7.64281 8.9631 6.92995 8.33038C6.37524 7.83792 6.00073 7.22974 5.89181 7.04388C5.78308 6.85785 5.89089 6.76703 5.97369 6.66486C6.1757 6.41519 6.378 6.15344 6.44018 6.02957C6.50246 5.90561 6.47128 5.79712 6.42454 5.70419C6.378 5.61127 6.00478 4.69711 5.84931 4.32513C5.69771 3.96313 5.54399 4.01202 5.42936 4.00635C5.32063 4.00095 5.19616 3.99985 5.0717 3.99985C4.94732 3.99985 4.74512 4.04626 4.57401 4.2323C4.403 4.41824 3.92096 4.86749 3.92096 5.78165C3.92096 6.6958 4.58965 7.57892 4.68293 7.70288C4.77621 7.82684 5.99889 9.70276 7.87086 10.5071C8.3161 10.6987 8.66365 10.8128 8.93475 10.8984C9.38184 11.0398 9.78854 11.0198 10.1101 10.972C10.4687 10.9187 11.2142 10.5227 11.3698 10.0889C11.5253 9.65506 11.5253 9.28326 11.4785 9.20572C11.432 9.12827 11.3075 9.08185 11.121 8.98883Z"/>
+          </svg>
+          <span class="tooltip-content invisible rounded-3 absolute pointer-none tooltip-bottom">
+            {{- 'general.social.links.whatsapp' | t -}}
+          </span>
+        </a>
+      </li>
+    {%- endif -%}
+    {%- if settings.tumblr != blank -%}
+      <li class="list-social__item inline-flex">
+        <a
+          href="{{ settings.tumblr }}"
+          class=" inline-flex hover-heading-color content-center tooltip relative"
+          target="_blank"
+          aria-label="{{ 'general.social.links.tumblr' | t }}"
+        >
+          <svg width="10" height="15" viewBox="0 0 10 15" fill="none">
+            <path fill="currentColor" d="M7.77037 12.5096C6.87262 12.6934 5.52752 12.5108 5.40466 11.396C5.25501 10.7015 5.35446 6.87719 5.3275 6.21604H8.67023V3.88511H5.3275V0H3.16746C3.14179 0.129433 3.14179 0.233175 3.11596 0.362608C2.90835 2.04036 1.79653 3.51388 0.18457 4.01438V6.21588H1.72743C1.75698 8.3125 1.66076 10.4192 1.77877 12.5095C1.85594 12.9757 2.13878 13.3641 2.44744 13.7009C3.42301 14.7326 4.77296 15.0404 6.15035 14.9959C7.20437 15.0235 8.19011 14.6193 9.18457 14.2706V11.9139C8.69606 12.2248 8.31038 12.3802 7.77037 12.5096Z" />
+          </svg>
+          <span class="tooltip-content invisible rounded-3 absolute pointer-none tooltip-bottom">
+            {{- 'general.social.links.tumblr' | t -}}
+          </span>
+        </a>
+      </li>
+    {%- endif -%}
+    {%- if settings.snapchat != blank -%}
+      <li class="list-social__item inline-flex">
+        <a
+          href="{{ settings.snapchat }}"
+          class="inline-flex hover-heading-color content-center tooltip relative"
+          target="_blank"
+          aria-label="{{ 'general.social.links.snapchat' | t }}"
+        >
+          <svg width="16" height="15" viewBox="0 0 16 15" fill="none">
+            <path fill="currentColor" d="M15.6864 11.201C13.5473 10.849 12.5832 8.658 12.5442 8.565C12.5412 8.559 12.5392 8.553 12.5352 8.547C12.4262 8.325 12.4002 8.142 12.4602 8.003C12.5772 7.729 13.0252 7.587 13.3212 7.493C13.4073 7.466 13.4883 7.44 13.5553 7.414C13.8473 7.299 14.0553 7.174 14.1933 7.033C14.3573 6.864 14.3893 6.702 14.3873 6.597C14.3823 6.341 14.1863 6.113 13.8733 6.002C13.7683 5.959 13.6473 5.936 13.5253 5.936C13.4423 5.936 13.3182 5.947 13.2012 6.002C12.9512 6.119 12.7272 6.183 12.5342 6.192C12.4322 6.187 12.3602 6.165 12.3132 6.144C12.3192 6.044 12.3252 5.941 12.3322 5.835L12.3352 5.789C12.4042 4.706 12.4892 3.359 12.1312 2.559C11.8862 2.011 11.5572 1.54 11.1521 1.158C10.8131 0.838 10.4191 0.578 9.98109 0.386C9.22006 0.05 8.51002 0 8.15401 0H8.15301C8.13901 0 8.12601 0 8.11401 0C8.015 0.001 7.85399 0.00299999 7.83899 0.00299999C7.48398 0.00299999 6.77294 0.053 6.00991 0.389C5.57289 0.581 5.18087 0.84 4.84285 1.16C4.43983 1.542 4.11182 2.012 3.86781 2.558C3.50979 3.357 3.59479 4.704 3.6628 5.786V5.788C3.6698 5.904 3.6778 6.025 3.6848 6.143C3.6328 6.166 3.54779 6.192 3.42279 6.192C3.22078 6.192 2.98077 6.128 2.70975 6.001C2.62975 5.964 2.53875 5.945 2.43874 5.945C2.27773 5.945 2.10672 5.992 1.95972 6.079C1.77371 6.188 1.6537 6.341 1.6207 6.512C1.5997 6.624 1.6007 6.847 1.84871 7.073C1.98572 7.197 2.18573 7.312 2.44474 7.414C2.51274 7.441 2.59375 7.466 2.67875 7.493C2.97477 7.587 3.42379 7.729 3.54079 8.003C3.59979 8.142 3.57379 8.325 3.46479 8.547C3.46179 8.553 3.45879 8.559 3.45679 8.565C3.42879 8.629 3.17377 9.204 2.65075 9.811C2.35374 10.156 2.02672 10.445 1.6787 10.669C1.25369 10.943 0.794664 11.121 0.313641 11.2C0.124632 11.231 -0.0103739 11.399 0.000626613 11.59C0.00362675 11.645 0.0166274 11.7 0.0396284 11.753V11.754C0.116632 11.933 0.29364 12.084 0.581654 12.217C0.93367 12.38 1.45969 12.517 2.14673 12.624C2.18173 12.69 2.21773 12.855 2.24273 12.968C2.26873 13.088 2.29573 13.212 2.33474 13.343C2.37674 13.485 2.48474 13.655 2.76376 13.655C2.86976 13.655 2.99077 13.631 3.13177 13.604C3.33778 13.564 3.6198 13.509 3.97081 13.509C4.16582 13.509 4.36783 13.526 4.57084 13.56C4.96286 13.625 5.30087 13.863 5.69189 14.139C6.26392 14.543 6.91195 15 7.902 15C7.929 15 7.956 14.999 7.983 14.997C8.015 14.999 8.056 15 8.09801 15C9.08805 15 9.73608 14.543 10.3081 14.14L10.3091 14.139C10.7001 13.864 11.0381 13.626 11.4302 13.561C11.6332 13.527 11.8352 13.51 12.0302 13.51C12.3662 13.51 12.6322 13.553 12.8692 13.599C13.0242 13.629 13.1442 13.644 13.2372 13.644H13.2462H13.2552C13.4593 13.644 13.6093 13.532 13.6663 13.337C13.7043 13.208 13.7313 13.088 13.7583 12.965C13.7813 12.859 13.8193 12.689 13.8533 12.623C14.5403 12.515 15.0663 12.379 15.4183 12.216C15.7054 12.083 15.8824 11.932 15.9594 11.754C15.9824 11.701 15.9964 11.646 15.9994 11.589C16.0104 11.4 15.8754 11.231 15.6864 11.201Z"/>
+          </svg>
+          <span class="tooltip-content invisible rounded-3 absolute pointer-none tooltip-bottom">
+            {{- 'general.social.links.snapchat' | t -}}
+          </span>
+        </a>
+      </li>
+    {%- endif -%}
+  </ul>
+{%- endif -%}

@@ -1,0 +1,39 @@
+{%- liquid
+  assign t = template | split: '.' | first
+  assign admin_vi = request.design_mode
+-%}
+{% if settings.scroll_animation != 'none' %}
+  <script src="{{ 'animation.js' | asset_url }}" defer="defer"></script>
+{%- endif %}
+<script src="{{ 'tingle.min.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+{%- case t -%}
+  {%- when 'collection' -%}
+    <script src="{{ 'collection.js' | asset_url }}" defer="defer"></script>
+  {%- when 'product' -%}
+    <script src="{{ 'main-product.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'js-cloudimage-360-view.min.js' | asset_url }}" defer="defer"></script>
+  {%- when 'search' -%}
+    <script src="{{ 'collection.js' | asset_url }}" defer="defer"></script>
+{%- endcase -%}
+<script defer="defer">
+  var milano_app = {
+  shop: '{{ shop.permanent_domain }}',
+  domain: '{{ shop.domain }}',
+  {%- if admin_vi == true -%}
+    lic: '{{ settings.purchase_code }}',
+    action: '{{ settings.purchase_code_action }}',
+  {%- endif -%}
+  mode: '{%- if admin_vi == true -%}admin{% else %}front{%- endif -%}',
+  };
+</script>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%- when 'collection' and collection.handle -%}"
+  to: "{%- when 'collection' -%}"
+  position: 395..420
+{% endcomment %}

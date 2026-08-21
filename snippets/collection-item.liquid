@@ -1,0 +1,338 @@
+{% comment %}
+  Renders a collection card
+
+  Accepts:
+  - card_collection: {Object} collection Liquid object (optional)
+  - section: {String} Section (required)
+  - block: {String} block (required)
+  - class: {String} custom class (optional)
+
+  Usage:
+  {% render 'card-collection', section: section, block: block %}
+{% endcomment %}
+{% liquid
+  assign section_st = section.settings
+  assign block_st = block.settings
+  assign collection_image = block_st.collection_image
+  assign collection_title = block_st.collection_title
+  assign image_ratio = section_st.image_ratio
+  assign custom_ratio = section_st.custom_ratio
+  assign show_product_count = section_st.show_product_count
+  assign show_description = false
+  assign show_description = section_st.show_description
+  assign rounded_image = section_st.rounded_image
+  assign image_custom_width = section_st.image_custom_width
+  assign image_width = section_st.image_width
+  assign font_size = section_st.font_size
+  assign ratio = ''
+  if image_ratio != 'adapt'
+    case image_ratio
+      when 'square'
+        assign ratio = '1/1'
+      when 'landscape'
+        assign ratio = '4/3'
+      when 'portrait'
+        assign ratio = '3/4'
+      else
+        if custom_ratio != empty
+          assign ratio = custom_ratio | replace: ':', '/'
+        else
+          assign ratio = '3/4'
+        endif
+    endcase
+  else
+    if collection_image != blank
+      assign ratio = collection_image.aspect_ratio
+    elsif card_collection.featured_image
+      assign ratio = card_collection.featured_image.aspect_ratio
+    else
+      assign ratio = '3/4'
+    endif
+  endif
+
+  if collection_image.alt != blank
+    assign alt_text = collection_image.alt
+  elsif card_collection.featured_image.alt != blank
+    assign alt_text = card_collection.featured_image.alt
+  elsif collection_title != blank
+    assign alt_text = collection_title
+  elsif card_collection.title != blank
+    assign alt_text = card_collection.title
+  else
+    assign alt_text = 'Collection Title'
+  endif
+%}
+{% comment %} Case card collection has data, handle data {% endcomment %}
+{% if card_collection and card_collection != empty %}
+  <div
+    class="collection-item__wrapper relative"
+  >
+    {% comment %} collection inner media {% endcomment %}
+    <div
+      class="collection-item__media relative{% if collection_information_position == 'overlay_image' %} {{ design }} {% endif %} rounded overflow-hidden{% if collection_information_position == 'below_image' and image_custom_width %} w-custom max-w-100{% if section_st.text_alignment == 'left' %} me-auto{% elsif section_st.text_alignment == 'right' %} ms-auto{% else %} mx-auto{% endif %}{% endif %}{% if collection_information_position == 'below_image' and rounded_image %} rounded-50 overflow-hidden{% endif %}"
+      {% if collection_information_position == 'below_image' and image_custom_width %}
+        style="--custom-width: {{ image_width }}px"
+      {% endif %}
+    >
+      <a
+        class="block collection-item__media--ratio  hover-effect"
+        draggable="false"
+        href="{{ card_collection.url }}"
+        aria-label="{{- card_collection.title -}}"
+        style="--aspect-ratio: {{ ratio }};"
+      >
+        {% assign collection_media = card_collection.featured_image %}
+
+        {% comment %} Case collection has image {% endcomment %}
+        {%- if collection_media -%}
+          {% if collection_image != blank %}
+            {% render 'responsive-image',
+              type: 'other',
+              image: collection_image,
+              image_alt: alt_text,
+              container: container,
+              colunm: colunm,
+              colunm_mobile: colunm_mobile,
+              padding: padding
+            %}
+          {% else %}
+            {% render 'responsive-image',
+              type: 'other',
+              image: collection_media,
+              image_alt: alt_text,
+              container: container,
+              colunm: colunm,
+              colunm_mobile: colunm_mobile,
+              padding: padding,
+              class: 'rounded'
+            %}
+          {% endif %}
+        {%- else -%}
+          {% comment %} Case collection has no image show placeholder {% endcomment %}
+          {% render 'placeholder-render', class: 'rounded' %}
+        {%- endif -%}
+      </a>
+    </div>
+    {% comment %} collection information {% endcomment %}
+    <div
+      class="collection-item__information{% if collection_information_position == 'below_image' %} mt-custom{% else %} absolute inset-x-15 bottom-15 {% if design == 'futuristic' %}futuristic-absolute rounded inset-x-md-20 bottom-md-15{% else %} inset-x-md-30 bottom-md-30{% endif %} z-3 flex justify-content-{{ section_st.text_alignment }} pointer-none{% endif %} text-{{ section_st.text_alignment }}{% if collection_information_position == 'overlay_image' and  design == 'morden' %} flex-column align-item-{{  section_st.text_alignment }} gap-5{% endif %}"
+      {% if collection_information_position == 'below_image' %}
+        style="--space-top: {{ section_st.information_spacing }}px;"
+      {% endif %}
+    >
+      {% comment %} collection item title {% endcomment %}
+      <a
+        aria-label="{{ card_collection.title }}"
+        class="collection-item__name no-underline word-break heading-color {{ section_st.font_weight }}{% if font_size > 14 %} fs-medium-list{% else %} fs-custom{% endif %}{% if collection_information_position == 'below_image' %} mb-10{% else %} inline-flex gap-5 align-center justify-content-{{ section_st.text_alignment }}{% endif %}{% if collection_information_position == 'overlay_image' and  design == 'default' %} btn-white lh-50{% endif %} {% if design == 'futuristic' %}flex align-center w-full{% endif %}"
+        style="--font-size: {{ font_size }};--space-bottom: {{ section_st.spacing }}"
+        href="{{ card_collection.url }}"
+      >
+        {% if design == 'futuristic' %}
+          <div class="futuristic-box flex-1 relative">
+        {% endif %}
+        <span class="collection-item__name-inner lh-normal inline-block{% if collection_information_position == 'overlay_image' and design == 'morden' %} heading_weight{% endif %} overflow-visible-important relative">
+          {% if collection_title != blank %}
+            {{ collection_title }}
+          {% else %}
+            {{- card_collection.title -}}
+          {% endif %}
+          {% if collection_information_position == 'below_image'
+            or collection_information_position == 'overlay_image'
+          %}
+            {% if design == 'morden' and show_product_count and show_description %}
+              {% if card_collection.products_count > 1 %}
+                <span class="collection-item__count whitespace-nowrap fs-12 heading_weight absolute">
+                  {{-
+                    'general.collections.collection_count_multiple_noCP'
+                    | t: number: card_collection.products_count
+                  -}}
+                </span>
+              {% else %}
+                <span class="collection-item__count whitespace-nowrap fs-12 heading_weight absolute">
+                  {{- 'general.collections.collection_count_single_noCP' | t: number: card_collection.products_count -}}
+                </span>
+              {% endif %}
+            {% endif %}
+          {% endif %}
+        </span>
+        {% if collection_information_position == 'overlay_image' and design == 'default' and show_product_count %}
+          {% if card_collection.products_count > 1 %}
+            <span class="collection-item__count whitespace-nowrap">
+              {{- 'general.collections.collection_count_multiple_noP' | t: number: card_collection.products_count -}}
+            </span>
+          {% else %}
+            <span class="collection-item__count whitespace-nowrap">
+              {{- 'general.collections.collection_count_single_noP' | t: number: card_collection.products_count -}}
+            </span>
+          {% endif %}
+        {% endif %}
+
+        {% if design == 'futuristic' and show_product_count %}
+          <div class="collection-item__count">
+            {% if card_collection.products_count > 1 %}
+              {{- 'general.collections.collection_count_multiple' | t: number: card_collection.products_count -}}
+            {% else %}
+              {{- 'general.collections.collection_count_single' | t: number: card_collection.products_count -}}
+            {% endif %}
+          </div>
+        {% endif %}
+        {% if design == 'futuristic' %}
+          </div>
+          <span class="futuristic-icon">
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" style="margin:0">
+              <path d="M1.52537 6.20033H11.7227" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+              <path d="M6.62402 1.10168L11.7227 6.20033L6.62402 11.299" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </span>
+        {% endif %}
+      </a>
+      {% if collection_information_position == 'overlay_image'
+        and design == 'morden'
+        and show_product_count
+        and show_description == false
+      %}
+        <div class="collection-item__count">
+          {% if card_collection.products_count > 1 %}
+            {{- 'general.collections.collection_count_multiple' | t: number: card_collection.products_count -}}
+          {% else %}
+            {{- 'general.collections.collection_count_single' | t: number: card_collection.products_count -}}
+          {% endif %}
+        </div>
+      {% elsif collection_information_position == 'below_image' and design == 'default' and show_product_count %}
+        <div class="collection-item__count">
+          {% if card_collection.products_count > 1 %}
+            {{- 'general.collections.collection_count_multiple' | t: number: card_collection.products_count -}}
+          {% else %}
+            {{- 'general.collections.collection_count_single' | t: number: card_collection.products_count -}}
+          {% endif %}
+        </div>
+      {% elsif collection_information_position == 'below_image'
+        and design == 'morden'
+        and show_product_count
+        and show_description == false
+      %}
+        <div class="collection-item__count">
+          {% if card_collection.products_count > 1 %}
+            {{- 'general.collections.collection_count_multiple' | t: number: card_collection.products_count -}}
+          {% else %}
+            {{- 'general.collections.collection_count_single' | t: number: card_collection.products_count -}}
+          {% endif %}
+        </div>
+      {% endif %}
+      {% if collection_information_position == 'overlay_image' or collection_information_position == 'below_image' %}
+        {% if show_description and card_collection.description != blank and design == 'morden' %}
+          <div class="collection-information-description lh-small">
+            {{ card_collection.description }}
+          </div>
+        {% endif %}
+      {% endif %}
+    </div>
+  </div>
+{% else %}
+  {% comment %} Case card collection has no data, handle default data with shopify placeholder {% endcomment %}
+  <div
+    class="collection-item__wrapper relative"
+  >
+    <div
+      class=" collection-item__media relative{% if collection_information_position == 'overlay_image' %} {{ design }} {% endif %} rounded overflow-hidden{% if collection_information_position == 'below_image' and image_custom_width %} w-custom max-w-100{% if section_st.text_alignment == 'left' %} me-auto{% elsif section_st.text_alignment == 'right' %} ms-auto{% else %} mx-auto{% endif %}{% endif %}{% if collection_information_position == 'below_image' and rounded_image %} rounded-50 overflow-hidden{% endif %}"
+      {% if collection_information_position == 'below_image' and image_custom_width %}
+        style="--custom-width: {{ image_width }}px"
+      {% endif %}
+    >
+      <a
+        class="block collection-item__media--ratio 1 hover-effect "
+        role="link"
+        aria-disabled="true"
+        title="{{- 'onboarding.collection_title' | t -}}"
+        aria-label="{{- 'onboarding.collection_title' | t -}}"
+        style="--aspect-ratio: {{ ratio }};"
+      >
+        {% if collection_image != blank %}
+          {% render 'responsive-image',
+            class: 'rounded',
+            type: 'banner',
+            image: collection_image,
+            image_alt: alt_text
+          %}
+        {% else %}
+          {%- render 'placeholder-render', class: 'rounded transition' -%}
+        {% endif %}
+      </a>
+    </div>
+    <div
+      class="collection-item__information{% if collection_information_position == 'below_image' %} mt-custom{% else %} absolute inset-x-15 bottom-15 {% if design == 'futuristic' %}futuristic-absolute inset-x-md-20 bottom-md-15{% else %} inset-x-md-30 bottom-md-30{% endif %} z-3 flex justify-content-{{ section_st.text_alignment }} pointer-none{% endif %} text-{{ section_st.text_alignment }}{% if collection_information_position == 'overlay_image' and  design == 'morden' %} flex-column align-item-{{  section_st.text_alignment }} gap-5{% endif %}"
+      {% if collection_information_position == 'below_image' %}
+        style="--space-top: {{ section_st.information_spacing }}px;"
+      {% endif %}
+    >
+      <a
+        aria-label="{{ card_collection.title }}"
+        class="collection-item__name no-underline word-break heading-color {{ section_st.font_weight }}{% if font_size > 14 %} fs-medium-list{% else %} fs-custom{% endif %}{% if collection_information_position == 'below_image' %} mb-10{% else %} inline-flex gap-5 align-center justify-content-{{ section_st.text_alignment }}{% endif %}{% if collection_information_position == 'overlay_image' and  design == 'default' %} btn-white lh-50{% endif %} {% if design == 'futuristic' %}flex align-center w-full{% endif %}"
+        style="--font-size: {{ font_size }};--space-bottom: {{ section_st.spacing }}"
+        role="link"
+      >
+        {% if design == 'futuristic' %}
+          <div class="futuristic-box flex-1 relative">
+        {% endif %}
+        <span class="collection-item__name-inner lh-normal inline-block{% if collection_information_position == 'overlay_image' and design == 'morden' %} heading_weight{% endif %}">
+          {% if collection_title != blank %}
+            {{ collection_title }}
+          {% else %}
+            {{- 'onboarding.collection_title' | t -}}
+          {% endif %}
+        </span>
+        {% if collection_information_position == 'overlay_image' and design == 'default' and show_product_count %}
+          <span class="collection-item__count">(0)</span>
+        {% elsif collection_information_position == 'below_image'
+          or collection_information_position == 'overlay_image'
+        %}
+          {% if design == 'morden' and show_product_count and show_description %}
+            <span class="collection-item__count">0</span>
+          {% endif %}
+        {% endif %}
+        {% if design == 'futuristic' and show_product_count %}
+          <div class="collection-item__count">
+            {{- 'onboarding.collection_count' | t -}}
+          </div>
+        {% endif %}
+        {% if design == 'futuristic' %}
+          </div>
+          <span class="futuristic-icon">
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" style="margin:0">
+              <path d="M1.52537 6.20033H11.7227" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+              <path d="M6.62402 1.10168L11.7227 6.20033L6.62402 11.299" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </span>
+        {% endif %}
+      </a>
+      {% if collection_information_position == 'overlay_image'
+        and design == 'morden'
+        and show_product_count
+        and show_description == false
+      %}
+        <div class="collection-item__count">
+          {{- 'onboarding.collection_count' | t -}}
+        </div>
+      {% elsif collection_information_position == 'below_image' and design == 'default' and show_product_count %}
+        <div class="collection-item__count">
+          {{- 'onboarding.collection_count' | t -}}
+        </div>
+      {% elsif collection_information_position == 'below_image'
+        and design == 'morden'
+        and show_product_count
+        and show_description == false
+      %}
+        <div class="collection-item__count">
+          {{- 'onboarding.collection_count' | t -}}
+        </div>
+      {% endif %}
+      {% if collection_information_position == 'overlay_image' or collection_information_position == 'below_image' %}
+        {% if show_description and design == 'morden' %}
+          <div class="collection-information-description lh-small">
+            {{- 'onboarding.collection_description' | t -}}
+          </div>
+        {% endif %}
+      {% endif %}
+    </div>
+  </div>
+{% endif %}
